@@ -3,10 +3,12 @@ using UnityEngine;
 public class ObjectHider : MonoBehaviour
 {
     [SerializeField] private MeshRenderer m_Renderer;
-    public bool LightBlockDetected;
+    [HideInInspector] public bool LightBlockDetected;
 
     public void LightBlockCheck(Vector3 targetPosition) 
     {
+        Debug.Log(1);
+
         Vector3 direction = targetPosition - transform.position;
 
         RaycastHit hit;
