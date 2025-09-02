@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 5311979482998138741}
   - component: {fileID: 3609849158388510926}
   m_Layer: 0
-  m_Name: ConeColider
+  m_Name: ConeTrigger
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -104,3 +104,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e1b2fbbc4adc2f14ca2c7e9c8ec00eb7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  targetLightPoint: {fileID: 0}
