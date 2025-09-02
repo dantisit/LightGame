@@ -1,47 +1,36 @@
+using NUnit.Framework;
 using System;
 using UnityEngine;
+using System.Collections.Generic;
 
 public class Trigger : MonoBehaviour
 {
     [SerializeField] private Transform targetLightPoint;
-    /**
-    
-    private void OnTriggerStay (Collider other)
-    {
-        if (!other.CompareTag("HideObject")) return; 
-       
-        other.GetComponent<ObjectHider>().LightBlockCheck(targetLightPoint.position);
-    }
-
-    public void OnTriggerExit(Collider other)
-    {
-        if (!other.CompareTag("HideObject")) return;
-        
-        other.GetComponent<ObjectHider>().ShowColider();
-    }
-
-   **/
 
     private void OnTriggerEnter2D(Collider2D other)
     {
-        if (!other.CompareTag("HideObject")) return;
-
-        // TODO: Add counter of lights
-        other.GetComponent<ObjectHider>().LightBlockCheck(targetLightPoint.position);
+        Handle(other);
     }
 
     private void OnTriggerStay2D(Collider2D other)
     {
-        if (!other.CompareTag("HideObject")) return;
-
-        other.GetComponent<ObjectHider>().LightBlockCheck(targetLightPoint.position);
+        Handle(other);
     }
 
     public void OnTriggerExit2D(Collider2D other)
     {
         if (!other.CompareTag("HideObject")) return;
 
-        // TODO: Add counter of lights
-        other.GetComponent<ObjectHider>().ShowColider();
+        other.GetComponent<ObjectHider>().lightSprings.Remove(gameObject);
+    }
+
+    private void Handle(Collider2D other)
+    {
+        if (!other.CompareTag("HideObject")) return;
+
+        var component = other.GetComponent<ObjectHider>();
+        var is_lighted = component.LightBlockCheck(targetLightPoint.position);
+        if (is_lighted) component.lightSprings.TryAdd(gameObject, true);
+        else component.lightSprings.Remove(gameObject);
     }
 }

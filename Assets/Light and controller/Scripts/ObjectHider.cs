@@ -1,36 +1,44 @@
+using System.Collections.Generic;
 using UnityEngine;
 
 public class ObjectHider : MonoBehaviour
 {
     [SerializeField] private MeshRenderer m_Renderer;
+
     [HideInInspector] public bool LightBlockDetected;
 
-    public void LightBlockCheck(Vector3 targetPosition) 
-    {
-        Debug.Log(1);
+    public Dictionary<GameObject, bool> lightSprings = new Dictionary<GameObject, bool>();
 
+    private void Start()
+    {
+       //var LightSprings = new List<GameObject>();
+    }
+
+    private void Update()
+    {
+        if (lightSprings.Count > 0)
+        {
+            HideColider();
+        }
+        else
+        {
+            ShowColider();
+        }
+    }
+    public bool LightBlockCheck(Vector3 targetPosition) 
+    {
         Vector3 direction = targetPosition - transform.position;
 
         var mask = LayerMask.GetMask("LightLayer", "Ground");
         var hit = Physics2D.Raycast(transform.position, direction.normalized, direction.magnitude, mask);
-        if(hit.collider == null) return;
+        if(hit.collider == null) return false;
         Debug.DrawLine(transform.position, hit.transform.position);
-        Debug.Log($"{hit.transform.gameObject.name} on layer {hit.transform.gameObject.layer}");
-        if (hit.collider.CompareTag("Light"))
-        {
-            HideColider();
-        }
-
-        else 
-        { 
-            ShowColider();
-        }
+        return hit.collider.CompareTag("Light");
     }
     void HideColider() 
     { 
         gameObject.layer = LayerMask.NameToLayer("Hidden");
         m_Renderer.enabled = (false);
-        Debug.Log(false);
     }
 
     
@@ -38,6 +46,5 @@ public class ObjectHider : MonoBehaviour
     {
         gameObject.layer = LayerMask.NameToLayer("HiddenGround");
         m_Renderer.enabled = (true);
-        Debug.Log(true);
     }
 }
