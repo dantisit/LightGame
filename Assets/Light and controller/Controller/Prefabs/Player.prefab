@@ -602,7 +602,7 @@ MonoBehaviour:
     Physics:
       groundLayerMask:
         serializedVersion: 2
-        m_Bits: 2176
+        m_Bits: 6272
       headBumpLayerMask:
         serializedVersion: 2
         m_Bits: 1

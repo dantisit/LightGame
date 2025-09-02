@@ -1846,7 +1846,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2274047471240710477, guid: 8aba10223e62afd4abf755c049b6e672, type: 3}
       propertyPath: m_Layer
-      value: 7
+      value: 12
       objectReference: {fileID: 0}
     - target: {fileID: 2274047471240710479, guid: 8aba10223e62afd4abf755c049b6e672, type: 3}
       propertyPath: speed
@@ -3298,6 +3298,14 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 519420032, guid: 8df91cb297f60c04c9706753ea914b78, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -17.703375
+      objectReference: {fileID: 0}
+    - target: {fileID: 519420032, guid: 8df91cb297f60c04c9706753ea914b78, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 18.11361
+      objectReference: {fileID: 0}
     - target: {fileID: 1482001338, guid: 8df91cb297f60c04c9706753ea914b78, type: 3}
       propertyPath: Priority.Enabled
       value: 1
@@ -3316,7 +3324,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1482001339, guid: 8df91cb297f60c04c9706753ea914b78, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -20.168121
+      value: -32.16812
       objectReference: {fileID: 0}
     - target: {fileID: 3213259104454701869, guid: 8df91cb297f60c04c9706753ea914b78, type: 3}
       propertyPath: m_Name
@@ -4272,7 +4280,7 @@ GameObject:
   - component: {fileID: 952807271}
   - component: {fileID: 952807272}
   - component: {fileID: 952807273}
-  m_Layer: 10
+  m_Layer: 7
   m_Name: Triangle
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -8814,7 +8822,7 @@ GameObject:
   - component: {fileID: 1679404855}
   - component: {fileID: 1679404856}
   - component: {fileID: 1679404857}
-  m_Layer: 10
+  m_Layer: 7
   m_Name: Triangle (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -8999,7 +9007,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2274047471240710477, guid: 8aba10223e62afd4abf755c049b6e672, type: 3}
       propertyPath: m_Layer
-      value: 7
+      value: 12
       objectReference: {fileID: 0}
     - target: {fileID: 2274047471240710479, guid: 8aba10223e62afd4abf755c049b6e672, type: 3}
       propertyPath: speed
@@ -11595,7 +11603,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2274047471240710477, guid: 8aba10223e62afd4abf755c049b6e672, type: 3}
       propertyPath: m_Layer
-      value: 7
+      value: 12
       objectReference: {fileID: 0}
     - target: {fileID: 2274047471240710479, guid: 8aba10223e62afd4abf755c049b6e672, type: 3}
       propertyPath: speed
