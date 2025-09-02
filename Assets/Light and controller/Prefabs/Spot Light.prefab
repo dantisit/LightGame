@@ -80,9 +80,9 @@ PolygonCollider2D:
   m_AutoTiling: 0
   m_Points:
     m_Paths:
-    - - {x: 8.085064, y: -16.503683}
+    - - {x: 4.3750644, y: -5.373684}
       - {x: 0.09308332, y: 7.807432}
-      - {x: -6.158798, y: -16.63881}
+      - {x: -4.0387983, y: -5.50881}
   m_UseDelaunayMesh: 0
 --- !u!114 &5705270409059074438
 MonoBehaviour:
@@ -278,8 +278,8 @@ Light:
   serializedVersion: 11
   m_Type: 0
   m_Color: {r: 0.31679422, g: 0.41636708, b: 0.5943396, a: 1}
-  m_Intensity: 200
-  m_Range: 26.26
+  m_Intensity: 500
+  m_Range: 13.864184
   m_SpotAngle: 33.197247
   m_InnerSpotAngle: 0
   m_CookieSize: 10
