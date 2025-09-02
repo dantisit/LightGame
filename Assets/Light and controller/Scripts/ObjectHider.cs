@@ -33,6 +33,7 @@ public class ObjectHider : MonoBehaviour
         Debug.Log(false);
     }
 
+    
     public void ShowColider() 
     {
         gameObject.layer = LayerMask.NameToLayer("HiddenGround");

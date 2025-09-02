@@ -26,6 +26,7 @@ public class Trigger : MonoBehaviour
     {
         if (!other.CompareTag("HideObject")) return;
 
+        // TODO: Add counter of lights
         other.GetComponent<ObjectHider>().LightBlockCheck(targetLightPoint.position);
     }
 
@@ -40,6 +41,7 @@ public class Trigger : MonoBehaviour
     {
         if (!other.CompareTag("HideObject")) return;
 
+        // TODO: Add counter of lights
         other.GetComponent<ObjectHider>().ShowColider();
     }
 }
