@@ -44,7 +44,7 @@ public class Platform : MonoBehaviour
         }
         else if (direction == -1)
         {
-            if (transform.position.x > startPoint.x + startPoint.x)
+            if (transform.position.x > startPoint.x)
             {
                 rb.linearVelocity = new Vector2(direction * speed, 0);
             }

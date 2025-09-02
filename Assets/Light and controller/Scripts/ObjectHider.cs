@@ -11,10 +11,11 @@ public class ObjectHider : MonoBehaviour
 
         Vector3 direction = targetPosition - transform.position;
 
-        RaycastHit hit;
-        LightBlockDetected = Physics.Raycast(transform.position, direction.normalized, out hit);
-        Debug.DrawRay(transform.position, direction);
-
+        var mask = LayerMask.GetMask("LightLayer", "Ground");
+        var hit = Physics2D.Raycast(transform.position, direction.normalized, direction.magnitude, mask);
+        if(hit.collider == null) return;
+        Debug.DrawLine(transform.position, hit.transform.position);
+        Debug.Log($"{hit.transform.gameObject.name} on layer {hit.transform.gameObject.layer}");
         if (hit.collider.CompareTag("Light"))
         {
             HideColider();
@@ -27,14 +28,14 @@ public class ObjectHider : MonoBehaviour
     }
     void HideColider() 
     { 
-        GetComponent<Collider>().enabled = false;
+        gameObject.layer = LayerMask.NameToLayer("Hidden");
         m_Renderer.enabled = (false);
         Debug.Log(false);
     }
 
     public void ShowColider() 
     {
-        GetComponent<Collider>().enabled = true;
+        gameObject.layer = LayerMask.NameToLayer("HiddenGround");
         m_Renderer.enabled = (true);
         Debug.Log(true);
     }

@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 
 public class Trigger : MonoBehaviour
@@ -22,6 +23,13 @@ public class Trigger : MonoBehaviour
    **/
 
     private void OnTriggerEnter2D(Collider2D other)
+    {
+        if (!other.CompareTag("HideObject")) return;
+
+        other.GetComponent<ObjectHider>().LightBlockCheck(targetLightPoint.position);
+    }
+
+    private void OnTriggerStay2D(Collider2D other)
     {
         if (!other.CompareTag("HideObject")) return;
 

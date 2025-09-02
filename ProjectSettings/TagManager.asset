@@ -14,11 +14,11 @@ TagManager:
   - Water
   - UI
   - HideObject
-  - 
-  - 
-  - 
-  - 
-  - 
+  - Ground
+  - Wall
+  - Player
+  - Hidden
+  - HiddenGround
   - 
   - 
   - 
