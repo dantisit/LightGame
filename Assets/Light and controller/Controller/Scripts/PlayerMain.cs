@@ -3,7 +3,7 @@ using UnityEngine;
 
 public class PlayerMain : MonoBehaviour
 {
-    private PlayerStateMachine _stateMachine; // State Machine declaration where we change current state
+    public PlayerStateMachine _stateMachine; // State Machine declaration where we change current state
     [NonEditable, Space(5)] public AnimName CurrentState; // Variable to display the current state in the Unity inspector for debugging purposes.
     public MainState IdleState, WalkState, JumpState, LandState, DashState, CrouchIdleState, CrouchWalkState, WallGrabState, WallClimbState, WallJumpState, WallSlideState ; // State declarations
     public enum AnimName { Idle, Walk, Jump, ExtraJump1, ExtraJump2, Land, Dash, CrouchIdle, CrouchWalk, WallGrab, WallClimb, WallJump, WallSlide } // Enum declaration of state names as animator parameters

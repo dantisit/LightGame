@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 public class ObjectHider : MonoBehaviour
@@ -30,7 +31,11 @@ public class ObjectHider : MonoBehaviour
         Vector3 direction = targetPosition - transform.position;
 
         var mask = LayerMask.GetMask("LightLayer", "Ground");
-        var hit = Physics2D.Raycast(transform.position, direction.normalized, direction.magnitude, mask);
+        var filter = new ContactFilter2D();
+        filter.SetLayerMask(mask);
+        var results = new List<RaycastHit2D>();
+        Physics2D.Raycast(transform.position, direction.normalized, filter, results, direction.magnitude);
+        var hit = results.FirstOrDefault(x => !x.transform.CompareTag("PassLight"));
         if(hit.collider == null) return false;
         Debug.DrawLine(transform.position, hit.transform.position);
         return hit.collider.CompareTag("Light");

@@ -11,7 +11,7 @@ public class PlayerInputManager : MonoBehaviour
     public InputActions playerControls;
 
     // Variables to store input
-    [SerializeField, NonEditable] private float input_Walk;
+    [SerializeField, NonEditable] public float input_Walk;
     [SerializeField, NonEditable] private bool input_Jump;
     [SerializeField, NonEditable] private bool input_Dash;
     [SerializeField, NonEditable] private bool input_Crouch;
@@ -41,7 +41,7 @@ public class PlayerInputManager : MonoBehaviour
         playerData = player.PlayerData; // Reference for Ultimate2DPlayer.PlayerData component where all variables stored
     }
 
-    private void OnEnable()
+    protected virtual void OnEnable()
     {
         // This code block assigns events to actions in order to receive input from the player.
         playerControls.Player.Enable();
