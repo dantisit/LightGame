@@ -3,6 +3,7 @@ using System;
 using UnityEngine;
 using System.Collections.Generic;
 using System.Linq;
+using Light_and_controller.Scripts.Components;
 
 public class Trigger : MonoBehaviour
 {
@@ -21,19 +22,17 @@ public class Trigger : MonoBehaviour
 
     public void OnTriggerExit2D(Collider2D other)
     {
-        if (!other.CompareTag("HideObject")) return;
+        if(!other.TryGetComponent<LightDetector>(out var component)) return;
         var contacts = new List<Collider2D>();
         collider2D.GetContacts(contacts);
         if(contacts.Any(x => x.gameObject == other.gameObject)) return;
 
-        other.GetComponent<ObjectHider>().lightSprings.Remove(gameObject);
+        component.lightSprings.Remove(gameObject);
     }
 
     private void Handle(Collider2D other)
     {
-        if (!other.CompareTag("HideObject")) return;
-
-        var component = other.GetComponent<ObjectHider>();
+        if(!other.TryGetComponent<LightDetector>(out var component)) return;
         var is_lighted = component.LightBlockCheck(targetLightPoint.position);
         if (is_lighted) component.lightSprings.Add(gameObject);
         else component.lightSprings.Remove(gameObject);

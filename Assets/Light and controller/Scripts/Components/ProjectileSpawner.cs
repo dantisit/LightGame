@@ -5,24 +5,23 @@ namespace Light_and_controller.Scripts.Components
 {
     public class ProjectileSpawner : MonoBehaviour
     {
-        [SerializeField] private float duration;
         [SerializeField] private float rate;
         [SerializeField] private GameObject projectilePrefab;
-        [SerializeField] private GameObject spawnPoint;
-
-        private float _currentTime;
+        [SerializeField] private Transform directionPoint;
+        [SerializeField] private float speed;
         
         private IEnumerator Start()
         {
-            while (_currentTime < duration)
+            while (true)
             {
-                var projectile = Instantiate(projectilePrefab, spawnPoint.transform);
-                projectile.transform.SetParent(SceneRoot.Instance.transform);
                 yield return new WaitForSeconds(rate);
-                duration += rate;
+                
+                var instantiate = Instantiate(projectilePrefab, transform);
+                var projectile = instantiate.GetComponent<Projectile>();
+                projectile.transform.SetParent(SceneRoot.Instance.transform, true);
+                projectile.Direction = (directionPoint.position - transform.position).normalized;
+                projectile.Speed = speed;
             }
-            
-            Destroy(this);
         }
     }
 }

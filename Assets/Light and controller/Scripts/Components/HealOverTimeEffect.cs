@@ -1,15 +1,20 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 using UnityEngine.EventSystems;
 
 namespace Light_and_controller.Scripts.Components
 {
-    public class HealOverTimeEffect : MonoBehaviourEffect
+    public class HealOverTimeEffect : MonoBehaviourEffect<HealOverTimeEffect.EffectData>
     {
-        [SerializeField] private float amount;
+        [Serializable]
+        public class EffectData : Components.EffectData
+        {
+            public int Amount;
+        }
         
         protected override void Tick()
         {
-            ExecuteEvents.Execute<IHealable>(gameObject, null, (x, _) => x.Heal(amount));
+            ExecuteEvents.Execute<IHealable>(gameObject, null, (x, _) => x.Heal(Data.Amount));
         }
     }
 }

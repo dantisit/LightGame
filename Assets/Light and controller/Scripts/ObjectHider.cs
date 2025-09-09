@@ -1,16 +1,13 @@
 using System.Collections.Generic;
 using System.Linq;
+using Light_and_controller.Scripts.Components;
 using UnityEngine;
 using UnityEngine.Events;
 
-public class ObjectHider : MonoBehaviour
+[RequireComponent(typeof(LightDetector))]
+public class ObjectHider : MonoBehaviour, ILightable
 {
     [SerializeField] private MeshRenderer m_Renderer;
-    [SerializeField] private UnityEvent<bool> onChangeState;
-
-    [HideInInspector] public bool LightBlockDetected;
-
-    public HashSet<GameObject> lightSprings = new();
 
     private int _originalLayer;
     
@@ -19,36 +16,10 @@ public class ObjectHider : MonoBehaviour
         _originalLayer = gameObject.layer;
     }
 
-    private void Update()
-    {
-        if (lightSprings.Count > 0)
-        {
-            HideColider();
-        }
-        else
-        {
-            ShowColider();
-        }
-    }
-    public bool LightBlockCheck(Vector3 targetPosition) 
-    {
-        Vector3 direction = targetPosition - transform.position;
-
-        var mask = LayerMask.GetMask("LightLayer", "Ground");
-        var filter = new ContactFilter2D();
-        filter.SetLayerMask(mask);
-        var results = new List<RaycastHit2D>();
-        Physics2D.Raycast(transform.position, direction.normalized, filter, results, direction.magnitude);
-        var hit = results.FirstOrDefault(x => !x.collider.transform.CompareTag("PassLight"));
-        if(hit.collider == null) return false;
-        Debug.DrawLine(transform.position, hit.transform.position);
-        return hit.collider.CompareTag("Light");
-    }
     void HideColider() 
     { 
         gameObject.layer = LayerMask.NameToLayer("Hidden");
         m_Renderer.enabled = (false);
-        onChangeState.Invoke(false);
     }
 
     
@@ -56,6 +27,11 @@ public class ObjectHider : MonoBehaviour
     {
         gameObject.layer = _originalLayer;
         m_Renderer.enabled = (true);
-        onChangeState.Invoke(true);
+    }
+
+    public void OnInLightChange(bool isInLight)
+    {
+        if(isInLight) HideColider();
+        else ShowColider();
     }
 }

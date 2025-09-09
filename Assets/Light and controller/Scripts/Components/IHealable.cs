@@ -4,6 +4,6 @@ namespace Light_and_controller.Scripts.Components
 {
     public interface IHealable : IEventSystemHandler
     {
-        public void Heal(float amount);
+        public void Heal(int amount);
     }
 }

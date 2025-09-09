@@ -5,13 +5,17 @@ using UnityEngine.EventSystems;
 
 namespace Light_and_controller.Scripts.Components
 {
-    public class DamageOverTimeEffect : MonoBehaviourEffect
+    public class DamageOverTimeEffect : MonoBehaviourEffect<DamageOverTimeEffect.EffectData>
     {
-        [SerializeField] private float amount;
-
+        [Serializable]
+        public class EffectData : Components.EffectData
+        {
+            public int Amount;
+        }
+        
         protected override void Tick()
         {
-            ExecuteEvents.Execute<IDamageable>(gameObject, null, (x, _) => x.TakeDamage(amount));
+            ExecuteEvents.Execute<IDamageable>(gameObject, null, (x, _) => x.TakeDamage(Data.Amount));
         }
     }
 }
