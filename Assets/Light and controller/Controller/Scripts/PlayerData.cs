@@ -107,7 +107,11 @@ public class PlayerData
         [SerializeField] private float turnBackTime;
         [SerializeField, NonEditable] private float physics2DGravityScale;
 
-        public float MaxSpeed => maxSpeed;
+        public float MaxSpeed
+        {
+            get => maxSpeed;
+            set => maxSpeed = value;
+        }
         public AnimationCurve SpeedUpCurve => speedUpCurve;
         public float SpeedUpTime => speedUpTime;
         public AnimationCurve SlowDownCurve => slowDownCurve;

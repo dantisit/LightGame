@@ -85,14 +85,6 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 8399377946891660614}
     m_Modifications:
-    - target: {fileID: 82344280721218313, guid: a035de815e5174448afe708ccd118af3, type: 3}
-      propertyPath: m_Layer
-      value: 3
-      objectReference: {fileID: 0}
-    - target: {fileID: 1530099218119585425, guid: a035de815e5174448afe708ccd118af3, type: 3}
-      propertyPath: m_Layer
-      value: 3
-      objectReference: {fileID: 0}
     - target: {fileID: 2892639753119997799, guid: a035de815e5174448afe708ccd118af3, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -136,10 +128,6 @@ PrefabInstance:
     - target: {fileID: 4950435877615530213, guid: a035de815e5174448afe708ccd118af3, type: 3}
       propertyPath: m_Name
       value: Spot Light
-      objectReference: {fileID: 0}
-    - target: {fileID: 4950435877615530213, guid: a035de815e5174448afe708ccd118af3, type: 3}
-      propertyPath: m_Layer
-      value: 3
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

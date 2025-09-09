@@ -29,9 +29,12 @@ public class PushableObject : PlayerMain
         WallClimbState = new PlayerWallClimbState(this, _stateMachine, AnimName.WallClimb, PlayerData);
         WallJumpState = new PlayerWallJumpState(this, _stateMachine, AnimName.WallJump, PlayerData);
         WallSlideState = new PlayerWallSlideState(this, _stateMachine, AnimName.WallSlide, PlayerData);
+
+        baseMaxSpeed = PlayerData.Walk.MaxSpeed;
     }
 
     private PlayerMain _lastPlayer;
+    private float baseMaxSpeed;
 
     private void OnTriggerEnter2D(Collider2D other)
     {
@@ -45,7 +48,12 @@ public class PushableObject : PlayerMain
         if(!_lastPlayer.PlayerData.Physics.IsGrounded) return;
         var playerDir = Mathf.Sign(_lastPlayer.InputManager.Input_Walk);
         var dir = Mathf.Sign((transform.position - _lastPlayer.transform.position).x);
-        if(!Mathf.Approximately(playerDir, dir) && !Mathf.Approximately(_lastPlayer.InputManager.Input_Walk, 0)) return;
+        var isSameDir = Mathf.Approximately(playerDir, dir);
+        var isStopping = Mathf.Approximately(_lastPlayer.InputManager.Input_Walk, 0);
+        var isCrouching = _lastPlayer.CurrentState == AnimName.CrouchWalk;
+        if(!isSameDir && !isCrouching && !isStopping) return;
+        if (isCrouching) PlayerData.Walk.MaxSpeed = _lastPlayer.PlayerData.Walk.MaxSpeed;
+        else PlayerData.Walk.MaxSpeed = baseMaxSpeed;
         InputManager.input_Walk = _lastPlayer.InputManager.Input_Walk;
     }
 
@@ -54,5 +62,11 @@ public class PushableObject : PlayerMain
         if(!_lastPlayer || other.gameObject != _lastPlayer.gameObject) return;
         InputManager.input_Walk = 0;
         _lastPlayer = null;
+    }
+
+    private void OnDisable()
+    {
+        InputManager.input_Walk = 0;
+        _stateMachine.ChangeState(IdleState);
     }
 }
