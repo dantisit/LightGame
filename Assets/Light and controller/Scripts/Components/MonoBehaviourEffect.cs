@@ -8,7 +8,6 @@ namespace Light_and_controller.Scripts.Components
     {
         [SerializeField] private float duration;
         [SerializeField] private float rate;
-        [SerializeField] private float amount;
 
         private float _currentTime;
         
