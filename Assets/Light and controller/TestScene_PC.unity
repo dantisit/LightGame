@@ -3721,6 +3721,11 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!1 &576114951 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 3213259104454701869, guid: 8df91cb297f60c04c9706753ea914b78, type: 3}
+  m_PrefabInstance: {fileID: 699210210}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &584196387
 GameObject:
   m_ObjectHideFlags: 0
@@ -4322,10 +4327,14 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 6508063912062212154, guid: 8df91cb297f60c04c9706753ea914b78, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 3213259104454701869, guid: 8df91cb297f60c04c9706753ea914b78, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1255661424}
   m_SourcePrefab: {fileID: 100100000, guid: 8df91cb297f60c04c9706753ea914b78, type: 3}
 --- !u!4 &699210219 stripped
 Transform:
@@ -7858,12 +7867,26 @@ MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 2287397683517608150, guid: 8df91cb297f60c04c9706753ea914b78, type: 3}
   m_PrefabInstance: {fileID: 699210210}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
+  m_GameObject: {fileID: 576114951}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: b54db35fd4e84fd891fab143dcacdf84, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &1255661424
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 576114951}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f5d9414519091594899df78d903aba69, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  data:
+    Radius: 0
 --- !u!4 &1282798811 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 3993562489843131902, guid: fb8c097ad0780904aa3bdd2d74cdf16d, type: 3}
