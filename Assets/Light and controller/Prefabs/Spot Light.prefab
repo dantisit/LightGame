@@ -245,7 +245,7 @@ GameObject:
   - component: {fileID: 6492615257337425116}
   m_Layer: 3
   m_Name: Spot Light
-  m_TagString: Untagged
+  m_TagString: Teleport
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

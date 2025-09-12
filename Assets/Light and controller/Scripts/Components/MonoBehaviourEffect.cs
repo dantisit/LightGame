@@ -5,25 +5,17 @@ using UnityEngine.EventSystems;
 
 namespace Light_and_controller.Scripts.Components
 {
-    public abstract class MonoBehaviourEffect<T> : MonoBehaviour where T : EffectData
+    public abstract class MonoBehaviourEffect<T> : MonoBehaviourWithData<T> where T : EffectData
     {
-        [SerializeField] private T data;
-
-        public T Data
-        {
-            get => data;
-            set => data = value;
-        }
-        
         private float _currentTime;
         
         private IEnumerator Start()
         {
-            while (_currentTime < data.Duration || data.IsInfinity)
+            while (_currentTime < Data.Duration || Data.IsInfinity)
             {
-                yield return new WaitForSeconds(data.Rate);
+                yield return new WaitForSeconds(Data.Rate);
                 Tick();
-                _currentTime += data.Rate;
+                _currentTime += Data.Rate;
             }
             
             Destroy(this);

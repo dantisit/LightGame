@@ -34,6 +34,7 @@ namespace Light_and_controller.Scripts.Components
            var mask = LayerMask.GetMask("LightLayer", "Ground");
            var filter = new ContactFilter2D();
            filter.SetLayerMask(mask);
+           filter.useTriggers = false;
            var results = new List<RaycastHit2D>();
            Physics2D.Raycast(transform.position, direction.normalized, filter, results, direction.magnitude);
            var hit = results.FirstOrDefault(x => !x.collider.transform.CompareTag("PassLight"));

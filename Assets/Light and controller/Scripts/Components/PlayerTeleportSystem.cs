@@ -2,10 +2,9 @@ using Light_and_controller.Scripts.Components;
 using UnityEngine;
 
 [RequireComponent(typeof(LightDetector))]
-public class PlayerTeleportSystem : MonoBehaviour, ILightable
+public class PlayerTeleportSystem : MonoBehaviourWithData<PlayerTeleportSkill.TeleportData>, ILightable
 {
-    private MonoBehaviour TeleportComponent;
-    [SerializeField] private PlayerTeleportSkill.TeleportData data;
+    private PlayerTeleportSkill TeleportComponent;
 
     public void OnInLightChange(bool IsInLight)
     {
@@ -16,6 +15,7 @@ public class PlayerTeleportSystem : MonoBehaviour, ILightable
     public void TeleportOn()
     {
         TeleportComponent = gameObject.AddComponent<PlayerTeleportSkill>();
+        TeleportComponent.Data = Data;
     }
 
     public void TeleportOff()

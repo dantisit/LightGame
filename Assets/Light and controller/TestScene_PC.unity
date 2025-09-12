@@ -3721,11 +3721,6 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!1 &576114951 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 3213259104454701869, guid: 8df91cb297f60c04c9706753ea914b78, type: 3}
-  m_PrefabInstance: {fileID: 699210210}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &584196387
 GameObject:
   m_ObjectHideFlags: 0
@@ -4327,14 +4322,22 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    m_RemovedComponents:
-    - {fileID: 6508063912062212154, guid: 8df91cb297f60c04c9706753ea914b78, type: 3}
+    - target: {fileID: 3803380629175493506, guid: 8df91cb297f60c04c9706753ea914b78, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5736767365432281745, guid: 8df91cb297f60c04c9706753ea914b78, type: 3}
+      propertyPath: data.Radius
+      value: 24.43
+      objectReference: {fileID: 0}
+    - target: {fileID: 5736767365432281745, guid: 8df91cb297f60c04c9706753ea914b78, type: 3}
+      propertyPath: data.TeleportPoint
+      value: 
+      objectReference: {fileID: 1893282013}
+    m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents:
-    - targetCorrespondingSourceObject: {fileID: 3213259104454701869, guid: 8df91cb297f60c04c9706753ea914b78, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 1255661424}
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 8df91cb297f60c04c9706753ea914b78, type: 3}
 --- !u!4 &699210219 stripped
 Transform:
@@ -7867,26 +7870,12 @@ MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 2287397683517608150, guid: 8df91cb297f60c04c9706753ea914b78, type: 3}
   m_PrefabInstance: {fileID: 699210210}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 576114951}
+  m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: b54db35fd4e84fd891fab143dcacdf84, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &1255661424
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 576114951}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f5d9414519091594899df78d903aba69, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  data:
-    Radius: 0
 --- !u!4 &1282798811 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 3993562489843131902, guid: fb8c097ad0780904aa3bdd2d74cdf16d, type: 3}
@@ -8387,6 +8376,10 @@ PrefabInstance:
     - target: {fileID: 4426169313571634668, guid: 723aacfa635b5d6419729712e303b194, type: 3}
       propertyPath: rightBorderOffset.x
       value: 17
+      objectReference: {fileID: 0}
+    - target: {fileID: 5167782084821752879, guid: 723aacfa635b5d6419729712e303b194, type: 3}
+      propertyPath: m_TagString
+      value: Teleport
       objectReference: {fileID: 0}
     - target: {fileID: 8399377946891660614, guid: 723aacfa635b5d6419729712e303b194, type: 3}
       propertyPath: m_LocalPosition.x
@@ -9930,6 +9923,10 @@ PrefabInstance:
     - target: {fileID: 4426169313571634668, guid: 723aacfa635b5d6419729712e303b194, type: 3}
       propertyPath: rightBorderOffset.x
       value: 17
+      objectReference: {fileID: 0}
+    - target: {fileID: 5167782084821752879, guid: 723aacfa635b5d6419729712e303b194, type: 3}
+      propertyPath: m_TagString
+      value: Teleport
       objectReference: {fileID: 0}
     - target: {fileID: 8399377946891660614, guid: 723aacfa635b5d6419729712e303b194, type: 3}
       propertyPath: m_LocalPosition.x
@@ -13379,6 +13376,11 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1866665279}
   m_CullTransparentMesh: 1
+--- !u!1 &1893282013 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 3803380629175493506, guid: 8df91cb297f60c04c9706753ea914b78, type: 3}
+  m_PrefabInstance: {fileID: 699210210}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1897218597
 PrefabInstance:
   m_ObjectHideFlags: 0

@@ -1,34 +1,71 @@
 using System;
+using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngineInternal;
 
-public class PlayerTeleportSkill : MonoBehaviour
+public class PlayerTeleportSkill : MonoBehaviourWithData<PlayerTeleportSkill.TeleportData>
 {
     [Serializable]
     public class TeleportData
     {
-        public float Radius = 10f;
+        public float Radius = 25f;
+        public GameObject TeleportPoint;
     }
 
-    public TeleportData teleportData = new TeleportData();
+    public ContactFilter2D contactFilter;
 
-    void Update()
+    private bool StartLightFiltr;
+    private Vector2? TargetPosition;
+
+
+    public void Start()
+    { 
+        ContactFilter2D contactFilter = new ContactFilter2D();
+        contactFilter.useTriggers = true;
+    }
+    public void Update()
     {
         // Get the center of the screen in world coordinates
         Vector3 screenCenter = new Vector3(Screen.width / 2f, Screen.height / 2f, 0f);
 
         // Get the mouse position in world coordinates
-        Vector3 mouseWorldPos = Input.mousePosition;
+        Vector3 mouseScreenPosition = Input.mousePosition;
 
         // Calculate the direction vector
-        Vector2 direction = (mouseWorldPos - screenCenter).normalized;
+        Vector2 direction = (mouseScreenPosition - screenCenter).normalized;
 
         // Optional: Visualize the direction
-        Debug.DrawRay(transform.position, direction * 5f, Color.green);
+        Debug.DrawRay(transform.position, direction * Data.Radius, Color.green);
 
-        RaycastHit hit;
-        //if (Physics2D.Raycast(ray, out hit, teleportData.Radius))
-        //{
-        //    Debug.Log("Попал в: " + hit.collider.name);
-        //}
+        RaycastHit2D[] hits = Physics2D.RaycastAll(transform.position, direction * Data.Radius);
+        foreach (RaycastHit2D hit in hits)
+        {
+            if (StartLightFiltr && hit.collider?.tag == "Teleport")
+            {
+                TargetPosition = hit.point;
+
+                Data.TeleportPoint.SetActive(true);
+                Data.TeleportPoint.transform.position = TargetPosition.Value;
+            }   
+
+            if (hit.collider?.tag == "Teleport")
+                StartLightFiltr = true;
+        }
+        StartLightFiltr = false;
+
+        if (Input.GetMouseButton(1)) 
+        {
+            Teleportation();
+        }
+    }
+
+    private void Teleportation()
+    {
+        if (TargetPosition == null) return;
+
+        transform.position = TargetPosition.Value;
+
+        Data.TeleportPoint.SetActive(false);
+        TargetPosition = null;
     }
 }
