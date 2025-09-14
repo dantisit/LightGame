@@ -1,0 +1,177 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ContentModelStore">
+    <e p="C:\Users\79136\AppData\Local\JetBrains\Rider2020.2\extResources" t="IncludeRecursive" />
+    <e p="C:\Users\79136\AppData\Local\JetBrains\Rider2020.2\resharper-host\Local\Transient\Rider\v202\SolutionCaches\_LightDemo.-1394928232.00" t="ExcludeRecursive" />
+    <e p="D:\Unityproject\LightDemo" t="IncludeRecursive">
+      <e p="Assembly-CSharp-Editor.csproj" t="IncludeRecursive" />
+      <e p="Assembly-CSharp.csproj" t="IncludeRecursive" />
+      <e p="Assets" t="Include">
+        <e p="Light and controller" t="Include">
+          <e p="Controller" t="Include">
+            <e p="Scripts" t="Include">
+              <e p="Essentials" t="Include">
+                <e p="Custom Attributes" t="Include">
+                  <e p="BoundedCurveAttribute.cs" t="Include" />
+                  <e p="CustomRangeAttribute.cs" t="Include" />
+                  <e p="InformAttribute.cs" t="Include" />
+                  <e p="NonEditableAttribute.cs" t="Include" />
+                </e>
+                <e p="EssentialPhysics.cs" t="Include" />
+                <e p="Extensions" t="Include">
+                  <e p="AnimationCurveExtensions.cs" t="Include" />
+                  <e p="Vector2Extensions.cs" t="Include" />
+                </e>
+              </e>
+              <e p="Input System" t="Include">
+                <e p="InputActions.cs" t="Include" />
+                <e p="InputManager" t="Include">
+                  <e p="PlayerInputManager.cs" t="Include" />
+                </e>
+              </e>
+              <e p="Platform Movement" t="Include">
+                <e p="Platform.cs" t="Include" />
+                <e p="SwingingPlatform.cs" t="Include" />
+              </e>
+              <e p="PlayerData.cs" t="Include" />
+              <e p="PlayerMain.cs" t="Include" />
+              <e p="State System" t="Include">
+                <e p="Base States" t="Include">
+                  <e p="MainState.cs" t="Include" />
+                </e>
+                <e p="Child States" t="Include">
+                  <e p="Interfaces" t="Include">
+                    <e p="IInterfaces.cs" t="Include" />
+                  </e>
+                  <e p="PlayerCrouchIdleState.cs" t="Include" />
+                  <e p="PlayerCrouchWalkState.cs" t="Include" />
+                  <e p="PlayerDashState.cs" t="Include" />
+                  <e p="PlayerIdleState.cs" t="Include" />
+                  <e p="PlayerJumpState.cs" t="Include" />
+                  <e p="PlayerLandState.cs" t="Include" />
+                  <e p="PlayerWalkState.cs" t="Include" />
+                  <e p="PlayerWallClimbState.cs" t="Include" />
+                  <e p="PlayerWallGrabState.cs" t="Include" />
+                  <e p="PlayerWallJumpState.cs" t="Include" />
+                  <e p="PlayerWallSlideState.cs" t="Include" />
+                </e>
+                <e p="PlayerStateMachine.cs" t="Include" />
+              </e>
+            </e>
+          </e>
+          <e p="MovedPlatform.cs" t="Include" />
+          <e p="Scripts" t="Include">
+            <e p="Components" t="Include">
+              <e p="Checkpoint.cs" t="Include" />
+              <e p="DamageOverTimeEffect.cs" t="Include" />
+              <e p="DamageTrigger.cs" t="Include" />
+              <e p="DangerLightSystem.cs" t="Include" />
+              <e p="HealOverTimeEffect.cs" t="Include" />
+              <e p="HealthSystem.cs" t="Include" />
+              <e p="IDamageable.cs" t="Include" />
+              <e p="IHealable.cs" t="Include" />
+              <e p="ILightable.cs" t="Include" />
+              <e p="IWeight.cs" t="Include" />
+              <e p="LightDetector.cs" t="Include" />
+              <e p="MonoBehaviourEffect.cs" t="Include" />
+              <e p="MonoBehaviourWithData.cs" t="Include" />
+              <e p="PlayerHealthSystem.cs" t="Include" />
+              <e p="PlayerTeleportSkill.cs" t="Include" />
+              <e p="PlayerTeleportSystem.cs" t="Include" />
+              <e p="Projectile.cs" t="Include" />
+              <e p="ProjectileSpawner.cs" t="Include" />
+              <e p="PushableObject" t="Include">
+                <e p="ManualInputManager.cs" t="Include" />
+                <e p="PushableObject.cs" t="Include" />
+              </e>
+              <e p="SceneRoot.cs" t="Include" />
+              <e p="Weight.cs" t="Include" />
+              <e p="WeightTrigger.cs" t="Include" />
+            </e>
+            <e p="ObjectHider.cs" t="Include" />
+            <e p="Trigger.cs" t="Include" />
+            <e p="UI" t="Include">
+              <e p="HealthView.cs" t="Include" />
+            </e>
+          </e>
+        </e>
+        <e p="Packages" t="Include">
+          <e p="TextMesh Pro" t="Include">
+            <e p="Fonts" t="Include">
+              <e p="LiberationSans - OFL.txt" t="Include" />
+            </e>
+            <e p="Resources" t="Include">
+              <e p="LineBreaking Following Characters.txt" t="Include" />
+              <e p="LineBreaking Leading Characters.txt" t="Include" />
+            </e>
+            <e p="Shaders" t="Include">
+              <e p="SDFFunctions.hlsl" t="Include" />
+              <e p="TMP_Bitmap-Custom-Atlas.shader" t="Include" />
+              <e p="TMP_Bitmap-Mobile.shader" t="Include" />
+              <e p="TMP_Bitmap.shader" t="Include" />
+              <e p="TMP_SDF Overlay.shader" t="Include" />
+              <e p="TMP_SDF SSD.shader" t="Include" />
+              <e p="TMP_SDF-Mobile Masking.shader" t="Include" />
+              <e p="TMP_SDF-Mobile Overlay.shader" t="Include" />
+              <e p="TMP_SDF-Mobile SSD.shader" t="Include" />
+              <e p="TMP_SDF-Mobile-2-Pass.shader" t="Include" />
+              <e p="TMP_SDF-Mobile.shader" t="Include" />
+              <e p="TMP_SDF-Surface-Mobile.shader" t="Include" />
+              <e p="TMP_SDF-Surface.shader" t="Include" />
+              <e p="TMP_SDF.shader" t="Include" />
+              <e p="TMP_Sprite.shader" t="Include" />
+              <e p="TMPro.cginc" t="Include" />
+              <e p="TMPro_Mobile.cginc" t="Include" />
+              <e p="TMPro_Properties.cginc" t="Include" />
+              <e p="TMPro_Surface.cginc" t="Include" />
+            </e>
+            <e p="Sprites" t="Include">
+              <e p="EmojiOne Attribution.txt" t="Include" />
+              <e p="EmojiOne.json" t="Include" />
+            </e>
+          </e>
+          <e p="TutorialInfo" t="Include">
+            <e p="Scripts" t="Include">
+              <e p="Editor" t="Include">
+                <e p="ReadmeEditor.cs" t="Include" />
+              </e>
+              <e p="Readme.cs" t="Include" />
+            </e>
+          </e>
+        </e>
+        <e p="Volumetric Light" t="Include">
+          <e p="Editor" t="Include">
+            <e p="com.cqf.urpvolumetricfog.editor.asmdef" t="Include" />
+            <e p="VolumetricFogVolumeComponentEditor.cs" t="Include" />
+          </e>
+          <e p="package.json" t="Include" />
+          <e p="Runtime" t="Include">
+            <e p="com.cqf.urpvolumetricfog.runtime.asmdef" t="Include" />
+            <e p="VolumetricAdditionalLight.cs" t="Include" />
+            <e p="VolumetricFogRendererFeature.cs" t="Include" />
+            <e p="VolumetricFogRenderPass.cs" t="Include" />
+            <e p="VolumetricFogRenderPassEvent.cs" t="Include" />
+            <e p="VolumetricFogRenderPassEventParameter.cs" t="Include" />
+            <e p="VolumetricFogVolumeComponent.cs" t="Include" />
+          </e>
+          <e p="Shaders" t="Include">
+            <e p="DeclareDownsampledDepthTexture.hlsl" t="Include" />
+            <e p="DepthAwareGaussianBlur.hlsl" t="Include" />
+            <e p="DepthAwareUpsample.hlsl" t="Include" />
+            <e p="DownsampleDepth.shader" t="Include" />
+            <e p="ProjectionUtils.hlsl" t="Include" />
+            <e p="VolumetricFog.hlsl" t="Include" />
+            <e p="VolumetricFog.shader" t="Include" />
+            <e p="VolumetricShadows.hlsl" t="Include" />
+          </e>
+        </e>
+      </e>
+      <e p="com.cqf.urpvolumetricfog.editor.csproj" t="IncludeRecursive" />
+      <e p="com.cqf.urpvolumetricfog.runtime.csproj" t="IncludeRecursive" />
+      <e p="LightDemo.sln" t="IncludeFlat" />
+      <e p="obj" t="ExcludeRecursive" />
+      <e p="Packages" t="ExcludeRecursive" />
+      <e p="Temp\bin" t="ExcludeRecursive" />
+    </e>
+  </component>
+</project>

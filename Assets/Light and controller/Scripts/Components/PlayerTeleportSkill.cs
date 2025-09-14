@@ -15,6 +15,8 @@ public class PlayerTeleportSkill : MonoBehaviourWithData<PlayerTeleportSkill.Tel
     public ContactFilter2D contactFilter;
 
     private bool StartLightFiltr;
+    private bool IsTeleported;
+    
     private Vector2? TargetPosition;
 
 
@@ -46,11 +48,22 @@ public class PlayerTeleportSkill : MonoBehaviourWithData<PlayerTeleportSkill.Tel
 
                 Data.TeleportPoint.SetActive(true);
                 Data.TeleportPoint.transform.position = TargetPosition.Value;
-            }   
+
+                IsTeleported = true;
+            }
 
             if (hit.collider?.tag == "Teleport")
                 StartLightFiltr = true;
         }
+
+        if (IsTeleported == false)
+        {
+            TargetPosition = null;
+
+            Data.TeleportPoint.SetActive(false);
+        }
+        else IsTeleported = false;
+        
         StartLightFiltr = false;
 
         if (Input.GetMouseButton(1)) 
