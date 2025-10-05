@@ -80,3 +80,4 @@ MonoBehaviour:
   projectilePrefab: {fileID: 7759473674814068349, guid: 33c9c8283637d844499218806644396f, type: 3}
   directionPoint: {fileID: 7437142578404539102}
   speed: 10
+  speedRotation: 0

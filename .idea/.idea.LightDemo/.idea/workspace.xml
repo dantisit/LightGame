@@ -1,9 +1,31 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
+  <component name="BranchesTreeState">
+    <expand>
+      <path>
+        <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="LOCAL_ROOT" type="e8cecc67:BranchNodeDescriptor" />
+      </path>
+      <path>
+        <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="REMOTE_ROOT" type="e8cecc67:BranchNodeDescriptor" />
+      </path>
+      <path>
+        <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="REMOTE_ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="GROUP_NODE:origin" type="e8cecc67:BranchNodeDescriptor" />
+      </path>
+    </expand>
+    <select />
+  </component>
   <component name="ChangeListManager">
     <list default="true" id="ad823aba-ffa9-441b-927b-c52aa8898984" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/Assets/Light and controller/Scripts/Components/Checkpoint.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Light and controller/Scripts/Components/Checkpoint.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Light and controller/Scripts/Components/PlayerTeleportSkill.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Light and controller/Scripts/Components/PlayerTeleportSkill.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/.idea.LightDemo/.idea/indexLayout.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.LightDemo/.idea/indexLayout.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/.idea.LightDemo/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.LightDemo/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Light and controller/Prefabs/Projectile.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Light and controller/Prefabs/Projectile.prefab" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Light and controller/Prefabs/ProjectileSpawner.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Light and controller/Prefabs/ProjectileSpawner.prefab" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Light and controller/Scripts/Components/Projectile.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Light and controller/Scripts/Components/Projectile.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Light and controller/Scripts/Components/ProjectileSpawner.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Light and controller/Scripts/Components/ProjectileSpawner.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Light and controller/TestScene_PC.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Light and controller/TestScene_PC.unity" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -19,6 +41,9 @@
       <list>
         <option value="$PROJECT_DIR$/Assets/Light and controller/Scripts/Components/Checkpoint.cs" />
         <option value="$PROJECT_DIR$/Assets/Light and controller/Scripts/Components/PlayerTeleportSkill.cs" />
+        <option value="$PROJECT_DIR$/Assets/Light and controller/Thorn.cs" />
+        <option value="$PROJECT_DIR$/Assets/Light and controller/Scripts/Components/ProjectileSpawner.cs" />
+        <option value="$PROJECT_DIR$/Assets/Light and controller/Scripts/Components/Projectile.cs" />
       </list>
     </option>
   </component>
@@ -64,6 +89,8 @@
       <updated>1757745845209</updated>
       <workItem from="1757745850361" duration="1564000" />
       <workItem from="1757748286121" duration="3964000" />
+      <workItem from="1759675044466" duration="2000" />
+      <workItem from="1759675562819" duration="3655000" />
     </task>
     <servers />
   </component>
@@ -72,6 +99,17 @@
   </component>
   <component name="UnityProjectConfiguration" hasMinimizedUI="true" />
   <component name="UnityUnitTestConfiguration" currentTestLauncher="EditMode" />
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
+  </component>
   <component name="VcsManagerConfiguration">
     <option name="CLEAR_INITIAL_COMMIT_MESSAGE" value="true" />
   </component>

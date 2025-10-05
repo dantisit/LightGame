@@ -9,6 +9,7 @@ namespace Light_and_controller.Scripts.Components
         [SerializeField] private GameObject projectilePrefab;
         [SerializeField] private Transform directionPoint;
         [SerializeField] private float speed;
+        [SerializeField] private float speedRotation;
         
         private IEnumerator Start()
         {
@@ -21,6 +22,7 @@ namespace Light_and_controller.Scripts.Components
                 projectile.transform.SetParent(SceneRoot.Instance.transform, true);
                 projectile.Direction = (directionPoint.position - transform.position).normalized;
                 projectile.Speed = speed;
+                projectile.SpeedRotation = speedRotation;
             }
         }
     }
