@@ -16,22 +16,24 @@ public class ObjectHider : MonoBehaviour, ILightable
         _originalLayer = gameObject.layer;
     }
 
-    void HideColider() 
-    { 
+    void HideCollider()
+    {
         gameObject.layer = LayerMask.NameToLayer("Hidden");
-        m_Renderer.enabled = (false);
+        if (!m_Renderer) return;
+        m_Renderer.enabled = false;
     }
 
-    
-    public void ShowColider() 
+
+    public void ShowCollider()
     {
         gameObject.layer = _originalLayer;
-        m_Renderer.enabled = (true);
+        if (!m_Renderer) return;
+        m_Renderer.enabled = true;
     }
 
     public void OnInLightChange(bool isInLight)
     {
-        if(isInLight) HideColider();
-        else ShowColider();
+        if(isInLight) HideCollider();
+        else ShowCollider();
     }
 }

@@ -9,10 +9,14 @@ namespace Light_and_controller.Scripts.Components
     [RequireComponent(typeof(Collider2D))]
     public class LightDetector : MonoBehaviour
    {
-       [SerializeField] private UnityEvent<bool> onChangeState;
-       [SerializeField] private UnityEvent<bool> onChangeStateInverse;
-   
+       [SerializeField] private UnityEvent<bool> onChangeState = new UnityEvent<bool>();
+       [SerializeField] private UnityEvent<bool> onChangeStateInverse = new UnityEvent<bool>();
+
        public HashSet<GameObject> lightSprings = new();
+
+       // Public accessors for events
+       public UnityEvent<bool> OnChangeState => onChangeState;
+       public UnityEvent<bool> OnChangeStateInverse => onChangeStateInverse;
 
        private bool _lastStateIsInLight = true;
        private bool _isInLight;
@@ -22,12 +26,12 @@ namespace Light_and_controller.Scripts.Components
            _isInLight = lightSprings.Count > 0;
            if(_isInLight == _lastStateIsInLight) return;
            ExecuteEvents.Execute<ILightable>(gameObject, null, (x, _) => x.OnInLightChange(_isInLight));
-           onChangeState.Invoke(_isInLight);
-           onChangeStateInverse.Invoke(!_isInLight);
+           onChangeState?.Invoke(_isInLight);
+           onChangeStateInverse?.Invoke(!_isInLight);
            _lastStateIsInLight = _isInLight;
        }
        
-       public bool LightBlockCheck(Vector3 targetPosition) 
+       public bool LightBlockCheck(Vector3 targetPosition, Rigidbody2D lightRigidbody) 
        {
            Vector3 direction = targetPosition - transform.position;
    
@@ -38,7 +42,7 @@ namespace Light_and_controller.Scripts.Components
            var results = new List<RaycastHit2D>();
            Physics2D.Raycast(transform.position, direction.normalized, filter, results, direction.magnitude);
            var hit = results.FirstOrDefault(x => !x.collider.transform.CompareTag("PassLight"));
-           if(hit.collider == null) return false;
+           if(hit.collider == null && hit.rigidbody != lightRigidbody) return false;
            Debug.DrawLine(transform.position, hit.transform.position);
            return hit.collider.CompareTag("Light");
        }

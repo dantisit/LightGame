@@ -1,0 +1,20 @@
+{
+    "name": "LightGame",
+    "rootNamespace": "",
+    "references": [
+        "PlayerController",
+        "Unity.TextMeshPro",
+        "DOTweenPro.Scripts",
+        "DOTween.Modules",
+        "UniTask"
+    ],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}

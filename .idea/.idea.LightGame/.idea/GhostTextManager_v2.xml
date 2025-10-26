@@ -1,0 +1,946 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="GhostTextManager">
+    <option name="inputs">
+      <map>
+        <entry key="// Search surrounding pixels up to search width and return largest alpha value found.&#10;&#10;float GetNeigbourWithLargestAlpha(sampler2D baseTexture, float2 baseTextureUV, float2 baseTextureTexelSize, float currentAlpha, int searchWidth, float outlineWidth)&#10;{&#10;    float alpha = currentAlpha;&#10;    float2 texelSize = (outlineWidth / searchWidth) * baseTextureTexelSize.xy;&#10;&#10;    for (int x = -searchWidth; x &lt;= searchWidth; x++)&#10;    {&#10;        for (int y = -searchWidth; y &lt;= searchWidth; y++)&#10;        {&#10;            if (x == 0 &amp;&amp; y == 0) continue; // Ignore this pixel.&#10;&#10;            float2 offset = float2(x, y) * texelSize;&#10;            float4 neighbour = tex2D(baseTexture, baseTextureUV + offset);&#10;&#10;            alpha = max(alpha, neighbour.a);&#10;        }&#10;    }&#10;&#10;    return alpha;&#10;}&#10;&#10;// Based on current pixel and largest neighbour alpha, should current pixel be an outline pixel?&#10;&#10;bool IsOutline(float currentAlpha, float largestNeighbourAlpha)&#10;{&#10;    if (currentAlpha &lt; 0.5 &amp;&amp; largestNeighbourAlpha &gt;= 0.5)&#10;    {&#10;        return true;&#10;    }&#10;&#10;    return false;&#10;}&#10;&#10;is it the same way?">
+          <value>
+            <GhostTextMetaData>
+              <option name="count" value="1.0" />
+              <option name="timestamps">
+                <list>
+                  <option value="1761509295104" />
+                </list>
+              </option>
+            </GhostTextMetaData>
+          </value>
+        </entry>
+        <entry key="About dissolve effects, what ways do i have? How to sync dissolving of sprite with physics blocks?">
+          <value>
+            <GhostTextMetaData>
+              <option name="count" value="1.0" />
+              <option name="timestamps">
+                <list>
+                  <option value="1761469733786" />
+                </list>
+              </option>
+            </GhostTextMetaData>
+          </value>
+        </entry>
+        <entry key="Are your colliders supposed to cover the entire sprite from edge to edge? - yes they supposed to">
+          <value>
+            <GhostTextMetaData>
+              <option name="count" value="1.0" />
+              <option name="timestamps">
+                <list>
+                  <option value="1761475831269" />
+                </list>
+              </option>
+            </GhostTextMetaData>
+          </value>
+        </entry>
+        <entry key="ArgumentException: Zero-sized array is not allowed.&#10;UnityEngine.Material.SetVectorArray (System.Int32 name, UnityEngine.Vector4[] values, System.Int32 count) (at /Users/bokken/build/output/unity/unity/Runtime/Export/Shaders/Material.cs:36)&#10;UnityEngine.Material.SetVectorArray (System.String name, UnityEngine.Vector4[] values) (at /Users/bokken/build/output/unity/unity/Runtime/Export/Shaders/Material.cs:151)&#10;SimpleBlockToSpriteSync.UpdateShader () (at Assets/Light and controller/Scripts/SimpleBlockToSpriteSync.cs:109)&#10;SimpleBlockToSpriteSync.Start () (at Assets/Light and controller/Scripts/SimpleBlockToSpriteSync.cs:72)&#10;&#10;NullReferenceException: Object reference not set to an instance of an object&#10;ObjectHider.ShowColider () (at Assets/Light and controller/Scripts/ObjectHider.cs:29)&#10;ObjectHider.OnInLightChange (System.Boolean isInLight) (at Assets/Light and controller/Scripts/ObjectHider.cs:35)&#10;Light_and_controller.Scripts.Components.LightDetector.&lt;Update&gt;b__9_0 (Light_and_controller.Scripts.Components.ILightable x, UnityEngine.EventSystems.BaseEventData _) (at Assets/Light and controller/Scripts/Components/LightDetector.cs:28)&#10;UnityEngine.EventSystems.ExecuteEvents.Execute[T] (UnityEngine.GameObject target, UnityEngine.EventSystems.BaseEventData eventData, UnityEngine.EventSystems.ExecuteEvents+EventFunction`1[T1] functor) (at ./Library/PackageCache/com.unity.ugui@&lt;file_name&gt;&#10;UnityEngine.EventSystems.ExecuteEvents:Execute(GameObject, BaseEventData, EventFunction`1)&#10;Light_and_controller.Scripts.Components.LightDetector:Update() (at Assets/Light and controller/Scripts/Components/LightDetector.cs:28)&#10;&#10;NullReferenceException: Object reference not set to an instance of an object&#10;Light_and_controller.Scripts.Components.LightDetector.Update () (at Assets/Light and controller/Scripts/Components/LightDetector.cs:29)">
+          <value>
+            <GhostTextMetaData>
+              <option name="count" value="1.0" />
+              <option name="timestamps">
+                <list>
+                  <option value="1761471683420" />
+                </list>
+              </option>
+            </GhostTextMetaData>
+          </value>
+        </entry>
+        <entry key="As you can see object visibility is dictated by light source collider2d. Main concern for now is to be sure that all works fine with physics. Like example: part of the wall is under light and player can pass through. Or floor is becomed lighted and disapear under player. It actually works in demo levels i build. I think you agree that it is not the worst way to implement that mechanic and we can easialy optimize this in future. But maybe there some other significatly better alternatives?">
+          <value>
+            <GhostTextMetaData>
+              <option name="count" value="2.0" />
+              <option name="timestamps">
+                <list>
+                  <option value="1761468323439" />
+                  <option value="1761468200470" />
+                </list>
+              </option>
+            </GhostTextMetaData>
+          </value>
+        </entry>
+        <entry key="Assets/Tests/SimpleBlockToSpriteSyncPlayModeTests.cs(176,64): error CS1503: Argument 2: cannot convert from 'float[]' to 'System.Collections.Generic.List&lt;float&gt;'">
+          <value>
+            <GhostTextMetaData>
+              <option name="count" value="1.0" />
+              <option name="timestamps">
+                <list>
+                  <option value="1761474710954" />
+                </list>
+              </option>
+            </GhostTextMetaData>
+          </value>
+        </entry>
+        <entry key="Assets/Tests/SimpleBlockToSpriteSyncTests.cs(75,31): error CS1061: 'SimpleBlockToSpriteSync' does not contain a definition for 'GetAverageDissolveAmount' and no accessible extension method 'GetAverageDissolveAmount' accepting a first argument of type 'SimpleBlockToSpriteSync' could be found (are you missing a using directive or an assembly reference?)&#10;Assets/Tests/SimpleBlockToSpriteSyncTests.cs(118,35): error CS1061: 'SimpleBlockToSpriteSync' does not contain a definition for 'IsAnyBlockDissolving' and no accessible extension method 'IsAnyBlockDissolving' accepting a first argument of type 'SimpleBlockToSpriteSync' could be found (are you missing a using directive or an assembly reference?)&#10;Assets/Tests/SimpleBlockToSpriteSyncTests.cs(138,15): error CS1061: 'SimpleBlockToSpriteSync' does not contain a definition for 'SetAllBlocksDissolve' and no accessible extension method 'SetAllBlocksDissolve' accepting a first argument of type 'SimpleBlockToSpriteSync' could be found (are you missing a using directive or an assembly reference?)">
+          <value>
+            <GhostTextMetaData>
+              <option name="count" value="1.0" />
+              <option name="timestamps">
+                <list>
+                  <option value="1761471605510" />
+                </list>
+              </option>
+            </GhostTextMetaData>
+          </value>
+        </entry>
+        <entry key="Can we make SoundManager as static class\singleton so we dont need to create gameobject with it">
+          <value>
+            <GhostTextMetaData>
+              <option name="count" value="1.0" />
+              <option name="timestamps">
+                <list>
+                  <option value="1761483702747" />
+                </list>
+              </option>
+            </GhostTextMetaData>
+          </value>
+        </entry>
+        <entry key="Can you also add optional edge glow?">
+          <value>
+            <GhostTextMetaData>
+              <option name="count" value="1.0" />
+              <option name="timestamps">
+                <list>
+                  <option value="1761514581411" />
+                </list>
+              </option>
+            </GhostTextMetaData>
+          </value>
+        </entry>
+        <entry key="Can you create : Rim Lighting Shader, so in dark we can see only outlines of object? Still coloured tho">
+          <value>
+            <GhostTextMetaData>
+              <option name="count" value="1.0" />
+              <option name="timestamps">
+                <list>
+                  <option value="1761507816919" />
+                </list>
+              </option>
+            </GhostTextMetaData>
+          </value>
+        </entry>
+        <entry key="Can you make it handle case when, parent is also content size fitter, so on this rebuild we need rebuild parent">
+          <value>
+            <GhostTextMetaData>
+              <option name="count" value="1.0" />
+              <option name="timestamps">
+                <list>
+                  <option value="1761503179741" />
+                </list>
+              </option>
+            </GhostTextMetaData>
+          </value>
+        </entry>
+        <entry key="Can you make it lit?">
+          <value>
+            <GhostTextMetaData>
+              <option name="count" value="1.0" />
+              <option name="timestamps">
+                <list>
+                  <option value="1761514505315" />
+                </list>
+              </option>
+            </GhostTextMetaData>
+          </value>
+        </entry>
+        <entry key="Can you review my current approach for next game mechanic: &quot;Some objects disappear under light and appear when there is no light&quot;.">
+          <value>
+            <GhostTextMetaData>
+              <option name="count" value="1.0" />
+              <option name="timestamps">
+                <list>
+                  <option value="1761467541976" />
+                </list>
+              </option>
+            </GhostTextMetaData>
+          </value>
+        </entry>
+        <entry key="Can you simplify test by removing not meaningfull testing, so it don`t &quot;overtest&quot; things">
+          <value>
+            <GhostTextMetaData>
+              <option name="count" value="1.0" />
+              <option name="timestamps">
+                <list>
+                  <option value="1761472319251" />
+                </list>
+              </option>
+            </GhostTextMetaData>
+          </value>
+        </entry>
+        <entry key="Cannot access private serialised field 'onChangeState' here. Also can you cover new script with simple test in @&lt;file_name&gt;">
+          <value>
+            <GhostTextMetaData>
+              <option name="count" value="1.0" />
+              <option name="timestamps">
+                <list>
+                  <option value="1761471117284" />
+                </list>
+              </option>
+            </GhostTextMetaData>
+          </value>
+        </entry>
+        <entry key="Continue">
+          <value>
+            <GhostTextMetaData>
+              <option name="count" value="1.0" />
+              <option name="timestamps">
+                <list>
+                  <option value="1761472553856" />
+                </list>
+              </option>
+            </GhostTextMetaData>
+          </value>
+        </entry>
+        <entry key="Currently this shader dont look like disolve at all. Maybe this example may help?  Shader &quot;Custom/Dissolve&quot; {&#10;    Properties{&#10;        _MainTex(&quot;Texture&quot;, 2D) = &quot;white&quot; {}&#10;        _DissolveThreshold(&quot;Dissolve Threshold&quot;, Range(0, 1)) = 0&#10;        _EdgeColor(&quot;Edge Color&quot;, Color) = (0, 0, 0, 0)&#10;    }&#10;&#10;        SubShader{&#10;            Tags { &quot;Queue&quot; = &quot;Transparent&quot; &quot;RenderType&quot; = &quot;Transparent&quot; }&#10;            LOD 100&#10;&#10;            Pass {&#10;                CGPROGRAM&#10;                #pragma vertex vert&#10;                #pragma fragment frag&#10;                #pragma multi_compile_fog&#10;                #include &quot;UnityCG.cginc&quot;&#10;&#10;                struct appdata {&#10;                    float4 vertex : POSITION;&#10;                    float2 uv : TEXCOORD0;&#10;                };&#10;&#10;                struct v2f {&#10;                    float2 uv : TEXCOORD0;&#10;                    UNITY_FOG_COORDS(1)&#10;                    float4 vertex : SV_POSITION;&#10;                };&#10;&#10;                sampler2D _MainTex;&#10;                float _DissolveThreshold;&#10;                float4 _EdgeColor;&#10;&#10;                v2f vert(appdata v) {&#10;                    v2f o;&#10;                    o.vertex = UnityObjectToClipPos(v.vertex);&#10;                    o.uv = v.uv;&#10;                    UNITY_TRANSFER_FOG(o,o.vertex);&#10;                    return o;&#10;                }&#10;&#10;                fixed4 frag(v2f i) : SV_Target {&#10;                    float noiseScale = 1.0;&#10;                    fixed noise = frac(sin(dot(i.uv * noiseScale ,float2(12.9898,78.233))) * 43758.5453);&#10;                    noise = noise * 0.5 + 0.5; // Remap the noise&#10;&#10;                    fixed4 col = tex2D(_MainTex, i.uv);&#10;                    fixed4 edgeCol = _EdgeColor;&#10;                    edgeCol.a = col.a;&#10;&#10;                    if (noise &lt; _DissolveThreshold) {&#10;                        clip(-1);&#10;                    }&#10;                    else if (noise &lt; _DissolveThreshold + 0.1) {&#10;                        return edgeCol;&#10;                    }&#10;&#10;                    UNITY_APPLY_FOG(i.fogCoord, col);&#10;                    return col;&#10;                }&#10;                ENDCG&#10;            }&#10;        }&#10;}">
+          <value>
+            <GhostTextMetaData>
+              <option name="count" value="1.0" />
+              <option name="timestamps">
+                <list>
+                  <option value="1761475996361" />
+                </list>
+              </option>
+            </GhostTextMetaData>
+          </value>
+        </entry>
+        <entry key="DissolveAnimation_UpdatesShaderValues (0.329s)&#10;---&#10;System.NullReferenceException : Object reference not set to an instance of an object&#10;---&#10;  at SimpleBlockToSpriteSyncTests+&lt;DissolveAnimation_UpdatesShaderValues&gt;d__13.MoveNext () [0x00178] in Assets/Tests/SimpleBlockToSpriteSyncTests.cs:206 &#10;  at UnityEngine.TestTools.TestEnumerator+&lt;Execute&gt;d__7.MoveNext () [0x0004e] in Library/PackageCache/com.unity.test-framework@&lt;file_name&gt;&#10;---&#10;No block regions configured on WallSprite">
+          <value>
+            <GhostTextMetaData>
+              <option name="count" value="1.0" />
+              <option name="timestamps">
+                <list>
+                  <option value="1761472789303" />
+                </list>
+              </option>
+            </GhostTextMetaData>
+          </value>
+        </entry>
+        <entry key="Does it work as lit or unlit?">
+          <value>
+            <GhostTextMetaData>
+              <option name="count" value="1.0" />
+              <option name="timestamps">
+                <list>
+                  <option value="1761514486746" />
+                </list>
+              </option>
+            </GhostTextMetaData>
+          </value>
+        </entry>
+        <entry key="Doesnt this is things that shouldnt be tested through tests?">
+          <value>
+            <GhostTextMetaData>
+              <option name="count" value="1.0" />
+              <option name="timestamps">
+                <list>
+                  <option value="1761473910485" />
+                </list>
+              </option>
+            </GhostTextMetaData>
+          </value>
+        </entry>
+        <entry key="GetAverageDissolveAmount_ReturnsCorrectValue (0.028s)&#10;---&#10;  Expected: 0.40000000596046448d +/- 0.0010000000474974513d&#10;  But was:  0.0d&#10;&#10;---&#10;at SimpleBlockToSpriteSyncPlayModeTests+&lt;GetAverageDissolveAmount_ReturnsCorrectValue&gt;d__7.MoveNext () [0x0019f] in Assets/Tests/SimpleBlockToSpriteSyncPlayModeTests.cs:120&#10;at UnityEngine.TestTools.TestEnumerator+&lt;Execute&gt;d__7.MoveNext () [0x0004e] in Library/PackageCache/com.unity.test-framework@&lt;file_name&gt;">
+          <value>
+            <GhostTextMetaData>
+              <option name="count" value="1.0" />
+              <option name="timestamps">
+                <list>
+                  <option value="1761473765874" />
+                </list>
+              </option>
+            </GhostTextMetaData>
+          </value>
+        </entry>
+        <entry key="GetAverageDissolveAmount_ReturnsCorrectValue (0.038s)&#10;---&#10;  Expected: 0.40000000596046448d +/- 0.0010000000474974513d&#10;  But was:  0.3333333432674408d&#10;&#10;---&#10;at SimpleBlockToSpriteSyncPlayModeTests+&lt;GetAverageDissolveAmount_ReturnsCorrectValue&gt;d__7.MoveNext () [0x000c2] in Assets/Tests/SimpleBlockToSpriteSyncPlayModeTests.cs:109&#10;at UnityEngine.TestTools.TestEnumerator+&lt;Execute&gt;d__7.MoveNext () [0x0004e] in Library/PackageCache/com.unity.test-framework@&lt;file_name&gt;&#10;&#10;---&#10;Property (_RegionDissolve) exceeds previous array size (3 vs 1). Cap to previous size. Restart Unity to recreate the arrays.">
+          <value>
+            <GhostTextMetaData>
+              <option name="count" value="1.0" />
+              <option name="timestamps">
+                <list>
+                  <option value="1761473695791" />
+                </list>
+              </option>
+            </GhostTextMetaData>
+          </value>
+        </entry>
+        <entry key="I mean blocks of provided data from @&lt;file_name&gt;">
+          <value>
+            <GhostTextMetaData>
+              <option name="count" value="1.0" />
+              <option name="timestamps">
+                <list>
+                  <option value="1761476162325" />
+                </list>
+              </option>
+            </GhostTextMetaData>
+          </value>
+        </entry>
+        <entry key="I mostly like approach with shader, but i dont know how to sync it with physics. Like i have: wall sprite, 10 physics blocks of it. 2 of them disable physics - how to pass this data to shader of wall sprite?">
+          <value>
+            <GhostTextMetaData>
+              <option name="count" value="1.0" />
+              <option name="timestamps">
+                <list>
+                  <option value="1761470170251" />
+                </list>
+              </option>
+            </GhostTextMetaData>
+          </value>
+        </entry>
+        <entry key="Is it needed for it to be 300 lines of code, or could be simplified?">
+          <value>
+            <GhostTextMetaData>
+              <option name="count" value="1.0" />
+              <option name="timestamps">
+                <list>
+                  <option value="1761473406671" />
+                </list>
+              </option>
+            </GhostTextMetaData>
+          </value>
+        </entry>
+        <entry key="It is too slow, and dont look smooth. I can easialy see &quot;blocks&quot; that shouldnt be the case">
+          <value>
+            <GhostTextMetaData>
+              <option name="count" value="1.0" />
+              <option name="timestamps">
+                <list>
+                  <option value="1761476126831" />
+                </list>
+              </option>
+            </GhostTextMetaData>
+          </value>
+        </entry>
+        <entry key="It looks like bad practice to test animations. We should focus on pure logic i think - event fires, shader receivec correct data">
+          <value>
+            <GhostTextMetaData>
+              <option name="count" value="1.0" />
+              <option name="timestamps">
+                <list>
+                  <option value="1761473588009" />
+                </list>
+              </option>
+            </GhostTextMetaData>
+          </value>
+        </entry>
+        <entry key="Lets go with Option B. PlayTests looks like poverfull way of integration test">
+          <value>
+            <GhostTextMetaData>
+              <option name="count" value="1.0" />
+              <option name="timestamps">
+                <list>
+                  <option value="1761473252101" />
+                </list>
+              </option>
+            </GhostTextMetaData>
+          </value>
+        </entry>
+        <entry key="LightDetectorEvent_ReverseAnimation (0.044s)&#10;---&#10;  Should start dissolved&#10;  Expected: 1.0d +/- 0.0010000000474974513d&#10;  But was:  0.0d&#10;&#10;---&#10;at SimpleBlockToSpriteSyncPlayModeTests+&lt;LightDetectorEvent_ReverseAnimation&gt;d__8.MoveNext () [0x000d2] in Assets/Tests/SimpleBlockToSpriteSyncPlayModeTests.cs:142&#10;at UnityEngine.TestTools.TestEnumerator+&lt;Execute&gt;d__7.MoveNext () [0x0004e] in Library/PackageCache/com.unity.test-framework@&lt;file_name&gt;">
+          <value>
+            <GhostTextMetaData>
+              <option name="count" value="1.0" />
+              <option name="timestamps">
+                <list>
+                  <option value="1761474904234" />
+                </list>
+              </option>
+            </GhostTextMetaData>
+          </value>
+        </entry>
+        <entry key="LightDetectorEvent_ReverseAnimation (0.634s)&#10;---&#10;System.NullReferenceException : Object reference not set to an instance of an object&#10;---&#10;  at SimpleBlockToSpriteSyncPlayModeTests+&lt;LightDetectorEvent_ReverseAnimation&gt;d__8.MoveNext () [0x0010e] in Assets/Tests/SimpleBlockToSpriteSyncPlayModeTests.cs:153 &#10;  at UnityEngine.TestTools.TestEnumerator+&lt;Execute&gt;d__7.MoveNext () [0x0004e] in Library/PackageCache/com.unity.test-framework@&lt;file_name&gt;">
+          <value>
+            <GhostTextMetaData>
+              <option name="count" value="1.0" />
+              <option name="timestamps">
+                <list>
+                  <option value="1761474619070" />
+                </list>
+              </option>
+            </GhostTextMetaData>
+          </value>
+        </entry>
+        <entry key="LightDetectorEvent_ReverseAnimation (0.637s)&#10;---&#10;System.NullReferenceException : Object reference not set to an instance of an object&#10;---&#10;  at SimpleBlockToSpriteSyncPlayModeTests+&lt;LightDetectorEvent_ReverseAnimation&gt;d__8.MoveNext () [0x0010e] in Assets/Tests/SimpleBlockToSpriteSyncPlayModeTests.cs:149 &#10;  at UnityEngine.TestTools.TestEnumerator+&lt;Execute&gt;d__7.MoveNext () [0x0004e] in Library/PackageCache/com.unity.test-framework@&lt;file_name&gt;&#10;LightDetectorEvent_TriggersDissolveAnimation (0.014s)&#10;---&#10;System.NullReferenceException : Object reference not set to an instance of an object&#10;---&#10;  at SimpleBlockToSpriteSyncPlayModeTests+&lt;LightDetectorEvent_TriggersDissolveAnimation&gt;d__7.MoveNext () [0x000a1] in Assets/Tests/SimpleBlockToSpriteSyncPlayModeTests.cs:117 &#10;  at UnityEngine.TestTools.TestEnumerator+&lt;Execute&gt;d__7.MoveNext () [0x0004e] in Library/PackageCache/com.unity.test-framework@&lt;file_name&gt;&#10;SetAllBlocksDissolve_UpdatesShaderAndAverage (0.018s)&#10;---&#10;  Dissolve amounts should be in shader&#10;  Expected: not null&#10;  But was:  null&#10;&#10;---&#10;at SimpleBlockToSpriteSyncPlayModeTests+&lt;SetAllBlocksDissolve_UpdatesShaderAndAverage&gt;d__6.MoveNext () [0x000ae] in Assets/Tests/SimpleBlockToSpriteSyncPlayModeTests.cs:98&#10;at UnityEngine.TestTools.TestEnumerator+&lt;Execute&gt;d__7.MoveNext () [0x0004e] in Library/PackageCache/com.unity.test-framework@&lt;file_name&gt;&#10;Start_InitializesAndSendsDataToShader (0.015s)&#10;---&#10;  Region data should be sent to shader&#10;  Expected: not null&#10;  But was:  null&#10;&#10;---&#10;at SimpleBlockToSpriteSyncPlayModeTests+&lt;Start_InitializesAndSendsDataToShader&gt;d__5.MoveNext () [0x00098] in Assets/Tests/SimpleBlockToSpriteSyncPlayModeTests.cs:66&#10;at UnityEngine.TestTools.TestEnumerator+&lt;Execute&gt;d__7.MoveNext () [0x0004e] in Library/PackageCache/com.unity.test-framework@&lt;file_name&gt;">
+          <value>
+            <GhostTextMetaData>
+              <option name="count" value="1.0" />
+              <option name="timestamps">
+                <list>
+                  <option value="1761474575100" />
+                </list>
+              </option>
+            </GhostTextMetaData>
+          </value>
+        </entry>
+        <entry key="LightDetectorEvent_ReverseAnimation (0.645s)&#10;---&#10;  Dissolve array should have at least one element&#10;  Expected: greater than 0&#10;  But was:  0&#10;&#10;---&#10;at SimpleBlockToSpriteSyncPlayModeTests+&lt;LightDetectorEvent_ReverseAnimation&gt;d__8.MoveNext () [0x0011a] in Assets/Tests/SimpleBlockToSpriteSyncPlayModeTests.cs:159&#10;at UnityEngine.TestTools.TestEnumerator+&lt;Execute&gt;d__7.MoveNext () [0x0004e] in Library/PackageCache/com.unity.test-framework@&lt;file_name&gt;">
+          <value>
+            <GhostTextMetaData>
+              <option name="count" value="1.0" />
+              <option name="timestamps">
+                <list>
+                  <option value="1761474745634" />
+                </list>
+              </option>
+            </GhostTextMetaData>
+          </value>
+        </entry>
+        <entry key="LightDetector_EventsCanBeSubscribed (0.002s)&#10;---&#10;System.NullReferenceException : Object reference not set to an instance of an object&#10;---&#10;  at SimpleBlockToSpriteSyncTests.LightDetector_EventsCanBeSubscribed () [0x0000e] in Assets/Tests/SimpleBlockToSpriteSyncTests.cs:159 &#10;  at (wrapper managed-to-native) System.Reflection.RuntimeMethodInfo.InternalInvoke(System.Reflection.RuntimeMethodInfo,object,object[],System.Exception&amp;)&#10;  at System.Reflection.RuntimeMethodInfo.Invoke (System.Object obj, System.Reflection.BindingFlags invokeAttr, System.Reflection.Binder binder, System.Object[] parameters, System.Globalization.CultureInfo culture) [0x0006a] in &lt;fd98429b8c6c4f82ba907b21c76e6375&gt;:0&#10;LightDetector_HasPublicEventAccessors (0.002s)&#10;---&#10;  Expected: not null&#10;  But was:  null&#10;&#10;---&#10;at SimpleBlockToSpriteSyncTests.LightDetector_HasPublicEventAccessors () [0x00001] in Assets/Tests/SimpleBlockToSpriteSyncTests.cs:150&#10;OnBlockChanged_UpdatesDissolveAmount (0.016s)&#10;---&#10;System.Reflection.TargetInvocationException : Exception has been thrown by the target of an invocation.&#10;  ----&gt; System.NullReferenceException : Object reference not set to an instance of an object&#10;---&#10;  at System.Reflection.RuntimeMethodInfo.Invoke (System.Object obj, System.Reflection.BindingFlags invokeAttr, System.Reflection.Binder binder, System.Object[] parameters, System.Globalization.CultureInfo culture) [0x00083] in &lt;fd98429b8c6c4f82ba907b21c76e6375&gt;:0 &#10;  at System.Reflection.MethodBase.Invoke (System.Object obj, System.Object[] parameters) [0x00000] in &lt;fd98429b8c6c4f82ba907b21c76e6375&gt;:0 &#10;  at SimpleBlockToSpriteSyncTests+&lt;OnBlockChanged_UpdatesDissolveAmount&gt;d__9.MoveNext () [0x000ca] in Assets/Tests/SimpleBlockToSpriteSyncTests.cs:101 &#10;  at UnityEngine.TestTools.TestEnumerator+&lt;Execute&gt;d__7.MoveNext () [0x0004e] in Library/PackageCache/com.unity.test-framework@&lt;file_name&gt;&#10;--NullReferenceException&#10;  at SimpleBlockToSpriteSync.Start () [0x00102] in Assets/Light and controller/Scripts/SimpleBlockToSpriteSync.cs:63 &#10;  at (wrapper managed-to-native) System.Reflection.RuntimeMethodInfo.InternalInvoke(System.Reflection.RuntimeMethodInfo,object,object[],System.Exception&amp;)&#10;  at System.Reflection.RuntimeMethodInfo.Invoke (System.Object obj, System.Reflection.BindingFlags invokeAttr, System.Reflection.Binder binder, System.Object[] parameters, System.Globalization.CultureInfo culture) [0x0006a] in &lt;fd98429b8c6c4f82ba907b21c76e6375&gt;:0">
+          <value>
+            <GhostTextMetaData>
+              <option name="count" value="1.0" />
+              <option name="timestamps">
+                <list>
+                  <option value="1761471826684" />
+                </list>
+              </option>
+            </GhostTextMetaData>
+          </value>
+        </entry>
+        <entry key="May it be then we must create main assembly then?">
+          <value>
+            <GhostTextMetaData>
+              <option name="count" value="1.0" />
+              <option name="timestamps">
+                <list>
+                  <option value="1761471386305" />
+                </list>
+              </option>
+            </GhostTextMetaData>
+          </value>
+        </entry>
+        <entry key="May the problem be that i doesnt provide noise texture?">
+          <value>
+            <GhostTextMetaData>
+              <option name="count" value="1.0" />
+              <option name="timestamps">
+                <list>
+                  <option value="1761476020499" />
+                </list>
+              </option>
+            </GhostTextMetaData>
+          </value>
+        </entry>
+        <entry key="Now i have next problem: First segment isnt disappearing. If some segments are hidden there isnt some noise fade. Like it should smoothly connect visible and hidden paths without &quot;borders&quot;">
+          <value>
+            <GhostTextMetaData>
+              <option name="count" value="1.0" />
+              <option name="timestamps">
+                <list>
+                  <option value="1761476380924" />
+                </list>
+              </option>
+            </GhostTextMetaData>
+          </value>
+        </entry>
+        <entry key="NullReferenceException: Object reference not set to an instance of an object&#10;Light_and_controller.Scripts.Components.LightDetector.Update () (at Assets/Light and controller/Scripts/Components/LightDetector.cs:29)">
+          <value>
+            <GhostTextMetaData>
+              <option name="count" value="1.0" />
+              <option name="timestamps">
+                <list>
+                  <option value="1761471774362" />
+                </list>
+              </option>
+            </GhostTextMetaData>
+          </value>
+        </entry>
+        <entry key="Okay i try to descibe my setup: I have spriterenderer object and box collider objects under parent sync. spriterenderer localy located at Vector.Zero and has (3.165118, 1.002306, 1) scale. collider has custom position, scale, and collider offset. After auto-settuping they appear to be more righter then should be">
+          <value>
+            <GhostTextMetaData>
+              <option name="count" value="1.0" />
+              <option name="timestamps">
+                <list>
+                  <option value="1761475601885" />
+                </list>
+              </option>
+            </GhostTextMetaData>
+          </value>
+        </entry>
+        <entry key="Problem was that there was one extra one) Is it now looks correct? I mean covers all space of sprite?">
+          <value>
+            <GhostTextMetaData>
+              <option name="count" value="1.0" />
+              <option name="timestamps">
+                <list>
+                  <option value="1761475791020" />
+                </list>
+              </option>
+            </GhostTextMetaData>
+          </value>
+        </entry>
+        <entry key="Problem with this dissolve shader, that it separate sprite on areas and treat it as chuncks. Instead it should add disolve effect, so it smoothly blends to not disolved parts.">
+          <value>
+            <GhostTextMetaData>
+              <option name="count" value="1.0" />
+              <option name="timestamps">
+                <list>
+                  <option value="1761506813258" />
+                </list>
+              </option>
+            </GhostTextMetaData>
+          </value>
+        </entry>
+        <entry key="Shader 'Test/MockDissolveShader' does not have property '_RegionDissolve'&#10;UnityEngine.Debug:LogError (object)&#10;SimpleBlockToSpriteSyncPlayModeTests:GetDissolveArraySafe () (at Assets/Tests/SimpleBlockToSpriteSyncPlayModeTests.cs:189)&#10;SimpleBlockToSpriteSyncPlayModeTests/&lt;LightDetectorEvent_ReverseAnimation&gt;d__8:MoveNext () (at Assets/Tests/SimpleBlockToSpriteSyncPlayModeTests.cs:157)&#10;UnityEngine.SetupCoroutine:InvokeMoveNext (System.Collections.IEnumerator,intptr) (at /Users/bokken/build/output/unity/unity/Runtime/Export/Scripting/Coroutines.cs:17)&#10;&#10;Shader 'Test/MockDissolveShader' does not have property '_RegionDissolve'&#10;UnityEngine.Debug:LogError (object)&#10;SimpleBlockToSpriteSyncPlayModeTests:GetDissolveArraySafe () (at Assets/Tests/SimpleBlockToSpriteSyncPlayModeTests.cs:189)&#10;SimpleBlockToSpriteSyncPlayModeTests/&lt;LightDetectorEvent_TriggersDissolveAnimation&gt;d__7:MoveNext () (at Assets/Tests/SimpleBlockToSpriteSyncPlayModeTests.cs:121)&#10;UnityEngine.SetupCoroutine:InvokeMoveNext (System.Collections.IEnumerator,intptr) (at /Users/bokken/build/output/unity/unity/Runtime/Export/Scripting/Coroutines.cs:17)&#10;&#10;Shader 'Test/MockDissolveShader' does not have property '_RegionDissolve'&#10;UnityEngine.Debug:LogError (object)&#10;SimpleBlockToSpriteSyncPlayModeTests:GetDissolveArraySafe () (at Assets/Tests/SimpleBlockToSpriteSyncPlayModeTests.cs:189)&#10;SimpleBlockToSpriteSyncPlayModeTests/&lt;SetAllBlocksDissolve_UpdatesShaderAndAverage&gt;d__6:MoveNext () (at Assets/Tests/SimpleBlockToSpriteSyncPlayModeTests.cs:101)&#10;UnityEngine.SetupCoroutine:InvokeMoveNext (System.Collections.IEnumerator,intptr) (at /Users/bokken/build/output/unity/unity/Runtime/Export/Scripting/Coroutines.cs:17)">
+          <value>
+            <GhostTextMetaData>
+              <option name="count" value="1.0" />
+              <option name="timestamps">
+                <list>
+                  <option value="1761474797156" />
+                </list>
+              </option>
+            </GhostTextMetaData>
+          </value>
+        </entry>
+        <entry key="Shader error in 'Custom/URP/RimLighting': forced to unroll loop, but unrolling failed. at controller/Shaders/RimLighting.shader(173) (on metal)&#10;&#10;Compiling Subshader: 0, Pass: RimLighting, Fragment program with &lt;no keywords&gt;&#10;Platform defines: SHADER_API_DESKTOP UNITY_ENABLE_DETAIL_NORMALMAP UNITY_ENABLE_REFLECTION_BUFFERS UNITY_FRAMEBUFFER_FETCH_AVAILABLE UNITY_LIGHTMAP_FULL_HDR UNITY_LIGHT_PROBE_PROXY_VOLUME UNITY_NEEDS_RENDERPASS_FBFETCH_FALLBACK UNITY_PBS_USE_BRDF1 UNITY_SPECCUBE_BLENDING UNITY_SPECCUBE_BOX_PROJECTION UNITY_USE_DITHER_MASK_FOR_ALPHABLENDED_SHADOWS&#10;Disabled keywords: FOG_EXP FOG_EXP2 FOG_LINEAR SHADER_API_GLES30 SHADER_API_GLES31 SHADER_API_GLES32 UNITY_ASTC_NORMALMAP_ENCODING UNITY_COLORSPACE_GAMMA UNITY_HARDWARE_TIER1 UNITY_HARDWARE_TIER2 UNITY_HARDWARE_TIER3 UNITY_LIGHTMAP_DLDR_ENCODING UNITY_LIGHTMAP_RGBM_ENCODING UNITY_METAL_SHADOWS_USE_POINT_FILTERING UNITY_NO_DXT5nm UNITY_NO_SCREENSPACE_SHADOWS UNITY_PBS_USE_BRDF2 UNITY_PBS_USE_BRDF3 UNITY_PRETRANSFORM_TO_DISPLAY_ORIENTATION UNITY_UNIFIED_SHADER_PRECISION_MODEL UNITY_VIRTUAL_TEXTURING _ADDITIONAL_LIGHTS _ADDITIONAL_LIGHTS_VERTEX _MAIN_LIGHT_SHADOWS _MAIN_LIGHT_SHADOWS_CASCADE _SHADOWS_SOFT">
+          <value>
+            <GhostTextMetaData>
+              <option name="count" value="1.0" />
+              <option name="timestamps">
+                <list>
+                  <option value="1761509396771" />
+                </list>
+              </option>
+            </GhostTextMetaData>
+          </value>
+        </entry>
+        <entry key="ShaderReceivesCorrectRegionData_MultipleBlocks (0.014s)&#10;---&#10;Unhandled log message: '[Error] Material 'Test/MockDissolveShader' with Shader 'Test/MockDissolveShader' doesn't have a float or range property '_RegionCount''. Use UnityEngine.TestTools.LogAssert.Expect&#10;---&#10;UnityEngine.Material:GetInt (string)&#10;SimpleBlockToSpriteSyncTests/&lt;ShaderReceivesCorrectRegionData_MultipleBlocks&gt;d__12:MoveNext () (at Assets/Tests/SimpleBlockToSpriteSyncTests.cs:154)&#10;UnityEngine.SetupCoroutine:InvokeMoveNext (System.Collections.IEnumerator,intptr)&#10;&#10;&#10;---&#10;No block regions configured on WallSprite&#10;Material 'Test/MockDissolveShader' with Shader 'Test/MockDissolveShader' doesn't have a float or range property '_RegionCount'">
+          <value>
+            <GhostTextMetaData>
+              <option name="count" value="1.0" />
+              <option name="timestamps">
+                <list>
+                  <option value="1761472844122" />
+                </list>
+              </option>
+            </GhostTextMetaData>
+          </value>
+        </entry>
+        <entry key="So it can be easialy used by any input device and also changed throw some modern settings template?">
+          <value>
+            <GhostTextMetaData>
+              <option name="count" value="1.0" />
+              <option name="timestamps">
+                <list>
+                  <option value="1761496713413" />
+                </list>
+              </option>
+            </GhostTextMetaData>
+          </value>
+        </entry>
+        <entry key="Still no, while broken one was working (that was broked by scale)">
+          <value>
+            <GhostTextMetaData>
+              <option name="count" value="1.0" />
+              <option name="timestamps">
+                <list>
+                  <option value="1761508423258" />
+                </list>
+              </option>
+            </GhostTextMetaData>
+          </value>
+        </entry>
+        <entry key="Thats a lot of code. Can you simply explain logic behinde each method?">
+          <value>
+            <GhostTextMetaData>
+              <option name="count" value="1.0" />
+              <option name="timestamps">
+                <list>
+                  <option value="1761469894992" />
+                </list>
+              </option>
+            </GhostTextMetaData>
+          </value>
+        </entry>
+        <entry key="What about fact that i build &quot;walls&quot; from small physics blocks that appear and dissappear? What are alternatives when we need hide only part of object that light is fall on? Also can you examine else files in project(it is pretty small) cause objecthider actually small part of this.">
+          <value>
+            <GhostTextMetaData>
+              <option name="count" value="1.0" />
+              <option name="timestamps">
+                <list>
+                  <option value="1761467731543" />
+                </list>
+              </option>
+            </GhostTextMetaData>
+          </value>
+        </entry>
+        <entry key="What physicblock? Isnt we use ObjectHider for them?">
+          <value>
+            <GhostTextMetaData>
+              <option name="count" value="1.0" />
+              <option name="timestamps">
+                <list>
+                  <option value="1761470562100" />
+                </list>
+              </option>
+            </GhostTextMetaData>
+          </value>
+        </entry>
+        <entry key="What this test testing and is it relable way to see that it will disolve sprite on setuped positions?">
+          <value>
+            <GhostTextMetaData>
+              <option name="count" value="1.0" />
+              <option name="timestamps">
+                <list>
+                  <option value="1761471976046" />
+                </list>
+              </option>
+            </GhostTextMetaData>
+          </value>
+        </entry>
+        <entry key="Why in disolved areas it isnt transparent but just black?">
+          <value>
+            <GhostTextMetaData>
+              <option name="count" value="1.0" />
+              <option name="timestamps">
+                <list>
+                  <option value="1761515059585" />
+                </list>
+              </option>
+            </GhostTextMetaData>
+          </value>
+        </entry>
+        <entry key="Why it doesnt receive urp light and just output black color?">
+          <value>
+            <GhostTextMetaData>
+              <option name="count" value="1.0" />
+              <option name="timestamps">
+                <list>
+                  <option value="1761514768056" />
+                </list>
+              </option>
+            </GhostTextMetaData>
+          </value>
+        </entry>
+        <entry key="Why it doesnt see scripts? I think they are in general assembly">
+          <value>
+            <GhostTextMetaData>
+              <option name="count" value="1.0" />
+              <option name="timestamps">
+                <list>
+                  <option value="1761471278915" />
+                </list>
+              </option>
+            </GhostTextMetaData>
+          </value>
+        </entry>
+        <entry key="Yes, i agree with you. Is it possible to create mock shader, to actually test passing of data? And completely remove reflection.">
+          <value>
+            <GhostTextMetaData>
+              <option name="count" value="1.0" />
+              <option name="timestamps">
+                <list>
+                  <option value="1761472096610" />
+                </list>
+              </option>
+            </GhostTextMetaData>
+          </value>
+        </entry>
+        <entry key="You make too many changes at ones, so it keeping rejecting it. Make tool calls more shorter">
+          <value>
+            <GhostTextMetaData>
+              <option name="count" value="1.0" />
+              <option name="timestamps">
+                <list>
+                  <option value="1761472665377" />
+                </list>
+              </option>
+            </GhostTextMetaData>
+          </value>
+        </entry>
+        <entry key="can you also expose speed of animation? Or is it placed here @&lt;file_name&gt;">
+          <value>
+            <GhostTextMetaData>
+              <option name="count" value="1.0" />
+              <option name="timestamps">
+                <list>
+                  <option value="1761507373405" />
+                </list>
+              </option>
+            </GhostTextMetaData>
+          </value>
+        </entry>
+        <entry key="can you also simplify api here? I think we dont need to pass player, instead it should be configurable on singleton">
+          <value>
+            <GhostTextMetaData>
+              <option name="count" value="1.0" />
+              <option name="timestamps">
+                <list>
+                  <option value="1761484065087" />
+                </list>
+              </option>
+            </GhostTextMetaData>
+          </value>
+        </entry>
+        <entry key="can you create global event bus system?">
+          <value>
+            <GhostTextMetaData>
+              <option name="count" value="1.0" />
+              <option name="timestamps">
+                <list>
+                  <option value="1761503673847" />
+                </list>
+              </option>
+            </GhostTextMetaData>
+          </value>
+        </entry>
+        <entry key="can you do this">
+          <value>
+            <GhostTextMetaData>
+              <option name="count" value="1.0" />
+              <option name="timestamps">
+                <list>
+                  <option value="1761474422470" />
+                </list>
+              </option>
+            </GhostTextMetaData>
+          </value>
+        </entry>
+        <entry key="can you see compiller errors/">
+          <value>
+            <GhostTextMetaData>
+              <option name="count" value="1.0" />
+              <option name="timestamps">
+                <list>
+                  <option value="1761471428534" />
+                </list>
+              </option>
+            </GhostTextMetaData>
+          </value>
+        </entry>
+        <entry key="current glow of edges is just recolor of final sprite, but it doesnt fall on near objects. can i smhw fix it?">
+          <value>
+            <GhostTextMetaData>
+              <option name="count" value="1.0" />
+              <option name="timestamps">
+                <list>
+                  <option value="1761515755784" />
+                </list>
+              </option>
+            </GhostTextMetaData>
+          </value>
+        </entry>
+        <entry key="do it then">
+          <value>
+            <GhostTextMetaData>
+              <option name="count" value="1.0" />
+              <option name="timestamps">
+                <list>
+                  <option value="1761473000225" />
+                </list>
+              </option>
+            </GhostTextMetaData>
+          </value>
+        </entry>
+        <entry key="for 2d sprites actually">
+          <value>
+            <GhostTextMetaData>
+              <option name="count" value="1.0" />
+              <option name="timestamps">
+                <list>
+                  <option value="1761508140382" />
+                </list>
+              </option>
+            </GhostTextMetaData>
+          </value>
+        </entry>
+        <entry key="how can i make disolve to actually produce light on edges? Not color pixels of itself">
+          <value>
+            <GhostTextMetaData>
+              <option name="count" value="1.0" />
+              <option name="timestamps">
+                <list>
+                  <option value="1761515395374" />
+                </list>
+              </option>
+            </GhostTextMetaData>
+          </value>
+        </entry>
+        <entry key="is it correct shader to work with?">
+          <value>
+            <GhostTextMetaData>
+              <option name="count" value="1.0" />
+              <option name="timestamps">
+                <list>
+                  <option value="1761474396599" />
+                </list>
+              </option>
+            </GhostTextMetaData>
+          </value>
+        </entry>
+        <entry key="is it looks good?">
+          <value>
+            <GhostTextMetaData>
+              <option name="count" value="1.0" />
+              <option name="timestamps">
+                <list>
+                  <option value="1761508105806" />
+                </list>
+              </option>
+            </GhostTextMetaData>
+          </value>
+        </entry>
+        <entry key="is lock mechanism looks working?">
+          <value>
+            <GhostTextMetaData>
+              <option name="count" value="1.0" />
+              <option name="timestamps">
+                <list>
+                  <option value="1761506634693" />
+                </list>
+              </option>
+            </GhostTextMetaData>
+          </value>
+        </entry>
+        <entry key="it must modify anything through tweens, direct modifications is disallowed">
+          <value>
+            <GhostTextMetaData>
+              <option name="count" value="1.0" />
+              <option name="timestamps">
+                <list>
+                  <option value="1761505158547" />
+                </list>
+              </option>
+            </GhostTextMetaData>
+          </value>
+        </entry>
+        <entry key="it still appears just like recolor of pixels on object itself">
+          <value>
+            <GhostTextMetaData>
+              <option name="count" value="1.0" />
+              <option name="timestamps">
+                <list>
+                  <option value="1761515656718" />
+                </list>
+              </option>
+            </GhostTextMetaData>
+          </value>
+        </entry>
+        <entry key="it works bad for scaled objects">
+          <value>
+            <GhostTextMetaData>
+              <option name="count" value="1.0" />
+              <option name="timestamps">
+                <list>
+                  <option value="1761508209839" />
+                </list>
+              </option>
+            </GhostTextMetaData>
+          </value>
+        </entry>
+        <entry key="now i dont see it at all">
+          <value>
+            <GhostTextMetaData>
+              <option name="count" value="1.0" />
+              <option name="timestamps">
+                <list>
+                  <option value="1761508294862" />
+                </list>
+              </option>
+            </GhostTextMetaData>
+          </value>
+        </entry>
+        <entry key="remove it, it doesnt work">
+          <value>
+            <GhostTextMetaData>
+              <option name="count" value="1.0" />
+              <option name="timestamps">
+                <list>
+                  <option value="1761515876535" />
+                </list>
+              </option>
+            </GhostTextMetaData>
+          </value>
+        </entry>
+        <entry key="still bad on sides(">
+          <value>
+            <GhostTextMetaData>
+              <option name="count" value="1.0" />
+              <option name="timestamps">
+                <list>
+                  <option value="1761508660701" />
+                </list>
+              </option>
+            </GhostTextMetaData>
+          </value>
+        </entry>
+        <entry key="still broken with scale, lets try second approach">
+          <value>
+            <GhostTextMetaData>
+              <option name="count" value="1.0" />
+              <option name="timestamps">
+                <list>
+                  <option value="1761508563701" />
+                </list>
+              </option>
+            </GhostTextMetaData>
+          </value>
+        </entry>
+        <entry key="then actually it will be sick if it also collect all ObjectHider in children">
+          <value>
+            <GhostTextMetaData>
+              <option name="count" value="1.0" />
+              <option name="timestamps">
+                <list>
+                  <option value="1761470463725" />
+                </list>
+              </option>
+            </GhostTextMetaData>
+          </value>
+        </entry>
+        <entry key="too bright, make it work as lit">
+          <value>
+            <GhostTextMetaData>
+              <option name="count" value="1.0" />
+              <option name="timestamps">
+                <list>
+                  <option value="1761514831285" />
+                </list>
+              </option>
+            </GhostTextMetaData>
+          </value>
+        </entry>
+        <entry key="using Core.Extensions;&#10;using DG.Tweening;&#10;using UnityEngine;&#10;&#10;namespace Core._.UI&#10;{&#10;    public class ShadowMoveTween : TweenableBase&#10;    {&#10;        [SerializeField] private bool _isInverted = false;&#10;        [SerializeField] private Vector3 _startPos;&#10;        [SerializeField] private Vector3 _endPos;&#10;        [SerializeField] private float _duration = 0.3f;&#10;        public override Tween Tween { get; set; }&#10;    &#10;        public override Tween CreateTween()&#10;        {&#10;            var sequence = DOTween.Sequence();&#10;            var rect = (RectTransform)transform;&#10;            sequence.Append(rect.DOAnchorPos(_startPos, 0f));&#10;            sequence.Append(rect.DOAnchorPos(_endPos, _duration).SetEase(Ease.InOutQuad));&#10;            &#10;            if (!_isInverted) sequence.SetInverted(true);&#10;            return sequence;&#10;        }&#10;&#10;        public void Play(bool isInverted)&#10;        {&#10;            Tween?.Complete();&#10;            _isInverted = isInverted;&#10;            Tween = CreateTween();&#10;        }&#10;    }&#10;}&#10;example how to do it">
+          <value>
+            <GhostTextMetaData>
+              <option name="count" value="1.0" />
+              <option name="timestamps">
+                <list>
+                  <option value="1761505277486" />
+                </list>
+              </option>
+            </GhostTextMetaData>
+          </value>
+        </entry>
+        <entry key="why not to make it pure static?">
+          <value>
+            <GhostTextMetaData>
+              <option name="count" value="1.0" />
+              <option name="timestamps">
+                <list>
+                  <option value="1761503721450" />
+                </list>
+              </option>
+            </GhostTextMetaData>
+          </value>
+        </entry>
+        <entry key="yes do it">
+          <value>
+            <GhostTextMetaData>
+              <option name="count" value="1.0" />
+              <option name="timestamps">
+                <list>
+                  <option value="1761508478809" />
+                </list>
+              </option>
+            </GhostTextMetaData>
+          </value>
+        </entry>
+      </map>
+    </option>
+  </component>
+</project>
