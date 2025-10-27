@@ -27,6 +27,26 @@ namespace Light_and_controller.Scripts.UI
             healthSystem.OnTakeDamage -= RemoveHealth;
         }
 
+        private void OnHealPending(int amount, float delay)
+        {
+            
+        }
+
+        private void OnHealPendingCancel()
+        {
+            
+        }
+
+        private void OnTakeDamagePending(int amount, float delay)
+        {
+            
+        }
+        
+        private void OnTakeDamagePendingCancel()
+        {
+            
+        }
+
         private void AddHealth(int value)
         {
             healthSectors.Where(x => !x.activeSelf)

@@ -3,6 +3,7 @@ using System;
 using UnityEngine;
 using System.Collections.Generic;
 using System.Linq;
+using Cysharp.Threading.Tasks;
 using Light_and_controller.Scripts.Components;
 
 public class Trigger : MonoBehaviour
@@ -10,7 +11,23 @@ public class Trigger : MonoBehaviour
     [SerializeField] private Transform targetLightPoint;
     [SerializeField] private Collider2D collider2D;
     [SerializeField] private Rigidbody2D lightRigidbody;
-    
+
+    private async void Start()
+    {
+        await UniTask.WaitForFixedUpdate();
+        // Check for any colliders already overlapping at start
+        var contacts = new List<Collider2D>();
+        collider2D.GetContacts(contacts);
+
+        foreach (var contact in contacts)
+        {
+            if (contact != null)
+            {
+                Handle(contact);
+            }
+        }
+    }
+
     private void OnTriggerEnter2D(Collider2D other)
     {
         Handle(other);

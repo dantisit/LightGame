@@ -1,7 +1,6 @@
 using System;
-using Unity.VisualScripting;
 using UnityEngine;
-using UnityEngineInternal;
+using UnityEngine.InputSystem;
 
 public class PlayerTeleportSkill : MonoBehaviourWithData<PlayerTeleportSkill.TeleportData>
 {
@@ -13,33 +12,90 @@ public class PlayerTeleportSkill : MonoBehaviourWithData<PlayerTeleportSkill.Tel
     }
 
     public ContactFilter2D contactFilter;
+    private InputActions inputActions;
 
     private bool StartLightFiltr;
     private bool IsTeleported;
     
     private Vector2? TargetPosition;
+    private Vector2 aimPosition;
+    private Camera mainCamera;
 
+    private void Awake()
+    {
+        inputActions = new InputActions();
+        mainCamera = Camera.main;
+    }
 
-    public void Start()
-    { 
+    private void OnEnable()
+    {
+        inputActions.Player.Enable();
+        inputActions.Player.TeleportAim.performed += OnTeleportAim;
+        inputActions.Player.TeleportAim.canceled += OnTeleportAim;
+        inputActions.Player.TeleportExecute.performed += OnTeleportExecute;
+    }
+
+    private void OnDisable()
+    {
+        inputActions.Player.TeleportAim.performed -= OnTeleportAim;
+        inputActions.Player.TeleportAim.canceled -= OnTeleportAim;
+        inputActions.Player.TeleportExecute.performed -= OnTeleportExecute;
+        inputActions.Player.Disable();
+    }
+
+    private void Start()
+    {
         ContactFilter2D contactFilter = new ContactFilter2D();
         contactFilter.useTriggers = true;
     }
-    public void Update()
+
+    private void OnDestroy()
     {
+        Data.TeleportPoint.SetActive(false);
+    }
+
+    private void OnTeleportAim(InputAction.CallbackContext context)
+    {
+        aimPosition = context.ReadValue<Vector2>();
+    }
+
+    private void OnTeleportExecute(InputAction.CallbackContext context)
+    {
+        Teleportation();
+    }
+
+    private void Update()
+    {
+        UpdateTeleportTarget();
+    }
+
+    private void UpdateTeleportTarget()
+    {
+        // Read the current aim position every frame
+        aimPosition = inputActions.Player.TeleportAim.ReadValue<Vector2>();
+
         // Get the center of the screen in world coordinates
         Vector3 screenCenter = new Vector3(Screen.width / 2f, Screen.height / 2f, 0f);
 
-        // Get the mouse position in world coordinates
-        Vector3 mouseScreenPosition = Input.mousePosition;
+        // Calculate the direction vector based on input device
+        Vector2 direction;
 
-        // Calculate the direction vector
-        Vector2 direction = (mouseScreenPosition - screenCenter).normalized;
+        // Check if using gamepad (right stick will have non-zero values when moved)
+        if (Gamepad.current != null && Gamepad.current.rightStick.ReadValue().magnitude > 0.1f)
+        {
+            // Gamepad: use right stick direction directly
+            direction = Gamepad.current.rightStick.ReadValue().normalized;
+        }
+        else
+        {
+            // Mouse/Touch: calculate direction from screen center to aim position
+            direction = (aimPosition - (Vector2)screenCenter).normalized;
+        }
 
-        // Optional: Visualize the direction
+        // Visualize the direction
         Debug.DrawRay(transform.position, direction * Data.Radius, Color.green);
 
-        RaycastHit2D[] hits = Physics2D.RaycastAll(transform.position, direction * Data.Radius);
+        RaycastHit2D[] hits = Physics2D.RaycastAll(transform.position, direction, Data.Radius);
         foreach (RaycastHit2D hit in hits)
         {
             if (StartLightFiltr && hit.collider?.tag == "Teleport")
@@ -65,11 +121,6 @@ public class PlayerTeleportSkill : MonoBehaviourWithData<PlayerTeleportSkill.Tel
         else IsTeleported = false;
         
         StartLightFiltr = false;
-
-        if (Input.GetMouseButton(1)) 
-        {
-            Teleportation();
-        }
     }
 
     private void Teleportation()

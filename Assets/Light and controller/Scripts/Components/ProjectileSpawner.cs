@@ -1,4 +1,4 @@
-﻿using System.Collections;
+﻿using System;
 using UnityEngine;
 
 namespace Light_and_controller.Scripts.Components
@@ -11,12 +11,28 @@ namespace Light_and_controller.Scripts.Components
         [SerializeField] private float speed;
         [SerializeField] private float speedRotation;
         
-        private IEnumerator Start()
+        public Action<float> OnStartCharge { get; set; }
+        public Action OnCharged { get; set; }
+
+        private float _timer;
+        private bool _isCharging;
+
+        private void Update()
         {
-            while (true)
+            _timer += Time.deltaTime;
+
+            if (!_isCharging && _timer >= rate)
             {
-                yield return new WaitForSeconds(rate);
-                
+                _isCharging = true;
+                _timer = 0f;
+                OnStartCharge?.Invoke(rate);
+            }
+
+            if (_isCharging && _timer >= rate)
+            {
+                _isCharging = false;
+                _timer = 0f;
+                OnCharged?.Invoke();
                 var instantiate = Instantiate(projectilePrefab, transform);
                 var projectile = instantiate.GetComponent<Projectile>();
                 projectile.transform.SetParent(SceneRoot.Instance.transform, true);

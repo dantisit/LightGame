@@ -18,7 +18,7 @@ namespace Light_and_controller.Scripts.Components
        public UnityEvent<bool> OnChangeState => onChangeState;
        public UnityEvent<bool> OnChangeStateInverse => onChangeStateInverse;
 
-       private bool _lastStateIsInLight = true;
+       private bool _lastStateIsInLight;
        private bool _isInLight;
    
        private void Update()

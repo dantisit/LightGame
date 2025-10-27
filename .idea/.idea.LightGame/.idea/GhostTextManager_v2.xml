@@ -100,6 +100,18 @@
             </GhostTextMetaData>
           </value>
         </entry>
+        <entry key="Can you add check on start to this?">
+          <value>
+            <GhostTextMetaData>
+              <option name="count" value="1.0" />
+              <option name="timestamps">
+                <list>
+                  <option value="1761570462353" />
+                </list>
+              </option>
+            </GhostTextMetaData>
+          </value>
+        </entry>
         <entry key="Can you also add optional edge glow?">
           <value>
             <GhostTextMetaData>
@@ -119,6 +131,18 @@
               <option name="timestamps">
                 <list>
                   <option value="1761507816919" />
+                </list>
+              </option>
+            </GhostTextMetaData>
+          </value>
+        </entry>
+        <entry key="Can you generate for me white cube 11x0.3 proportion with alpha at edges for shaders?">
+          <value>
+            <GhostTextMetaData>
+              <option name="count" value="1.0" />
+              <option name="timestamps">
+                <list>
+                  <option value="1761554353881" />
                 </list>
               </option>
             </GhostTextMetaData>
@@ -280,6 +304,18 @@
             </GhostTextMetaData>
           </value>
         </entry>
+        <entry key="I mean it should have solid edges but alpha is needed to detect them">
+          <value>
+            <GhostTextMetaData>
+              <option name="count" value="1.0" />
+              <option name="timestamps">
+                <list>
+                  <option value="1761554693231" />
+                </list>
+              </option>
+            </GhostTextMetaData>
+          </value>
+        </entry>
         <entry key="I mostly like approach with shader, but i dont know how to sync it with physics. Like i have: wall sprite, 10 physics blocks of it. 2 of them disable physics - how to pass this data to shader of wall sprite?">
           <value>
             <GhostTextMetaData>
@@ -299,6 +335,30 @@
               <option name="timestamps">
                 <list>
                   <option value="1761473406671" />
+                </list>
+              </option>
+            </GhostTextMetaData>
+          </value>
+        </entry>
+        <entry key="It doesnt work on tap">
+          <value>
+            <GhostTextMetaData>
+              <option name="count" value="1.0" />
+              <option name="timestamps">
+                <list>
+                  <option value="1761570063305" />
+                </list>
+              </option>
+            </GhostTextMetaData>
+          </value>
+        </entry>
+        <entry key="It doesnt work on touchpad tap">
+          <value>
+            <GhostTextMetaData>
+              <option name="count" value="1.0" />
+              <option name="timestamps">
+                <list>
+                  <option value="1761570082056" />
                 </list>
               </option>
             </GhostTextMetaData>
@@ -400,6 +460,18 @@
             </GhostTextMetaData>
           </value>
         </entry>
+        <entry key="Looks good?">
+          <value>
+            <GhostTextMetaData>
+              <option name="count" value="1.0" />
+              <option name="timestamps">
+                <list>
+                  <option value="1761554025137" />
+                </list>
+              </option>
+            </GhostTextMetaData>
+          </value>
+        </entry>
         <entry key="May it be then we must create main assembly then?">
           <value>
             <GhostTextMetaData>
@@ -443,6 +515,18 @@
               <option name="timestamps">
                 <list>
                   <option value="1761471774362" />
+                </list>
+              </option>
+            </GhostTextMetaData>
+          </value>
+        </entry>
+        <entry key="Okay can you remove alpha?">
+          <value>
+            <GhostTextMetaData>
+              <option name="count" value="1.0" />
+              <option name="timestamps">
+                <list>
+                  <option value="1761554751700" />
                 </list>
               </option>
             </GhostTextMetaData>
@@ -527,6 +611,18 @@
               <option name="timestamps">
                 <list>
                   <option value="1761496713413" />
+                </list>
+              </option>
+            </GhostTextMetaData>
+          </value>
+        </entry>
+        <entry key="Still it doesnt registered on start, if player in light from begin">
+          <value>
+            <GhostTextMetaData>
+              <option name="count" value="1.0" />
+              <option name="timestamps">
+                <list>
+                  <option value="1761570678025" />
                 </list>
               </option>
             </GhostTextMetaData>
@@ -652,6 +748,30 @@
             </GhostTextMetaData>
           </value>
         </entry>
+        <entry key="better?">
+          <value>
+            <GhostTextMetaData>
+              <option name="count" value="1.0" />
+              <option name="timestamps">
+                <list>
+                  <option value="1761554171484" />
+                </list>
+              </option>
+            </GhostTextMetaData>
+          </value>
+        </entry>
+        <entry key="can you add camera shaking">
+          <value>
+            <GhostTextMetaData>
+              <option name="count" value="1.0" />
+              <option name="timestamps">
+                <list>
+                  <option value="1761572081406" />
+                </list>
+              </option>
+            </GhostTextMetaData>
+          </value>
+        </entry>
         <entry key="can you also expose speed of animation? Or is it placed here @&lt;file_name&gt;">
           <value>
             <GhostTextMetaData>
@@ -748,6 +868,18 @@
             </GhostTextMetaData>
           </value>
         </entry>
+        <entry key="hmm, doesnt help. Why tho?">
+          <value>
+            <GhostTextMetaData>
+              <option name="count" value="1.0" />
+              <option name="timestamps">
+                <list>
+                  <option value="1761570595809" />
+                </list>
+              </option>
+            </GhostTextMetaData>
+          </value>
+        </entry>
         <entry key="how can i make disolve to actually produce light on edges? Not color pixels of itself">
           <value>
             <GhostTextMetaData>
@@ -796,6 +928,18 @@
             </GhostTextMetaData>
           </value>
         </entry>
+        <entry key="it actually should unload shared">
+          <value>
+            <GhostTextMetaData>
+              <option name="count" value="1.0" />
+              <option name="timestamps">
+                <list>
+                  <option value="1761554070431" />
+                </list>
+              </option>
+            </GhostTextMetaData>
+          </value>
+        </entry>
         <entry key="it must modify anything through tweens, direct modifications is disallowed">
           <value>
             <GhostTextMetaData>
@@ -839,6 +983,18 @@
               <option name="timestamps">
                 <list>
                   <option value="1761508294862" />
+                </list>
+              </option>
+            </GhostTextMetaData>
+          </value>
+        </entry>
+        <entry key="redo this on update">
+          <value>
+            <GhostTextMetaData>
+              <option name="count" value="1.0" />
+              <option name="timestamps">
+                <list>
+                  <option value="1761569120881" />
                 </list>
               </option>
             </GhostTextMetaData>

@@ -12,6 +12,8 @@ Shader "Custom/URP/SpriteDissolve"
         [Header(Edge Settings)]
         _EdgeWidth ("Edge Width", Range(0, 0.5)) = 0.1
         _EdgeColor ("Edge Color", Color) = (1, 0.5, 0, 1)
+        _EdgeGlowIntensity ("Edge Glow Intensity", Range(0, 10)) = 2.0
+        _InnerEdgeOffset ("Inner Edge Offset", Range(0, 0.2)) = 0.05
 
         [Header(Rendering)]
         [Enum(UnityEngine.Rendering.BlendMode)] _SrcBlend ("Src Blend", Float) = 5
@@ -82,6 +84,8 @@ Shader "Custom/URP/SpriteDissolve"
                 float _NoiseScale;
                 float _EdgeWidth;
                 float4 _EdgeColor;
+                float _EdgeGlowIntensity;
+                float _InnerEdgeOffset;
 
                 // Region data arrays (set from C# script)
                 float4 _RegionData[MAX_REGIONS];      // x,y,width,height for each UV region
@@ -172,22 +176,43 @@ Shader "Custom/URP/SpriteDissolve"
                     finalDissolve /= totalWeight;
                 }
 
-                // Calculate dissolve effect
+                // Calculate dissolve effect with bright unlit edges
                 // finalDissolve: 0 = fully visible, 1 = fully dissolved
                 if (noise < finalDissolve)
                 {
                     clip(-1); // Discard this pixel
                 }
-                else if (noise < finalDissolve + _EdgeWidth)
+                
+                // Create two edge thresholds for inner bright glow
+                half outerEdge = finalDissolve + _EdgeWidth;
+                half innerEdge = finalDissolve + _InnerEdgeOffset;
+                
+                if (noise < outerEdge)
                 {
-                    // Edge region - blend between edge color and sprite color
+                    // We're in the edge region
                     half edgeFactor = (noise - finalDissolve) / _EdgeWidth;
                     edgeFactor = smoothstep(0.0, 1.0, edgeFactor);
-
-                    half4 edgeColor = _EdgeColor;
-                    edgeColor.a *= litColor.a;
-                    half4 finalColor = lerp(edgeColor, litColor, edgeFactor);
-
+                    
+                    // Calculate bright inner glow (unlit/emissive)
+                    half glowMask = 0.0;
+                    if (noise < innerEdge)
+                    {
+                        // Inner bright edge - this will be unlit
+                        glowMask = 1.0 - ((noise - finalDissolve) / _InnerEdgeOffset);
+                        glowMask = smoothstep(0.0, 1.0, glowMask);
+                    }
+                    
+                    // Create the bright unlit edge color
+                    half4 unlitEdgeColor = _EdgeColor * _EdgeGlowIntensity;
+                    unlitEdgeColor.a = _EdgeColor.a;
+                    
+                    // Blend between lit sprite and unlit bright edge
+                    half4 finalColor = lerp(litColor, unlitEdgeColor, glowMask);
+                    
+                    // Fade to lit sprite at outer edge
+                    finalColor = lerp(unlitEdgeColor * 0.5, finalColor, edgeFactor);
+                    finalColor.a = litColor.a;
+                    
                     return finalColor;
                 }
 

@@ -98,6 +98,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   targetLightPoint: {fileID: 8032318125657472138}
   collider2D: {fileID: 8308682882465474172}
+  lightRigidbody: {fileID: 0}
 --- !u!50 &1059473318656560178
 Rigidbody2D:
   serializedVersion: 5
@@ -378,7 +379,7 @@ MonoBehaviour:
   m_Intensity: 10.61
   m_LightVolumeIntensity: 0
   m_LightVolumeEnabled: 0
-  m_ApplyToSortingLayers: 00000000a556f4a5
+  m_ApplyToSortingLayers: 00000000a556f4a5b1cef1e4
   m_LightCookieSprite: {fileID: 0}
   m_DeprecatedPointLightCookieSprite: {fileID: 0}
   m_LightOrder: 0
@@ -462,7 +463,7 @@ MonoBehaviour:
   m_Intensity: 5.47
   m_LightVolumeIntensity: 0
   m_LightVolumeEnabled: 0
-  m_ApplyToSortingLayers: 00000000a556f4a5
+  m_ApplyToSortingLayers: 00000000a556f4a5b1cef1e4
   m_LightCookieSprite: {fileID: 0}
   m_DeprecatedPointLightCookieSprite: {fileID: 0}
   m_LightOrder: 0

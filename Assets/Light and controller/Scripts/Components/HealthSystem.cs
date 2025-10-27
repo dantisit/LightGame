@@ -17,19 +17,19 @@ public class HealthSystem : MonoBehaviour, IDamageable, IHealable
 
     public int MaxHealth { get; set; }
 
-    private void Awake()
+    protected virtual void Awake()
     {
         MaxHealth = Health;
     }
 
-    public void TakeDamage(int amount)
+    public virtual void TakeDamage(int amount)
     {
         Health -= amount;
         OnTakeDamage?.Invoke(amount);
         if(Health <= 0) Die();
     }
 
-    public void Heal(int amount)
+    public virtual void Heal(int amount)
     {
         Health += amount;
         OnHeal?.Invoke(amount);

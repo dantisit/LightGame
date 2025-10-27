@@ -10,6 +10,9 @@ public class PlayerJumpState : MainState, IMove2D
     private float localXVelovity;
     private int turnBackStartDirection;
     PlayerData.JumpVariables.JumpInfo jumpInfo;
+    
+    // Jump pad support: multiplier for initial jump velocity
+    public float VelocityMultiplier { get; set; } = 1f;
     public PlayerJumpState(PlayerMain player, PlayerStateMachine stateMachine, PlayerMain.AnimName animEnum, PlayerData playerData) : base(player, stateMachine, animEnum, playerData)
     {
     }
@@ -35,7 +38,7 @@ public class PlayerJumpState : MainState, IMove2D
         playerData.Jump.NextJumpInt++;
         player.Animator.SetBool(_animEnum.ToString(), false);
         player.Animator.SetBool(jumpInfo.Animation.ToString(), true);
-        player.Rigidbody2D.linearVelocity = new Vector2(player.Rigidbody2D.linearVelocity.x, jumpInfo.MaxHeight);
+        player.Rigidbody2D.linearVelocity = new Vector2(player.Rigidbody2D.linearVelocity.x, jumpInfo.MaxHeight * VelocityMultiplier);
         playerData.Jump.JumpBufferTimer = 0;
         cutJumpTime = 0f;
         playerData.Physics.CutJump = false;
@@ -75,6 +78,9 @@ public class PlayerJumpState : MainState, IMove2D
         base.Exit();
         player.Animator.SetBool(jumpInfo.Animation.ToString(), false);
         playerData.Physics.CutJump = false;
+        
+        // Reset velocity multiplier for next jump
+        VelocityMultiplier = 1f;
     }
 
     public override void PhysicsCheck()
@@ -113,12 +119,12 @@ public class PlayerJumpState : MainState, IMove2D
         if (localTime <= jumpInfo.JumpTime && !playerData.Physics.CutJump)
         {
             _newVelocity.y = jumpInfo.JumpVelocityCurve.Evaluate(localTime / jumpInfo.JumpTime);
-            _newVelocity.y *= jumpInfo.MaxHeight * 1 / jumpInfo.JumpTime;
+            _newVelocity.y *= jumpInfo.MaxHeight * VelocityMultiplier * 1 / jumpInfo.JumpTime;
         }
         else if (localTime <= cutJumpTime + ((jumpInfo.JumpTime - cutJumpTime) * jumpInfo.TimeScaleOnCut) && playerData.Physics.CutJump)
         {   
             _newVelocity.y = jumpInfo.JumpVelocityCurve.Evaluate(localTime / (cutJumpTime + ((jumpInfo.JumpTime - cutJumpTime) * jumpInfo.TimeScaleOnCut)));
-            _newVelocity.y *= jumpInfo.MaxHeight * 1 / jumpInfo.JumpTime;
+            _newVelocity.y *= jumpInfo.MaxHeight * VelocityMultiplier * 1 / jumpInfo.JumpTime;
             _newVelocity.y *= 1 - jumpInfo.JumpCutPower;
         }
         else

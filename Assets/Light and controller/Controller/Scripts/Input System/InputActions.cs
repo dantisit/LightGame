@@ -96,7 +96,7 @@ public partial class @InputActions: IInputActionCollection2, IDisposable
                     ""name"": ""Walk"",
                     ""type"": ""Button"",
                     ""id"": ""edffd217-83c5-4efc-874e-7e3fe15fc289"",
-                    ""expectedControlType"": ""Button"",
+                    ""expectedControlType"": """",
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
@@ -142,6 +142,24 @@ public partial class @InputActions: IInputActionCollection2, IDisposable
                     ""type"": ""Button"",
                     ""id"": ""166fe860-2df9-4901-927c-6658fba861fc"",
                     ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""TeleportAim"",
+                    ""type"": ""Value"",
+                    ""id"": ""a1b2c3d4-5e6f-7a8b-9c0d-1e2f3a4b5c6d"",
+                    ""expectedControlType"": ""Vector2"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": true
+                },
+                {
+                    ""name"": ""TeleportExecute"",
+                    ""type"": ""Button"",
+                    ""id"": ""b2c3d4e5-6f7a-8b9c-0d1e-2f3a4b5c6d7e"",
+                    ""expectedControlType"": """",
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
@@ -367,6 +385,72 @@ public partial class @InputActions: IInputActionCollection2, IDisposable
                     ""action"": ""WallClimb"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""c1d2e3f4-5a6b-7c8d-9e0f-1a2b3c4d5e6f"",
+                    ""path"": ""<Mouse>/position"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""TeleportAim"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""d2e3f4a5-6b7c-8d9e-0f1a-2b3c4d5e6f7a"",
+                    ""path"": ""<Gamepad>/rightStick"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""TeleportAim"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""e3f4a5b6-7c8d-9e0f-1a2b-3c4d5e6f7a8b"",
+                    ""path"": ""<Touchscreen>/primaryTouch/position"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""TeleportAim"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""f4a5b6c7-8d9e-0f1a-2b3c-4d5e6f7a8b9c"",
+                    ""path"": ""<Keyboard>/f"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""TeleportExecute"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""a5b6c7d8-9e0f-1a2b-3c4d-5e6f7a8b9c0d"",
+                    ""path"": ""<Gamepad>/rightTrigger"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""TeleportExecute"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""b6c7d8e9-0f1a-2b3c-4d5e-6f7a8b9c0d1e"",
+                    ""path"": ""<Touchscreen>/primaryTouch/tap"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""TeleportExecute"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -393,6 +477,8 @@ public partial class @InputActions: IInputActionCollection2, IDisposable
         m_Player_Crouch = m_Player.FindAction("Crouch", throwIfNotFound: true);
         m_Player_WallGrab = m_Player.FindAction("WallGrab", throwIfNotFound: true);
         m_Player_WallClimb = m_Player.FindAction("WallClimb", throwIfNotFound: true);
+        m_Player_TeleportAim = m_Player.FindAction("TeleportAim", throwIfNotFound: true);
+        m_Player_TeleportExecute = m_Player.FindAction("TeleportExecute", throwIfNotFound: true);
     }
 
     ~@InputActions()
@@ -479,6 +565,8 @@ public partial class @InputActions: IInputActionCollection2, IDisposable
     private readonly InputAction m_Player_Crouch;
     private readonly InputAction m_Player_WallGrab;
     private readonly InputAction m_Player_WallClimb;
+    private readonly InputAction m_Player_TeleportAim;
+    private readonly InputAction m_Player_TeleportExecute;
     /// <summary>
     /// Provides access to input actions defined in input action map "Player".
     /// </summary>
@@ -514,6 +602,14 @@ public partial class @InputActions: IInputActionCollection2, IDisposable
         /// Provides access to the underlying input action "Player/WallClimb".
         /// </summary>
         public InputAction @WallClimb => m_Wrapper.m_Player_WallClimb;
+        /// <summary>
+        /// Provides access to the underlying input action "Player/TeleportAim".
+        /// </summary>
+        public InputAction @TeleportAim => m_Wrapper.m_Player_TeleportAim;
+        /// <summary>
+        /// Provides access to the underlying input action "Player/TeleportExecute".
+        /// </summary>
+        public InputAction @TeleportExecute => m_Wrapper.m_Player_TeleportExecute;
         /// <summary>
         /// Provides access to the underlying input action map instance.
         /// </summary>
@@ -558,6 +654,12 @@ public partial class @InputActions: IInputActionCollection2, IDisposable
             @WallClimb.started += instance.OnWallClimb;
             @WallClimb.performed += instance.OnWallClimb;
             @WallClimb.canceled += instance.OnWallClimb;
+            @TeleportAim.started += instance.OnTeleportAim;
+            @TeleportAim.performed += instance.OnTeleportAim;
+            @TeleportAim.canceled += instance.OnTeleportAim;
+            @TeleportExecute.started += instance.OnTeleportExecute;
+            @TeleportExecute.performed += instance.OnTeleportExecute;
+            @TeleportExecute.canceled += instance.OnTeleportExecute;
         }
 
         /// <summary>
@@ -587,6 +689,12 @@ public partial class @InputActions: IInputActionCollection2, IDisposable
             @WallClimb.started -= instance.OnWallClimb;
             @WallClimb.performed -= instance.OnWallClimb;
             @WallClimb.canceled -= instance.OnWallClimb;
+            @TeleportAim.started -= instance.OnTeleportAim;
+            @TeleportAim.performed -= instance.OnTeleportAim;
+            @TeleportAim.canceled -= instance.OnTeleportAim;
+            @TeleportExecute.started -= instance.OnTeleportExecute;
+            @TeleportExecute.performed -= instance.OnTeleportExecute;
+            @TeleportExecute.canceled -= instance.OnTeleportExecute;
         }
 
         /// <summary>
@@ -682,5 +790,19 @@ public partial class @InputActions: IInputActionCollection2, IDisposable
         /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
         /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
         void OnWallClimb(InputAction.CallbackContext context);
+        /// <summary>
+        /// Method invoked when associated input action "TeleportAim" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
+        /// </summary>
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.started" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
+        void OnTeleportAim(InputAction.CallbackContext context);
+        /// <summary>
+        /// Method invoked when associated input action "TeleportExecute" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
+        /// </summary>
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.started" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
+        void OnTeleportExecute(InputAction.CallbackContext context);
     }
 }

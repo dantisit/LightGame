@@ -6,7 +6,14 @@
         "Unity.TextMeshPro",
         "DOTweenPro.Scripts",
         "DOTween.Modules",
-        "UniTask"
+        "UniTask",
+        "Kybernetik.UltEvents",
+        "MVVM",
+        "Unity.Localization",
+        "R3.Unity",
+        "Unity.RenderPipelines.Universal.2D.Runtime",
+        "Unity.InputSystem",
+        "Unity.Cinemachine"
     ],
     "includePlatforms": [],
     "excludePlatforms": [],

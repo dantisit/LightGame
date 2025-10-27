@@ -4,9 +4,9 @@ using UnityEngine;
 
 namespace Light_and_controller.Scripts.UI
 {
-    public class WindowView<VT, Dt> : MonoBehaviour, IInitializable
+    public class WindowView<VT, Dt> : MonoBehaviour
     {
-        public void Initialize()
+        public void Awake()
         {
             EventBus.Subscribe<OpenWindowEvent<VT, Dt>>(OnOpen);
             EventBus.Subscribe<CloseWindowEvent<VT>>(OnClose);

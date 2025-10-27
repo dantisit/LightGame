@@ -25,14 +25,14 @@ namespace Core._.UI
             var rect = (RectTransform)transform.parent;
 
             // Set initial state using tweens (instant)
-            sequence.Append(transform.DOScale(_startScale, 0f));
+            sequence.Append(rect.DOScale(_startScale, 0f));
             sequence.Join(rect.DOAnchorPos(_startPos, 0f));
 
             // Add slide animation
             sequence.Append(rect.DOAnchorPos(_endPos, _duration).SetEase(_showEase));
 
             // Add scale animation (runs simultaneously with slide)
-            sequence.Join(transform.DOScale(_targetScale, _duration).SetEase(_scaleEase));
+            sequence.Join(rect.DOScale(_targetScale, _duration).SetEase(_scaleEase));
 
             return sequence;
         }
