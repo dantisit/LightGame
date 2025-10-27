@@ -1319,7 +1319,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   data:
     Radius: 10
-    TeleportPoint: {fileID: 0}
+    TeleportPoint: {fileID: 3803380629175493506}
 --- !u!114 &4937008101993315368
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1350,27 +1350,27 @@ MonoBehaviour:
   m_InstanceId: 0
   m_ShadowShape2DComponent: {fileID: 3213259104454701874}
   m_ShadowShape2DProvider:
-    rid: 3986961700621910230
+    rid: 3986961700621910232
   m_ShadowCastingSource: 2
   m_ShadowMesh:
     m_Mesh: {fileID: 0}
     m_LocalBounds:
       m_Center: {x: 0, y: 0, z: 0}
-      m_Extent: {x: 0.44999695, y: 0.94999695, z: 0}
+      m_Extent: {x: 0.44000244, y: 0.94000244, z: 0}
     m_EdgeProcessing: 1
-    m_TrimEdge: 0.05
+    m_TrimEdge: 0.06
     m_FlipX: 0
     m_FlipY: 0
-    m_InitialTrim: 0.05
+    m_InitialTrim: 0
   m_CastingOption: 2
-  m_PreviousTrimEdge: 0.05
+  m_PreviousTrimEdge: 0.06
   m_PreviousEdgeProcessing: 1
   m_PreviousShadowCastingSource: 2
   m_PreviousShadowShape2DSource: {fileID: 3213259104454701874}
   references:
     version: 2
     RefIds:
-    - rid: 3986961700621910230
+    - rid: 3986961700621910232
       type: {class: ShadowShape2DProvider_SpriteRenderer, ns: UnityEngine.Rendering.Universal, asm: Unity.RenderPipelines.Universal.2D.Runtime}
       data: 
 --- !u!1 &3410020105280573791
@@ -1481,7 +1481,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &742726834364584989
 Transform:
   m_ObjectHideFlags: 0

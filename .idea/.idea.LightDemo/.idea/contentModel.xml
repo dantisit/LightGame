@@ -4,7 +4,9 @@
     <e p="C:\Users\79136\AppData\Local\JetBrains\Rider2020.2\extResources" t="IncludeRecursive" />
     <e p="C:\Users\79136\AppData\Local\JetBrains\Rider2020.2\resharper-host\Local\Transient\Rider\v202\SolutionCaches\_LightDemo.-1394928232.00" t="ExcludeRecursive" />
     <e p="D:\Unityproject\LightDemo" t="IncludeRecursive">
+      <e p="Assembly-CSharp-Editor-firstpass.csproj" t="IncludeRecursive" />
       <e p="Assembly-CSharp-Editor.csproj" t="IncludeRecursive" />
+      <e p="Assembly-CSharp-firstpass.csproj" t="IncludeRecursive" />
       <e p="Assembly-CSharp.csproj" t="IncludeRecursive" />
       <e p="Assets" t="Include">
         <e p="Light and controller" t="Include">
@@ -33,6 +35,7 @@
                 <e p="Platform.cs" t="Include" />
                 <e p="SwingingPlatform.cs" t="Include" />
               </e>
+              <e p="PlayerController.asmdef" t="Include" />
               <e p="PlayerData.cs" t="Include" />
               <e p="PlayerMain.cs" t="Include" />
               <e p="State System" t="Include">
@@ -61,6 +64,12 @@
           </e>
           <e p="MovedPlatform.cs" t="Include" />
           <e p="Scripts" t="Include">
+            <e p="Audio" t="Include">
+              <e p="ISoundPlayer.cs" t="Include" />
+              <e p="SoundData.cs" t="Include" />
+              <e p="SoundManager.cs" t="Include" />
+              <e p="UnitySoundPlayer.cs" t="Include" />
+            </e>
             <e p="Components" t="Include">
               <e p="Checkpoint.cs" t="Include" />
               <e p="DamageOverTimeEffect.cs" t="Include" />
@@ -88,11 +97,52 @@
               <e p="Weight.cs" t="Include" />
               <e p="WeightTrigger.cs" t="Include" />
             </e>
-            <e p="ObjectHider.cs" t="Include" />
-            <e p="Trigger.cs" t="Include" />
-            <e p="UI" t="Include">
-              <e p="HealthView.cs" t="Include" />
+            <e p="DissolveObjectHider.cs" t="Include" />
+            <e p="Events" t="Include">
+              <e p="CloseWindowEvent.cs" t="Include" />
+              <e p="OpenWindowEvent.cs" t="Include" />
             </e>
+            <e p="IInitializable.cs" t="Include" />
+            <e p="LightGame.asmdef" t="Include" />
+            <e p="ModularWallDissolve.cs" t="Include" />
+            <e p="ObjectHider.cs" t="Include" />
+            <e p="Root.cs" t="Include" />
+            <e p="SaveSystem.cs" t="Include" />
+            <e p="SimpleBlockToSpriteSync.cs" t="Include" />
+            <e p="SimpleFadeHider.cs" t="Include" />
+            <e p="SpritePhysicsSync.cs" t="Include" />
+            <e p="Systems" t="Include">
+              <e p="EventBus.cs" t="Include" />
+            </e>
+            <e p="Trigger.cs" t="Include" />
+            <e p="Tween" t="Include">
+              <e p="CardScaleAttackTween.cs" t="Include" />
+              <e p="CardScaleDamageTween.cs" t="Include" />
+              <e p="Editor" t="Include">
+                <e p="AnimationToTweenConverter.cs" t="Include" />
+                <e p="CustomTweenAnimationEditor.cs" t="Include" />
+              </e>
+              <e p="HintPopupCombinedTween.cs" t="Include" />
+              <e p="HintPopupScaleTween.cs" t="Include" />
+              <e p="HintPopupSlideTween.cs" t="Include" />
+              <e p="PulseTween.cs" t="Include" />
+              <e p="ScaleTween.cs" t="Include" />
+              <e p="TweenableBase.cs" t="Include" />
+            </e>
+            <e p="UI" t="Include">
+              <e p="Utils" t="Include">
+                <e p="ParentedContentSizeFitter.cs" t="Include" />
+              </e>
+              <e p="Views" t="Include">
+                <e p="HealthView.cs" t="Include" />
+                <e p="HintView.cs" t="Include" />
+                <e p="WindowView.cs" t="Include" />
+              </e>
+            </e>
+          </e>
+          <e p="Shaders" t="Include">
+            <e p="RimLighting.shader" t="Include" />
+            <e p="SpriteDissolveShader.shader" t="Include" />
           </e>
         </e>
         <e p="Packages" t="Include">
@@ -139,6 +189,61 @@
             </e>
           </e>
         </e>
+        <e p="Plugins" t="Include">
+          <e p="Demigiant" t="Include">
+            <e p="DemiLib" t="Include">
+              <e p="Core" t="Include">
+                <e p="DemiLib.xml" t="Include" />
+                <e p="Editor" t="Include">
+                  <e p="DemiEditor.xml" t="Include" />
+                </e>
+              </e>
+            </e>
+            <e p="DOTween" t="Include">
+              <e p="Modules" t="Include">
+                <e p="DOTween.Modules.asmdef" t="Include" />
+                <e p="DOTweenModuleAudio.cs" t="Include" />
+                <e p="DOTweenModuleEPOOutline.cs" t="Include" />
+                <e p="DOTweenModulePhysics.cs" t="Include" />
+                <e p="DOTweenModulePhysics2D.cs" t="Include" />
+                <e p="DOTweenModuleSprite.cs" t="Include" />
+                <e p="DOTweenModuleUI.cs" t="Include" />
+                <e p="DOTweenModuleUnityVersion.cs" t="Include" />
+                <e p="DOTweenModuleUtils.cs" t="Include" />
+              </e>
+              <e p="readme.txt" t="Include" />
+            </e>
+            <e p="DOTweenPro" t="Include">
+              <e p="DOTweenAnimation.cs" t="Include" />
+              <e p="DOTweenDeAudio.cs" t="Include" />
+              <e p="DOTweenDeUnityExtended.cs" t="Include" />
+              <e p="DOTweenPro.Scripts.asmdef" t="Include" />
+              <e p="DOTweenProShortcuts.cs" t="Include" />
+              <e p="DOTweenTextMeshPro.cs" t="Include" />
+              <e p="DOTweenTk2d.cs" t="Include" />
+              <e p="Editor" t="Include">
+                <e p="DOTweenAnimationInspector.cs" t="Include" />
+                <e p="DOTweenPreviewManager.cs" t="Include" />
+                <e p="DOTweenPro.EditorScripts.asmdef" t="Include" />
+              </e>
+              <e p="readme.txt" t="Include" />
+            </e>
+            <e p="readme_DOTweenPro.txt" t="Include" />
+          </e>
+        </e>
+        <e p="SpriteOutline" t="Include">
+          <e p="Shaders" t="Include">
+            <e p="SpriteOutline.shader" t="Include" />
+          </e>
+        </e>
+        <e p="Tests" t="Include">
+          <e p="SimpleBlockToSpriteSyncPlayModeTests.cs" t="Include" />
+          <e p="SimpleBlockToSpriteSyncTests.cs" t="Include" />
+          <e p="Tests.asmdef" t="Include" />
+          <e p="TestShaders" t="Include">
+            <e p="MockDissolveShader.shader" t="Include" />
+          </e>
+        </e>
         <e p="Volumetric Light" t="Include">
           <e p="Editor" t="Include">
             <e p="com.cqf.urpvolumetricfog.editor.asmdef" t="Include" />
@@ -168,10 +273,16 @@
       </e>
       <e p="com.cqf.urpvolumetricfog.editor.csproj" t="IncludeRecursive" />
       <e p="com.cqf.urpvolumetricfog.runtime.csproj" t="IncludeRecursive" />
+      <e p="DOTween.Modules.csproj" t="IncludeRecursive" />
+      <e p="DOTweenPro.EditorScripts.csproj" t="IncludeRecursive" />
+      <e p="DOTweenPro.Scripts.csproj" t="IncludeRecursive" />
       <e p="LightDemo.sln" t="IncludeFlat" />
+      <e p="LightGame.csproj" t="IncludeRecursive" />
       <e p="obj" t="ExcludeRecursive" />
       <e p="Packages" t="ExcludeRecursive" />
+      <e p="PlayerController.csproj" t="IncludeRecursive" />
       <e p="Temp\bin" t="ExcludeRecursive" />
+      <e p="Tests.csproj" t="IncludeRecursive" />
     </e>
   </component>
 </project>

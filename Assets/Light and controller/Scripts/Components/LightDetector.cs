@@ -33,6 +33,8 @@ namespace Light_and_controller.Scripts.Components
        
        public bool LightBlockCheck(Vector3 targetPosition, Rigidbody2D lightRigidbody) 
        {
+           Debug.Log(lightRigidbody);
+           
            Vector3 direction = targetPosition - transform.position;
    
            var mask = LayerMask.GetMask("LightLayer", "Ground");

@@ -48,6 +48,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   targetLightPoint: {fileID: 8032318125657472138}
   collider2D: {fileID: 3340997641310451738}
+  lightRigidbody: {fileID: 0}
 --- !u!50 &1059473318656560178
 Rigidbody2D:
   serializedVersion: 5

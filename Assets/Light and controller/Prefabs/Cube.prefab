@@ -99,12 +99,10 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 915530957697493976}
-  - component: {fileID: 5701395096381357439}
   - component: {fileID: 3143041267990072737}
   - component: {fileID: 4665454206999991692}
   - component: {fileID: 3299543362346600745}
   - component: {fileID: 7602725914417073209}
-  - component: {fileID: 5935778770970769331}
   - component: {fileID: 3353587625538493057}
   - component: {fileID: 3861321674227546996}
   m_Layer: 9
@@ -122,7 +120,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6874567129149552019}
   serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 39.77, y: -13.811, z: -1}
   m_LocalScale: {x: 1.3951812, y: 1.3951812, z: 1.3951812}
   m_ConstrainProportionsScale: 0
@@ -132,33 +130,6 @@ Transform:
   - {fileID: 4556513163811592942}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!50 &5701395096381357439
-Rigidbody2D:
-  serializedVersion: 5
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6874567129149552019}
-  m_BodyType: 0
-  m_Simulated: 1
-  m_UseFullKinematicContacts: 0
-  m_UseAutoMass: 0
-  m_Mass: 10
-  m_LinearDamping: 10
-  m_AngularDamping: 10
-  m_GravityScale: 5
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_Interpolate: 1
-  m_SleepingMode: 1
-  m_CollisionDetection: 1
-  m_Constraints: 4
 --- !u!61 &3143041267990072737
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -310,24 +281,6 @@ BoxCollider2D:
   m_AutoTiling: 0
   m_Size: {x: 1, y: 0.31}
   m_EdgeRadius: 0
---- !u!114 &5935778770970769331
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6874567129149552019}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4670b3350b5f48e4b0a0df033c20f25a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  input_Walk: 0
-  input_Jump: 0
-  input_Dash: 0
-  input_Crouch: 0
-  input_WallGrab: 0
-  input_WallClimb: 0
 --- !u!212 &3353587625538493057
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -613,10 +566,6 @@ PrefabInstance:
       propertyPath: m_Color.r
       value: 0.27450982
       objectReference: {fileID: 0}
-    - target: {fileID: 5705270409059074438, guid: 820818e7651764ba69402954764e07e0, type: 3}
-      propertyPath: lightRigidbody
-      value: 
-      objectReference: {fileID: 5701395096381357439}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []

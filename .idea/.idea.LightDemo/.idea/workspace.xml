@@ -20,13 +20,27 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="ad823aba-ffa9-441b-927b-c52aa8898984" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/.idea.LightDemo/.idea/contentModel.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.LightDemo/.idea/contentModel.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/.idea.LightDemo/.idea/indexLayout.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.LightDemo/.idea/indexLayout.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/.idea.LightDemo/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.LightDemo/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Light and controller/Prefabs/Projectile.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Light and controller/Prefabs/Projectile.prefab" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Light and controller/Prefabs/ProjectileSpawner.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Light and controller/Prefabs/ProjectileSpawner.prefab" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Light and controller/Scripts/Components/Projectile.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Light and controller/Scripts/Components/Projectile.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Light and controller/Scripts/Components/ProjectileSpawner.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Light and controller/Scripts/Components/ProjectileSpawner.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Light and controller/Controller/Prefabs/Player.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Light and controller/Controller/Prefabs/Player.prefab" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Light and controller/DemoScene.unity" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Light and controller/DemoScene.unity.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Light and controller/Fonts/Roboto_Condensed-Regular SDF.asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Light and controller/Fonts/Roboto_Condensed-Regular SDF.asset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Light and controller/Player 1.prefab" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Light and controller/Player 1.prefab.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Light and controller/Player.prefab" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Light and controller/Player.prefab.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Light and controller/Plugins/Registry.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Light and controller/Prefabs/Cube.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Light and controller/Prefabs/Cube.prefab" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Light and controller/Prefabs/HidePlatforms.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Light and controller/Prefabs/HidePlatforms.prefab" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Light and controller/Prefabs/Point Light.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Light and controller/Prefabs/Point Light.prefab" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Light and controller/Scripts/Components/LightDetector.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Light and controller/Scripts/Components/LightDetector.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Light and controller/Scripts/SaveSystem.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Light and controller/Scripts/SaveSystem.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Light and controller/Scripts/Trigger.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Light and controller/Scripts/Trigger.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Light and controller/TestScene_PC.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Light and controller/TestScene_PC.unity" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Resources/DOTweenSettings.asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Resources/DOTweenSettings.asset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ProjectSettings/ShaderGraphSettings.asset" beforeDir="false" afterPath="$PROJECT_DIR$/ProjectSettings/ShaderGraphSettings.asset" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -36,6 +50,13 @@
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
+  <component name="HighlightingSettingsPerFile">
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/9B6C948E-D54B-44D5-8900-B1C654F1710E/93/5d90af6c/ContactFilter2D.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/9B6C948E-D54B-44D5-8900-B1C654F1710E/0d/e8a58365/Collider2D.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/41B87322-5536-48A1-A761-74C5109C71F9/f5/4b0a63fc/Transform.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/41B87322-5536-48A1-A761-74C5109C71F9/17/9fc4d64a/Component.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/../HardBall/Assets/Dev/ContainObject.cs" root0="FORCE_HIGHLIGHTING" />
+  </component>
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
@@ -44,6 +65,9 @@
         <option value="$PROJECT_DIR$/Assets/Light and controller/Thorn.cs" />
         <option value="$PROJECT_DIR$/Assets/Light and controller/Scripts/Components/ProjectileSpawner.cs" />
         <option value="$PROJECT_DIR$/Assets/Light and controller/Scripts/Components/Projectile.cs" />
+        <option value="$PROJECT_DIR$/Assets/Light and controller/Scripts/Trigger.cs" />
+        <option value="$PROJECT_DIR$/Assets/Light and controller/Scripts/Components/LightDetector.cs" />
+        <option value="$PROJECT_DIR$/Assets/Light and controller/Scripts/SaveSystem.cs" />
       </list>
     </option>
   </component>
@@ -91,6 +115,12 @@
       <workItem from="1757748286121" duration="3964000" />
       <workItem from="1759675044466" duration="2000" />
       <workItem from="1759675562819" duration="3655000" />
+      <workItem from="1761554329118" duration="790000" />
+      <workItem from="1761557451592" duration="1545000" />
+      <workItem from="1761570343649" duration="1744000" />
+      <workItem from="1761572362571" duration="1778000" />
+      <workItem from="1761574173451" duration="1134000" />
+      <workItem from="1761576151594" duration="609000" />
     </task>
     <servers />
   </component>
@@ -109,6 +139,7 @@
         </entry>
       </map>
     </option>
+    <option name="oldMeFiltersMigrated" value="true" />
   </component>
   <component name="VcsManagerConfiguration">
     <option name="CLEAR_INITIAL_COMMIT_MESSAGE" value="true" />

@@ -18,7 +18,7 @@ public class Trigger : MonoBehaviour
 
     private void OnTriggerStay2D(Collider2D other)
     {
-        Handle(other);
+        Handle(other); 
     }
 
     public void OnTriggerExit2D(Collider2D other)
@@ -34,7 +34,9 @@ public class Trigger : MonoBehaviour
     private void Handle(Collider2D other)
     {
         if(!other.TryGetComponent<LightDetector>(out var component)) return;
+        
         var is_lighted = component.LightBlockCheck(targetLightPoint.position, lightRigidbody);
+        Debug.Log(is_lighted);
         if (is_lighted) component.lightSprings.Add(gameObject);
         else component.lightSprings.Remove(gameObject);
     }
