@@ -20,27 +20,9 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="ad823aba-ffa9-441b-927b-c52aa8898984" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/.idea.LightDemo/.idea/contentModel.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.LightDemo/.idea/contentModel.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/.idea.LightDemo/.idea/indexLayout.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.LightDemo/.idea/indexLayout.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/.idea.LightDemo/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.LightDemo/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Light and controller/Controller/Prefabs/Player.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Light and controller/Controller/Prefabs/Player.prefab" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Light and controller/DemoScene.unity" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Light and controller/DemoScene.unity.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Light and controller/Fonts/Roboto_Condensed-Regular SDF.asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Light and controller/Fonts/Roboto_Condensed-Regular SDF.asset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Light and controller/Player 1.prefab" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Light and controller/Player 1.prefab.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Light and controller/Player.prefab" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Light and controller/Player.prefab.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Light and controller/Plugins/Registry.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Light and controller/Prefabs/Cube.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Light and controller/Prefabs/Cube.prefab" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Light and controller/Prefabs/HidePlatforms.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Light and controller/Prefabs/HidePlatforms.prefab" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Light and controller/Prefabs/Point Light.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Light and controller/Prefabs/Point Light.prefab" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Light and controller/Scripts/Components/LightDetector.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Light and controller/Scripts/Components/LightDetector.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Light and controller/Scripts/SaveSystem.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Light and controller/Scripts/SaveSystem.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Light and controller/Scripts/Trigger.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Light and controller/Scripts/Trigger.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Light and controller/TestScene_PC.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Light and controller/TestScene_PC.unity" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Resources/DOTweenSettings.asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Resources/DOTweenSettings.asset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ProjectSettings/ShaderGraphSettings.asset" beforeDir="false" afterPath="$PROJECT_DIR$/ProjectSettings/ShaderGraphSettings.asset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Light and controller/Scripts/Components/HealOverTimeEffect.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Light and controller/Scripts/Components/HealOverTimeEffect.cs" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -68,6 +50,7 @@
         <option value="$PROJECT_DIR$/Assets/Light and controller/Scripts/Trigger.cs" />
         <option value="$PROJECT_DIR$/Assets/Light and controller/Scripts/Components/LightDetector.cs" />
         <option value="$PROJECT_DIR$/Assets/Light and controller/Scripts/SaveSystem.cs" />
+        <option value="$PROJECT_DIR$/Assets/Light and controller/Scripts/Components/HealOverTimeEffect.cs" />
       </list>
     </option>
   </component>
@@ -120,7 +103,8 @@
       <workItem from="1761570343649" duration="1744000" />
       <workItem from="1761572362571" duration="1778000" />
       <workItem from="1761574173451" duration="1134000" />
-      <workItem from="1761576151594" duration="609000" />
+      <workItem from="1761576151594" duration="1793000" />
+      <workItem from="1761578057768" duration="813000" />
     </task>
     <servers />
   </component>

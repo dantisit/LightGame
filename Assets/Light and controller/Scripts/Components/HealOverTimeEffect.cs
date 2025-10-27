@@ -16,5 +16,6 @@ namespace Light_and_controller.Scripts.Components
         {
             ExecuteEvents.Execute<IHealable>(gameObject, null, (x, _) => x.Heal(Data.Amount));
         }
+        
     }
 }
