@@ -15,6 +15,10 @@ namespace Light_and_controller.Scripts.UI
             SetHealth(healthSystem.Health);
             healthSystem.OnHeal += AddHealth;
             healthSystem.OnTakeDamage += RemoveHealth;
+            // Start heal - duration to heal
+            // Stop heal
+            // Start damage - duration to damaage
+            // Stop damage
         }
 
         private void OnDisable()
