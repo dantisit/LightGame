@@ -20,11 +20,9 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="ad823aba-ffa9-441b-927b-c52aa8898984" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/.idea.LightDemo/.idea/contentModel.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.LightDemo/.idea/contentModel.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/.idea.LightDemo/.idea/indexLayout.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.LightDemo/.idea/indexLayout.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/.idea.LightDemo/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.LightDemo/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Light and controller/Scenes/One way plaforms.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Light and controller/Scenes/One way plaforms.unity" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Light and controller/TestScene_PC.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Light and controller/TestScene_PC.unity" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Light and controller/Scenes/LightRayScaller.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Light and controller/Scenes/LightRayScaller.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Light and controller/Scenes/Mirror and LIghtRay.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Light and controller/Scenes/Mirror and LIghtRay.unity" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -40,7 +38,7 @@
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/9B6C948E-D54B-44D5-8900-B1C654F1710E/0d/e8a58365/Collider2D.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/41B87322-5536-48A1-A761-74C5109C71F9/f5/4b0a63fc/Transform.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/41B87322-5536-48A1-A761-74C5109C71F9/17/9fc4d64a/Component.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/../HardBall/Assets/Dev/ContainObject.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/../HardBall/Assets/Dev/ContainObject.cs" root0="SKIP_HIGHLIGHTING" />
   </component>
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
@@ -110,7 +108,9 @@
       <workItem from="1761576151594" duration="1793000" />
       <workItem from="1761578057768" duration="813000" />
       <workItem from="1761582085251" duration="1718000" />
-      <workItem from="1761584082187" duration="678000" />
+      <workItem from="1761584082187" duration="1653000" />
+      <workItem from="1761585979722" duration="1660000" />
+      <workItem from="1761588033232" duration="176000" />
     </task>
     <servers />
   </component>
