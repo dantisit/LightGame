@@ -65,6 +65,7 @@
           <e p="MovedPlatform.cs" t="Include" />
           <e p="Scenes" t="Include">
             <e p="LightRayScaller.cs" t="Include" />
+            <e p="Mirror.cs" t="Include" />
           </e>
           <e p="Scripts" t="Include">
             <e p="Audio" t="Include">

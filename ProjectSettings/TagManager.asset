@@ -8,6 +8,7 @@ TagManager:
   - Light
   - PassLight
   - Teleport
+  - Mirror
   layers:
   - Default
   - TransparentFX
