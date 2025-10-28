@@ -30,6 +30,15 @@ namespace Core._.UI
         }
         
         public void CompleteTween() => Tween?.Complete();
+        
         public void KillAll() => transform?.DOKill();
+        
+        public void SetDuration(float duration)
+        {
+            if (Tween != null && Tween.IsActive())
+            {
+                Tween.timeScale = Tween.Duration() / duration;
+            }
+        }
     }
 }

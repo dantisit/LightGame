@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1fc307326aecf456996104f40653b201, type: 3}
   m_Name: UIClickSound
   m_EditorClassIdentifier: LightGame::LightGame.Audio.SoundData
-  audioClip: {fileID: 8300000, guid: 74715af5b50f34f3195d6634810ae548, type: 3}
+  audioClip: {fileID: 0}
   loop: 0
   volume: 1
   pitch: 1

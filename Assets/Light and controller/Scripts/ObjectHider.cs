@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using Light_and_controller.Scripts.Components;
+using Light_and_controller.Scripts.Systems;
 using UnityEngine;
 using UnityEngine.Events;
 
@@ -14,6 +15,21 @@ public class ObjectHider : MonoBehaviour, ILightable
     private void Start()
     {
         _originalLayer = gameObject.layer;
+    }
+
+    private void OnEnable()
+    {
+        EventBus.Subscribe<LightChangeEvent>(gameObject, OnLightChangeEvent);
+    }
+
+    private void OnDisable()
+    {
+        EventBus.Unsubscribe<LightChangeEvent>(gameObject, OnLightChangeEvent);
+    }
+
+    private void OnLightChangeEvent(LightChangeEvent evt)
+    {
+        OnInLightChange(evt.IsInLight);
     }
 
     void HideCollider()

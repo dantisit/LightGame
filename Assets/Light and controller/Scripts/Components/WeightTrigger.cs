@@ -1,8 +1,8 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
+using Light_and_controller.Scripts.Systems;
 using UnityEngine;
 using UnityEngine.Events;
-using UnityEngine.EventSystems;
 
 namespace Light_and_controller.Scripts.Components
 {
@@ -20,14 +20,24 @@ namespace Light_and_controller.Scripts.Components
         private void OnTriggerEnter2D(Collider2D other)
         {
             if(!AddedWeights.Add(other.gameObject)) return;
-            ExecuteEvents.Execute<IWeight>(other.gameObject, null, (x, _) => AddWeight(x.Get()));
+            var weightRequest = new WeightRequestEvent();
+            EventBus.Publish(other.gameObject, weightRequest);
+            if (weightRequest.Weight > 0)
+            {
+                AddWeight(weightRequest.Weight);
+            }
         }
 
         private void OnTriggerExit2D(Collider2D other)
         {
             
             if(!AddedWeights.Remove(other.gameObject)) return;
-            ExecuteEvents.Execute<IWeight>(other.gameObject, null, (x, _) => RemoveWeight(x.Get()));
+            var weightRequest = new WeightRequestEvent();
+            EventBus.Publish(other.gameObject, weightRequest);
+            if (weightRequest.Weight > 0)
+            {
+                RemoveWeight(weightRequest.Weight);
+            }
         }
 
         private void AddWeight(float value)

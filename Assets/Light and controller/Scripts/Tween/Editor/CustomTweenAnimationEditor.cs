@@ -2,6 +2,7 @@ using UnityEditor;
 using UnityEngine;
 using DG.Tweening;
 using System;
+using System.Collections.Generic;
 
 namespace Core._.UI
 {
@@ -12,7 +13,9 @@ namespace Core._.UI
         private bool isPreviewing = false;
         private bool isLooping = false;
         private bool playBackwards = false;
+        private bool dontResetOnPlay = false;
         private double lastUpdateTime = 0;
+        private List<Tween> playedTweens = new List<Tween>();
         
         void OnEnable()
         {
@@ -78,6 +81,12 @@ namespace Core._.UI
             
             isLooping = EditorGUILayout.Toggle("Loop", isLooping);
             playBackwards = EditorGUILayout.Toggle("Play Backwards", playBackwards);
+            dontResetOnPlay = EditorGUILayout.Toggle("Don't Reset on Play", dontResetOnPlay);
+            
+            if (dontResetOnPlay)
+            {
+                EditorGUILayout.HelpBox("Tween won't reset on Play. Use Reset button to rewind.", MessageType.Info);
+            }
             
             EditorGUILayout.BeginHorizontal();
             
@@ -94,8 +103,9 @@ namespace Core._.UI
             
             EditorGUILayout.EndHorizontal();
             
-            // Initialize tween if needed (with auto-kill disabled)
-            if (tweenableTarget.Tween == null || !tweenableTarget.Tween.IsActive())
+            // Initialize tween if needed
+            // Only reinitialize if tween doesn't exist
+            if (tweenableTarget.Tween == null)
             {
                 InitializeTween(tweenableTarget);
             }
@@ -125,13 +135,30 @@ namespace Core._.UI
         {
             try
             {
-                tweenableTarget.Tween?.Kill();
-                tweenableTarget.Tween = tweenableTarget.CreateTween();
-                
-                // Key: Don't auto-kill so we can rewind later
+                if (!dontResetOnPlay){
+                    tweenableTarget.Tween?.Kill();
+                }
+                var tween = tweenableTarget.CreateTween();
+                if (tween == null) return;
+
+                // Wrap in sequence with tiny delay to capture initial state
+                if (tween is Sequence sequence)
+                {
+                    sequence.PrependInterval(0.001f);
+                    tweenableTarget.Tween = sequence;
+                }
+                else
+                {
+                    var wrappedSequence = DOTween.Sequence();
+                    wrappedSequence.PrependInterval(0.001f);
+                    wrappedSequence.Append(tween);
+                    tweenableTarget.Tween = wrappedSequence;
+                }
+
                 tweenableTarget.Tween.SetAutoKill(false);
                 tweenableTarget.Tween.SetLoops(1);
-                tweenableTarget.Tween.Pause(); // Start paused
+                tweenableTarget.Tween.Pause();
+                playedTweens.Add(tweenableTarget.Tween);
             }
             catch (Exception e)
             {
@@ -144,8 +171,6 @@ namespace Core._.UI
             try
             {
                 TweenableBase tweenableTarget = (TweenableBase)target;
-                
-                // Ensure tween is initialized
                 InitializeTween(tweenableTarget);
                 
                 isPreviewing = true;
@@ -164,9 +189,9 @@ namespace Core._.UI
         {
             isPreviewing = false;
             EditorApplication.update -= UpdatePreview;
-            
-            // Revert to initial state using DOTween
-            RevertTween();
+            previewTime = 0f;
+            if(!dontResetOnPlay) RewindAllTweens();
+            Repaint();
         }
         
         void ResetPreview()
@@ -174,6 +199,7 @@ namespace Core._.UI
             try
             {
                 StopPreview();
+                RewindAllTweens();
                 SceneView.lastActiveSceneView?.Repaint();
                 Repaint();
             }
@@ -203,8 +229,19 @@ namespace Core._.UI
                     previewTime -= deltaTime;
                     if (previewTime < 0f)
                     {
-                        previewTime = isLooping ? tween.Duration() : 0f;
-                       // if (!isLooping) StopPreview();
+                        if (isLooping)
+                        {
+                            previewTime = tween.Duration();
+                        }
+                        else
+                        {
+                            previewTime = 0f;
+                            if (dontResetOnPlay)
+                            {
+                                StopPreview();
+                                return;
+                            }
+                        }
                     }
                 }
                 else
@@ -212,8 +249,19 @@ namespace Core._.UI
                     previewTime += deltaTime;
                     if (previewTime > tween.Duration())
                     {
-                        previewTime = isLooping ? 0f : tween.Duration();
-                       // if (!isLooping) StopPreview();
+                        if (isLooping)
+                        {
+                            previewTime = 0f;
+                        }
+                        else
+                        {
+                            previewTime = tween.Duration();
+                            if (dontResetOnPlay)
+                            {
+                                StopPreview();
+                                return;
+                            }
+                        }
                     }
                 }
                 
@@ -247,6 +295,27 @@ namespace Core._.UI
             }
         }
         
+        void RewindAllTweens()
+        {
+            try
+            {
+                foreach (var tween in playedTweens)
+                {
+                    if (tween != null && tween.IsActive())
+                    {
+                        tween.Rewind();
+                    }
+                }
+                
+                RevertTween();
+                playedTweens.Clear();
+            }
+            catch (Exception e)
+            {
+                Debug.LogError($"Error rewinding tweens: {e.Message}");
+            }
+        }
+        
         void CleanupPreview()
         {
             try
@@ -254,10 +323,8 @@ namespace Core._.UI
                 isPreviewing = false;
                 EditorApplication.update -= UpdatePreview;
                 
-                // Revert using DOTween
-                RevertTween();
+                RewindAllTweens();
                 
-                // Kill the tween
                 TweenableBase tweenableTarget = (TweenableBase)target;
                 if (tweenableTarget != null && tweenableTarget.Tween != null)
                 {

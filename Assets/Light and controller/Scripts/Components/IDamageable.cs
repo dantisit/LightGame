@@ -1,9 +1,12 @@
-﻿using UnityEngine.EventSystems;
-
 namespace Light_and_controller.Scripts.Components
 {
-    public interface IDamageable : IEventSystemHandler
+    public interface IDamageable
     {
         public void TakeDamage(int amount);
+    }
+
+    public class DamageEvent
+    {
+        public int Amount { get; set; }
     }
 }

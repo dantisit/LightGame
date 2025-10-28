@@ -1,4 +1,5 @@
-﻿using System;
+using System;
+using Light_and_controller.Scripts.Systems;
 using Unity.VisualScripting;
 using UnityEngine;
 
@@ -11,6 +12,21 @@ namespace Light_and_controller.Scripts.Components
         [SerializeField] private HealOverTimeEffect.EffectData healOverTimeData;
 
         private MonoBehaviour _lastEffect;
+
+        private void OnEnable()
+        {
+            EventBus.Subscribe<LightChangeEvent>(gameObject, OnLightChangeEvent);
+        }
+
+        private void OnDisable()
+        {
+            EventBus.Unsubscribe<LightChangeEvent>(gameObject, OnLightChangeEvent);
+        }
+
+        private void OnLightChangeEvent(LightChangeEvent evt)
+        {
+            OnInLightChange(evt.IsInLight);
+        }
 
         public void OnInLightChange(bool isInLight)
         {

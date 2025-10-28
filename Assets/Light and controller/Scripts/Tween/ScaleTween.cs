@@ -10,6 +10,7 @@ namespace Core._.UI
     /// </summary>
     public class ScaleTween : TweenableBase
     {
+        [SerializeField] private bool _useStartScale;
         [SerializeField] private Vector3 _startScale;
         [SerializeField] private Vector3 _endScale;
         [SerializeField] private float _duration = 0.6f;
@@ -21,8 +22,13 @@ namespace Core._.UI
         {
             var sequence = DOTween.Sequence();
             var rect = (RectTransform)transform.parent;
-
-            sequence.Append(rect.DOScale(_startScale, 0f));
+            
+            if (_useStartScale)
+            {
+                // Set start scale with 0-duration tween, then animate to end scale
+                sequence.Append(rect.DOScale(_startScale, 0.001f));
+            }
+            
             sequence.Append(rect.DOScale(_endScale, _duration).SetEase(_scaleEase));
             
             return sequence;

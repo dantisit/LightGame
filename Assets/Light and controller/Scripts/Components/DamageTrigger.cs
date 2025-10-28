@@ -1,8 +1,8 @@
 using System;
 using System.Collections.Generic;
 using Light_and_controller.Scripts.Components;
+using Light_and_controller.Scripts.Systems;
 using UnityEngine;
-using UnityEngine.EventSystems;
 
 public class DamageTrigger : MonoBehaviour
 {
@@ -13,7 +13,7 @@ public class DamageTrigger : MonoBehaviour
     private void OnTriggerEnter2D(Collider2D other)
     {
         if(!ObjectsInTrigger.Add(other.gameObject)) return;
-        ExecuteEvents.Execute<IDamageable>(other.gameObject, null, (x, _) => x.TakeDamage(damage));
+        EventBus.Publish(other.gameObject, new DamageEvent { Amount = damage });
     }
 
     private void OnTriggerExit2D(Collider2D other)

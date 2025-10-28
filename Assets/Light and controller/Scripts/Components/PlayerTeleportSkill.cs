@@ -13,6 +13,7 @@ public class PlayerTeleportSkill : MonoBehaviourWithData<PlayerTeleportSkill.Tel
 
     public ContactFilter2D contactFilter;
     private InputActions inputActions;
+    private Rigidbody2D rigidbody2D;
 
     private bool StartLightFiltr;
     private bool IsTeleported;
@@ -41,6 +42,13 @@ public class PlayerTeleportSkill : MonoBehaviourWithData<PlayerTeleportSkill.Tel
         inputActions.Player.TeleportAim.canceled -= OnTeleportAim;
         inputActions.Player.TeleportExecute.performed -= OnTeleportExecute;
         inputActions.Player.Disable();
+        
+        // Hide the teleport point indicator when the skill is disabled
+        if (Data?.TeleportPoint != null)
+        {
+            Data.TeleportPoint.SetActive(false);
+        }
+        TargetPosition = null;
     }
 
     private void Start()
@@ -100,7 +108,19 @@ public class PlayerTeleportSkill : MonoBehaviourWithData<PlayerTeleportSkill.Tel
         {
             if (StartLightFiltr && hit.collider?.tag == "Teleport")
             {
-                TargetPosition = hit.point;
+                // Check if the hit object has a TeleportDestination component
+                TeleportDestination teleportDest = hit.collider.GetComponent<TeleportDestination>();
+                
+                if (teleportDest != null)
+                {
+                    // Use the specified destination point from the component
+                    TargetPosition = teleportDest.GetTeleportPosition();
+                }
+                else
+                {
+                    // Fallback to the hit point if no TeleportDestination component is found
+                    TargetPosition = hit.point;
+                }
 
                 Data.TeleportPoint.SetActive(true);
                 Data.TeleportPoint.transform.position = TargetPosition.Value;
@@ -126,9 +146,9 @@ public class PlayerTeleportSkill : MonoBehaviourWithData<PlayerTeleportSkill.Tel
     private void Teleportation()
     {
         if (TargetPosition == null) return;
-
-        transform.position = TargetPosition.Value;
-
+        rigidbody2D ??= GetComponent<Rigidbody2D>();
+ 
+        rigidbody2D.position =  TargetPosition.Value;
         Data.TeleportPoint.SetActive(false);
         TargetPosition = null;
     }

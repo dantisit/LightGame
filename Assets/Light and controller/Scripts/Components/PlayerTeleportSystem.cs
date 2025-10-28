@@ -1,4 +1,5 @@
 using Light_and_controller.Scripts.Components;
+using Light_and_controller.Scripts.Systems;
 using UnityEngine;
 
 [RequireComponent(typeof(LightDetector))]
@@ -16,6 +17,21 @@ public class PlayerTeleportSystem : MonoBehaviourWithData<PlayerTeleportSkill.Te
         }
         TeleportComponent.Data = Data;
         TeleportComponent.enabled = false;
+    }
+
+    private void OnEnable()
+    {
+        EventBus.Subscribe<LightChangeEvent>(gameObject, OnLightChangeEvent);
+    }
+
+    private void OnDisable()
+    {
+        EventBus.Unsubscribe<LightChangeEvent>(gameObject, OnLightChangeEvent);
+    }
+
+    private void OnLightChangeEvent(LightChangeEvent evt)
+    {
+        OnInLightChange(evt.IsInLight);
     }
 
     public void OnInLightChange(bool IsInLight)

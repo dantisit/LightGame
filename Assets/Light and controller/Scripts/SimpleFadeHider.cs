@@ -1,5 +1,6 @@
 using System.Collections;
 using Light_and_controller.Scripts.Components;
+using Light_and_controller.Scripts.Systems;
 using UnityEngine;
 
 /// <summary>
@@ -52,6 +53,21 @@ public class SimpleFadeHider : MonoBehaviour, ILightable
             // Ensure material is set to transparent mode
             SetMaterialTransparent();
         }
+    }
+
+    private void OnEnable()
+    {
+        EventBus.Subscribe<LightChangeEvent>(gameObject, OnLightChangeEvent);
+    }
+
+    private void OnDisable()
+    {
+        EventBus.Unsubscribe<LightChangeEvent>(gameObject, OnLightChangeEvent);
+    }
+
+    private void OnLightChangeEvent(LightChangeEvent evt)
+    {
+        OnInLightChange(evt.IsInLight);
     }
 
     private void SetMaterialTransparent()

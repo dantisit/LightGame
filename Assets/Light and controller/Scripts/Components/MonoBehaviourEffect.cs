@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections;
 using UnityEngine;
 using UnityEngine.EventSystems;
@@ -7,20 +7,34 @@ namespace Light_and_controller.Scripts.Components
 {
     public abstract class MonoBehaviourEffect<T> : MonoBehaviourWithData<T> where T : EffectData
     {
-        private float _currentTime;
-        
-        private IEnumerator Start()
+        protected float _currentTime;
+        protected float _timeSinceLastTick;
+        private bool _hasStarted;
+
+        private void Update()
         {
-            while (_currentTime < Data.Duration || Data.IsInfinity)
+            if (!_hasStarted)
             {
-                yield return new WaitForSeconds(Data.Rate);
-                Tick();
-                _currentTime += Data.Rate;
+                OnStart();
+                _hasStarted = true;
             }
-            
-            Destroy(this);
+
+            _timeSinceLastTick += Time.deltaTime;
+            _currentTime += Time.deltaTime;
+
+            if (_timeSinceLastTick >= Data.Rate)
+            {
+                Tick();
+                _timeSinceLastTick = 0f;
+            }
+
+            if (!Data.IsInfinity && _currentTime >= Data.Duration)
+            {
+                Destroy(this);
+            }
         }
 
+        protected virtual void OnStart() { }
         protected abstract void Tick();
     }
     

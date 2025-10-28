@@ -1,5 +1,6 @@
 using System;
 using Light_and_controller.Scripts.Components;
+using Light_and_controller.Scripts.Systems;
 using UnityEngine;
 
 public class HealthSystem : MonoBehaviour, IDamageable, IHealable
@@ -20,6 +21,28 @@ public class HealthSystem : MonoBehaviour, IDamageable, IHealable
     protected virtual void Awake()
     {
         MaxHealth = Health;
+    }
+
+    protected virtual void OnEnable()
+    {
+        EventBus.Subscribe<DamageEvent>(gameObject, OnDamageEvent);
+        EventBus.Subscribe<HealEvent>(gameObject, OnHealEvent);
+    }
+
+    protected virtual void OnDisable()
+    {
+        EventBus.Unsubscribe<DamageEvent>(gameObject, OnDamageEvent);
+        EventBus.Unsubscribe<HealEvent>(gameObject, OnHealEvent);
+    }
+
+    private void OnDamageEvent(DamageEvent evt)
+    {
+        TakeDamage(evt.Amount);
+    }
+
+    private void OnHealEvent(HealEvent evt)
+    {
+        Heal(evt.Amount);
     }
 
     public virtual void TakeDamage(int amount)
