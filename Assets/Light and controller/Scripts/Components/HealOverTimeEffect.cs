@@ -80,5 +80,6 @@ namespace Light_and_controller.Scripts.Components
             // Cancel pending event if effect is destroyed before completion
             _pendingEvent?.Cancel?.Invoke();
         }
+        
     }
 }

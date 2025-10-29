@@ -1,15 +1,18 @@
+using UnityEngine;
+using UnityEngine.SceneManagement;
+
 namespace Light_and_controller.Scripts
 {
     public static class SaveSystem
     {
         public static void SaveGame()
         {
-            // Level
+            PlayerPrefs.SetInt("Scene", SceneManager.GetActiveScene().buildIndex); // Сохраняем индекс активной сцены
         }
 
         public static void LoadGame()
         {
-            // Level
+            SceneManager.LoadScene(PlayerPrefs.GetInt("scene"));
         }
     }
 }

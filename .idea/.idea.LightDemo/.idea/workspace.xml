@@ -20,13 +20,11 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="ad823aba-ffa9-441b-927b-c52aa8898984" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/.idea.LightDemo/.idea/indexLayout.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.LightDemo/.idea/indexLayout.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/.idea.LightDemo/.idea/contentModel.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.LightDemo/.idea/contentModel.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/.idea.LightDemo/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.LightDemo/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Light and controller/Prefabs/Projectile.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Light and controller/Prefabs/Projectile.prefab" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Light and controller/Prefabs/ProjectileSpawner.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Light and controller/Prefabs/ProjectileSpawner.prefab" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Light and controller/Scripts/Components/Projectile.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Light and controller/Scripts/Components/Projectile.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Light and controller/Scripts/Components/ProjectileSpawner.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Light and controller/Scripts/Components/ProjectileSpawner.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Light and controller/TestScene_PC.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Light and controller/TestScene_PC.unity" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Light and controller/Scenes/LightRayScaller.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Light and controller/Scenes/LightRayScaller.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Light and controller/Scenes/Mirror and LIghtRay.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Light and controller/Scenes/Mirror and LIghtRay.unity" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ProjectSettings/TagManager.asset" beforeDir="false" afterPath="$PROJECT_DIR$/ProjectSettings/TagManager.asset" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -36,6 +34,15 @@
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
+  <component name="HighlightingSettingsPerFile">
+    <setting file="file://$PROJECT_DIR$/Assets/Light and controller/Scenes/LightRayScaller.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/9B6C948E-D54B-44D5-8900-B1C654F1710E/93/5d90af6c/ContactFilter2D.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/9B6C948E-D54B-44D5-8900-B1C654F1710E/0d/e8a58365/Collider2D.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/41B87322-5536-48A1-A761-74C5109C71F9/f5/4b0a63fc/Transform.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/41B87322-5536-48A1-A761-74C5109C71F9/17/9fc4d64a/Component.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/Light and controller/Scenes/Mirror.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/../HardBall/Assets/Dev/ContainObject.cs" root0="SKIP_HIGHLIGHTING" />
+  </component>
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
@@ -44,6 +51,12 @@
         <option value="$PROJECT_DIR$/Assets/Light and controller/Thorn.cs" />
         <option value="$PROJECT_DIR$/Assets/Light and controller/Scripts/Components/ProjectileSpawner.cs" />
         <option value="$PROJECT_DIR$/Assets/Light and controller/Scripts/Components/Projectile.cs" />
+        <option value="$PROJECT_DIR$/Assets/Light and controller/Scripts/Trigger.cs" />
+        <option value="$PROJECT_DIR$/Assets/Light and controller/Scripts/Components/LightDetector.cs" />
+        <option value="$PROJECT_DIR$/Assets/Light and controller/Scripts/SaveSystem.cs" />
+        <option value="$PROJECT_DIR$/Assets/Light and controller/Scripts/Components/HealOverTimeEffect.cs" />
+        <option value="$PROJECT_DIR$/Assets/Light and controller/Scenes/LightRayScaller.cs" />
+        <option value="$PROJECT_DIR$/Assets/Light and controller/Scenes/Mirror.cs" />
       </list>
     </option>
   </component>
@@ -91,6 +104,24 @@
       <workItem from="1757748286121" duration="3964000" />
       <workItem from="1759675044466" duration="2000" />
       <workItem from="1759675562819" duration="3655000" />
+      <workItem from="1761554329118" duration="790000" />
+      <workItem from="1761557451592" duration="1545000" />
+      <workItem from="1761570343649" duration="1744000" />
+      <workItem from="1761572362571" duration="1778000" />
+      <workItem from="1761574173451" duration="1134000" />
+      <workItem from="1761576151594" duration="1793000" />
+      <workItem from="1761578057768" duration="813000" />
+      <workItem from="1761582085251" duration="1718000" />
+      <workItem from="1761584082187" duration="1653000" />
+      <workItem from="1761585979722" duration="1660000" />
+      <workItem from="1761588033232" duration="176000" />
+      <workItem from="1761665235074" duration="1349000" />
+      <workItem from="1761667141716" duration="1758000" />
+      <workItem from="1761669059508" duration="1825000" />
+      <workItem from="1761670927660" duration="1906000" />
+      <workItem from="1761672878370" duration="1139000" />
+      <workItem from="1761674784163" duration="2383000" />
+      <workItem from="1761677212862" duration="230000" />
     </task>
     <servers />
   </component>
@@ -109,6 +140,7 @@
         </entry>
       </map>
     </option>
+    <option name="oldMeFiltersMigrated" value="true" />
   </component>
   <component name="VcsManagerConfiguration">
     <option name="CLEAR_INITIAL_COMMIT_MESSAGE" value="true" />
@@ -122,5 +154,9 @@
       <screen x="0" y="0" width="1920" height="1032" />
     </state>
     <state x="454" y="261" key="SettingsEditor/-1920.0.1920.1032/0.0.1920.1032@0.0.1920.1032" timestamp="1757748248108" />
+    <state x="-1537" y="283" key="Vcs.Push.Dialog.v2" timestamp="1761668312952">
+      <screen x="-1920" y="0" width="1920" height="1032" />
+    </state>
+    <state x="-1537" y="283" key="Vcs.Push.Dialog.v2/-1920.0.1920.1032/0.0.1920.1032@-1920.0.1920.1032" timestamp="1761668312952" />
   </component>
 </project>
