@@ -13,13 +13,19 @@ public class JumpPad : MonoBehaviour
     [Range(1, 3)]
     private int jumpIndex = 1;
     
-    [SerializeField, Tooltip("Multiplier for the jump height (1.0 = normal jump height)")]
-    [Range(0.5f, 10f)]
-    private float jumpHeightMultiplier = 1.5f;
+    [SerializeField, Tooltip("Direction to launch the player (will be normalized)")]
+    private Vector2 launchDirection = Vector2.up;
     
-    [SerializeField, Tooltip("Optional horizontal velocity boost multiplier")]
-    [Range(0f, 2f)]
-    private float horizontalBoostMultiplier = 1.2f;
+    [SerializeField, Tooltip("Force multiplier for the launch (1.0 = normal jump height)")]
+    [Range(0.5f, 10f)]
+    private float forceMultiplier = 1.5f;
+    
+    [SerializeField, Tooltip("Whether to preserve player's velocity in perpendicular direction")]
+    private bool preservePerpendicularVelocity = true;
+    
+    [SerializeField, Tooltip("Minimum angle (in degrees) between collision normal and pad's up direction to activate. 0 = any angle, 90 = must hit from specific side")]
+    [Range(0f, 90f)]
+    private float activationAngle = 60f;
     
     [SerializeField, Tooltip("Cooldown time before the same player can use this pad again")]
     private float cooldownTime = 0.5f;
@@ -87,10 +93,17 @@ public class JumpPad : MonoBehaviour
         if (player == null)
             return;
         
-        // Check if player is coming from above (landing on the pad)
-        Vector2 contactNormal = collision.contacts[0].normal;
-        if (Vector2.Dot(contactNormal, Vector2.down) < 0.5f)
-            return; // Player didn't land on top of the pad
+        // Check if player is hitting from the correct direction
+        if (activationAngle > 0f)
+        {
+            Vector2 contactNormal = collision.contacts[0].normal;
+            Vector2 padNormal = -launchDirection.normalized; // Opposite of launch direction
+            float dotProduct = Vector2.Dot(contactNormal, padNormal);
+            float minDot = Mathf.Cos(activationAngle * Mathf.Deg2Rad);
+            
+            if (dotProduct < minDot)
+                return; // Player didn't hit from the correct angle
+        }
         
         // Invoke land event
         OnPlayerLand?.Invoke(player);
@@ -121,20 +134,33 @@ public class JumpPad : MonoBehaviour
         // Transition to jump state
         player._stateMachine.ChangeState(player.JumpState);
         
-        // Set the velocity multiplier AFTER transition and apply velocity directly
+        // Set the velocity multiplier AFTER transition
         var jumpState = player.JumpState as PlayerJumpState;
         if (jumpState != null)
         {
-            jumpState.VelocityMultiplier = jumpHeightMultiplier;
+            jumpState.VelocityMultiplier = forceMultiplier;
         }
         
-        // Get jump info and apply boosted velocity directly
+        // Get jump info and calculate launch velocity
         var jumpInfo = player.PlayerData.Jump.Jumps[clampedJumpIndex - 1];
-        float targetJumpVelocity = jumpInfo.MaxHeight * jumpHeightMultiplier;
+        float baseForce = jumpInfo.MaxHeight * forceMultiplier;
         
-        // Apply velocity with horizontal boost
-        float horizontalVelocity = rb.linearVelocity.x * horizontalBoostMultiplier;
-        rb.linearVelocity = new Vector2(horizontalVelocity, targetJumpVelocity);
+        // Normalize launch direction
+        Vector2 normalizedDirection = launchDirection.normalized;
+        
+        // Calculate new velocity based on launch direction
+        Vector2 launchVelocity = normalizedDirection * baseForce;
+        
+        // Optionally preserve velocity perpendicular to launch direction
+        if (preservePerpendicularVelocity)
+        {
+            Vector2 perpendicular = new Vector2(-normalizedDirection.y, normalizedDirection.x);
+            float perpendicularSpeed = Vector2.Dot(rb.linearVelocity, perpendicular);
+            launchVelocity += perpendicular * perpendicularSpeed;
+        }
+        
+        // Apply the calculated velocity
+        rb.linearVelocity = launchVelocity;
         
         // Update cooldown
         lastBounceTime = Time.time;
@@ -149,16 +175,20 @@ public class JumpPad : MonoBehaviour
     private void OnDrawGizmos()
     {
         // Draw a visual indicator in the editor
-        Gizmos.color = Color.yellow;
+        Gizmos.color = cooldownCompleted ? Color.yellow : Color.gray;
         Vector3 position = transform.position;
         
-        // Draw arrow showing jump direction
-        float visualHeight = jumpHeightMultiplier * 2f;
-        Gizmos.DrawLine(position, position + Vector3.up * visualHeight);
-        Gizmos.DrawLine(position + Vector3.up * visualHeight, 
-                       position + Vector3.up * visualHeight + Vector3.left * 0.2f);
-        Gizmos.DrawLine(position + Vector3.up * visualHeight, 
-                       position + Vector3.up * visualHeight + Vector3.right * 0.2f);
+        // Draw arrow showing launch direction
+        Vector3 direction = launchDirection.normalized;
+        float visualLength = forceMultiplier * 2f;
+        Vector3 endPoint = position + (Vector3)(direction * visualLength);
+        
+        Gizmos.DrawLine(position, endPoint);
+        
+        // Draw arrowhead
+        Vector3 perpendicular = new Vector3(-direction.y, direction.x, 0) * 0.2f;
+        Gizmos.DrawLine(endPoint, endPoint - (Vector3)(direction * 0.3f) + perpendicular);
+        Gizmos.DrawLine(endPoint, endPoint - (Vector3)(direction * 0.3f) - perpendicular);
     }
     
     private void OnDrawGizmosSelected()
@@ -168,7 +198,36 @@ public class JumpPad : MonoBehaviour
         Vector3 position = transform.position;
         
         // Draw force visualization
-        float visualHeight = jumpHeightMultiplier * 2f;
-        Gizmos.DrawWireSphere(position + Vector3.up * visualHeight, 0.3f);
+        Vector3 direction = launchDirection.normalized;
+        float visualLength = forceMultiplier * 2f;
+        Vector3 endPoint = position + (Vector3)(direction * visualLength);
+        Gizmos.DrawWireSphere(endPoint, 0.3f);
+        
+        // Draw activation cone if angle restriction is set
+        if (activationAngle > 0f)
+        {
+            Gizmos.color = new Color(0, 1, 0, 0.2f);
+            Vector3 padNormal = -(Vector3)direction;
+            
+            // Draw cone representing valid collision angles
+            int segments = 16;
+            float angleStep = 360f / segments;
+            Vector3 perpendicular = new Vector3(-padNormal.y, padNormal.x, 0);
+            
+            for (int i = 0; i < segments; i++)
+            {
+                float angle1 = angleStep * i;
+                float angle2 = angleStep * (i + 1);
+                
+                Vector3 dir1 = Quaternion.AngleAxis(angle1, Vector3.forward) * perpendicular;
+                Vector3 dir2 = Quaternion.AngleAxis(angle2, Vector3.forward) * perpendicular;
+                
+                Vector3 coneDir1 = (padNormal + dir1 * Mathf.Tan(activationAngle * Mathf.Deg2Rad)).normalized;
+                Vector3 coneDir2 = (padNormal + dir2 * Mathf.Tan(activationAngle * Mathf.Deg2Rad)).normalized;
+                
+                Gizmos.DrawLine(position, position + coneDir1 * 1.5f);
+                Gizmos.DrawLine(position + coneDir1 * 1.5f, position + coneDir2 * 1.5f);
+            }
+        }
     }
 }
