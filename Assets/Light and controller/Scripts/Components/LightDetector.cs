@@ -12,6 +12,9 @@ namespace Light_and_controller.Scripts.Components
        [SerializeField] private UnityEvent<bool> onChangeState = new UnityEvent<bool>();
        [SerializeField] private UnityEvent<bool> onChangeStateInverse = new UnityEvent<bool>();
 
+       // ToForce - extension
+       // enum: Weak, Strong light
+       
        public HashSet<GameObject> lightSprings = new();
 
        // Public accessors for events
@@ -24,6 +27,7 @@ namespace Light_and_controller.Scripts.Components
        private void Update()
        {
            _isInLight = lightSprings.Count > 0;
+           // Enough light check
            if(_isInLight == _lastStateIsInLight) return;
            EventBus.Publish(gameObject, new LightChangeEvent { IsInLight = _isInLight });
            onChangeState?.Invoke(_isInLight);
@@ -33,7 +37,7 @@ namespace Light_and_controller.Scripts.Components
        
        public bool LightBlockCheck(Vector3 targetPosition, Rigidbody2D lightRigidbody) 
        {
-           Debug.Log(lightRigidbody);
+//           Debug.Log(lightRigidbody);
            
            Vector3 direction = targetPosition - transform.position;
    

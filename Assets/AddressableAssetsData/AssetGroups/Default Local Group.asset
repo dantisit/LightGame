@@ -14,7 +14,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: Unity.Addressables.Editor::UnityEditor.AddressableAssets.Settings.AddressableAssetGroup
   m_GroupName: Default Local Group
   m_GUID: 1fce2509380dc4b89b78bf7ffcc8b5cb
-  m_SerializeEntries: []
+  m_SerializeEntries:
+  - m_GUID: e038ac5e0718c4312bb2a1bfbc2f8fad
+    m_Address: Sounds/MainTheme
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - default
+    FlaggedDuringContentUpdateRestriction: 0
   m_ReadOnly: 0
   m_Settings: {fileID: 11400000, guid: 5a651dca81c6146b38249161cd4af2e5, type: 2}
   m_SchemaSet:

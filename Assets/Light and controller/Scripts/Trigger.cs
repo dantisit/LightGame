@@ -53,7 +53,7 @@ public class Trigger : MonoBehaviour
         if(!other.TryGetComponent<LightDetector>(out var component)) return;
         
         var is_lighted = component.LightBlockCheck(targetLightPoint.position, lightRigidbody);
-        Debug.Log(is_lighted);
+//        Debug.Log(is_lighted);
         if (is_lighted) component.lightSprings.Add(gameObject);
         else component.lightSprings.Remove(gameObject);
     }

@@ -2,7 +2,9 @@ using System;
 using System.Text.RegularExpressions;
 using Core._.UI;
 using Cysharp.Threading.Tasks;
+using DG.DemiEditor;
 using DG.Tweening;
+using EasyTextEffects;
 using Light_and_controller.Scripts.Events;
 using Light_and_controller.Scripts.Systems;
 using TMPro;
@@ -16,6 +18,7 @@ namespace Light_and_controller.Scripts.UI
     public class HintView : WindowView<HintView, HintView.EventData>
     {
         [SerializeField] private TMP_Text tmp;
+        [SerializeField] private TextEffect textEffect;
         [SerializeField] private TweenableBase showTween;
         [SerializeField] private TweenableBase hideTween;
 
@@ -43,9 +46,18 @@ namespace Light_and_controller.Scripts.UI
             }
             
             tmp.text = localizedText;
+            tmp.color = tmp.color.SetAlpha(0);
+            
             _isLocked = true;
             showTween.Play();
-            showTween.Tween.OnComplete(() => _isLocked = false);
+            showTween.Tween.OnComplete(() =>
+            {
+                tmp.color = tmp.color.SetAlpha(1);
+                textEffect.UpdateStyleInfos();
+                textEffect.StartManualEffects();
+                textEffect.Update();
+                _isLocked = false;
+            });
         }
         
         protected override async void OnClose(CloseWindowEvent<HintView> eventData)
@@ -56,7 +68,6 @@ namespace Light_and_controller.Scripts.UI
             hideTween.Tween.OnComplete(() =>
             {
                 _isLocked = false;
-                gameObject.SetActive(false);
             });
         }
  

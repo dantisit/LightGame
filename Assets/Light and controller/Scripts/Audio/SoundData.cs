@@ -29,7 +29,12 @@ namespace LightGame.Audio
         public AudioClip AudioClip => audioClip;
         public bool Loop => loop;
         public float Volume => volume;
-        public float Pitch => pitch;
+
+        public float Pitch
+        {
+            get => pitch;
+            set => pitch = value;
+        }
         public float SpatialBlend => spatialBlend;
         public float MaxDistance => maxDistance;
         #endregion

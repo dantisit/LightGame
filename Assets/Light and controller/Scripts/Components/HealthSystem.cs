@@ -6,9 +6,12 @@ using UnityEngine;
 public class HealthSystem : MonoBehaviour, IDamageable, IHealable
 {
     [SerializeField] private int health;
+    [SerializeField] private float invincibilityDuration = 1f;
     
     public Action<int> OnTakeDamage;
     public Action<int> OnHeal;
+    
+    private float invincibilityTimer = 0f;
     
     public int Health
     {
@@ -17,10 +20,20 @@ public class HealthSystem : MonoBehaviour, IDamageable, IHealable
     }
 
     public int MaxHealth { get; set; }
+    
+    public bool IsInvincible => invincibilityTimer > 0f;
 
     protected virtual void Awake()
     {
         MaxHealth = Health;
+    }
+
+    protected virtual void Update()
+    {
+        if(invincibilityTimer > 0f)
+        {
+            invincibilityTimer -= Time.deltaTime;
+        }
     }
 
     protected virtual void OnEnable()
@@ -47,9 +60,19 @@ public class HealthSystem : MonoBehaviour, IDamageable, IHealable
 
     public virtual void TakeDamage(int amount)
     {
+        if(IsInvincible) return;
+        
         Health -= amount;
         OnTakeDamage?.Invoke(amount);
-        if(Health <= 0) Die();
+        
+        if(Health <= 0)
+        {
+            Die();
+        }
+        else
+        {
+            invincibilityTimer = invincibilityDuration;
+        }
     }
 
     public virtual void Heal(int amount)

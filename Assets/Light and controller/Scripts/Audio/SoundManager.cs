@@ -15,6 +15,10 @@ namespace LightGame.Audio
         private static GameObject soundManagerRoot;
         private static bool isInitialized = false;
 
+        // Music-specific fields
+        private static UnitySoundPlayer musicPlayer;
+        private static SoundData currentMusic;
+
         /// <summary>
         /// Sets the maximum number of concurrent sounds that can play.
         /// </summary>
@@ -104,6 +108,146 @@ namespace LightGame.Audio
         public static void PlaySound2D(SoundData soundData)
         {
             PlaySound(soundData, null);
+        }
+
+        /// <summary>
+        /// Plays background music. Only one music track can play at a time.
+        /// </summary>
+        /// <param name="musicData">The music to play</param>
+        /// <param name="fadeDuration">Optional fade-in duration in seconds</param>
+        public static void PlayMusic(SoundData musicData, float fadeDuration = 0f)
+        {
+            if (!isInitialized)
+                Initialize();
+
+            if (musicData == null)
+            {
+                Debug.LogWarning("Cannot play music: SoundData is null");
+                return;
+            }
+
+            // Stop current music if playing
+            if (currentMusic != null)
+            {
+                StopMusic(fadeDuration);
+            }
+
+            // Create dedicated music player if it doesn't exist
+            if (musicPlayer == null)
+            {
+                GameObject musicObj = new GameObject("MusicPlayer");
+                musicObj.transform.SetParent(soundManagerRoot.transform);
+                musicPlayer = musicObj.AddComponent<UnitySoundPlayer>();
+            }
+
+            currentMusic = musicData;
+            musicData.PlayInternal(musicPlayer, null);
+
+            // Apply fade-in if requested
+            if (fadeDuration > 0f)
+            {
+                CoroutineRunner.Instance.StartCoroutine(FadeMusic(musicPlayer, 0f, musicData.Volume, fadeDuration));
+            }
+        }
+
+        /// <summary>
+        /// Stops the currently playing music.
+        /// </summary>
+        /// <param name="fadeDuration">Optional fade-out duration in seconds</param>
+        public static void StopMusic(float fadeDuration = 0f)
+        {
+            if (musicPlayer == null || currentMusic == null)
+                return;
+
+            if (fadeDuration > 0f)
+            {
+                CoroutineRunner.Instance.StartCoroutine(FadeMusicAndStop(musicPlayer, fadeDuration));
+            }
+            else
+            {
+                musicPlayer.Stop();
+                currentMusic = null;
+            }
+        }
+
+        /// <summary>
+        /// Pauses the currently playing music.
+        /// </summary>
+        public static void PauseMusic()
+        {
+            if (musicPlayer != null && musicPlayer.IsPlaying())
+            {
+                musicPlayer.Stop();
+            }
+        }
+
+        /// <summary>
+        /// Resumes the paused music.
+        /// </summary>
+        public static void ResumeMusic()
+        {
+            if (musicPlayer != null && currentMusic != null && !musicPlayer.IsPlaying())
+            {
+                currentMusic.PlayInternal(musicPlayer, null);
+            }
+        }
+
+        /// <summary>
+        /// Checks if music is currently playing.
+        /// </summary>
+        public static bool IsMusicPlaying()
+        {
+            return musicPlayer != null && musicPlayer.IsPlaying();
+        }
+
+        /// <summary>
+        /// Sets the volume of the currently playing music.
+        /// </summary>
+        public static void SetMusicVolume(float volume)
+        {
+            if (musicPlayer != null)
+            {
+                musicPlayer.SetVolume(volume);
+            }
+        }
+
+        private static System.Collections.IEnumerator FadeMusic(UnitySoundPlayer player, float startVolume, float targetVolume, float duration)
+        {
+            if (player == null)
+                yield break;
+
+            player.SetVolume(startVolume);
+            float elapsed = 0f;
+
+            while (elapsed < duration)
+            {
+                elapsed += Time.deltaTime;
+                float t = elapsed / duration;
+                player.SetVolume(Mathf.Lerp(startVolume, targetVolume, t));
+                yield return null;
+            }
+
+            player.SetVolume(targetVolume);
+        }
+
+        private static System.Collections.IEnumerator FadeMusicAndStop(UnitySoundPlayer player, float duration)
+        {
+            if (player == null)
+                yield break;
+
+            float startVolume = currentMusic != null ? currentMusic.Volume : 1f;
+            float elapsed = 0f;
+
+            while (elapsed < duration)
+            {
+                elapsed += Time.deltaTime;
+                float t = elapsed / duration;
+                player.SetVolume(Mathf.Lerp(startVolume, 0f, t));
+                yield return null;
+            }
+
+            player.Stop();
+            currentMusic = null;
         }
 
         /// <summary>

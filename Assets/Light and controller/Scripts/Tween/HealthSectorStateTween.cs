@@ -1,3 +1,4 @@
+using System;
 using DG.Tweening;
 using UnityEngine;
 
@@ -32,41 +33,8 @@ namespace Core._.UI
         [SerializeField] private float defaultCancelDuration = 0.5f;
 
         private float _customDuration = -1f;
-        private bool _isInitialized = false;
         
         public override Tween Tween { get; set; }
-
-        private void EnsureInitialized()
-        {
-            if (_isInitialized) return;
-            
-            // Initialize all child tweens on first use
-            if (healTween != null)
-            {
-                healTween.Tween = healTween.CreateTween().SetAutoKill(false);
-                healTween.Tween.Pause();
-            }
-            
-            if (damageTween != null)
-            {
-                damageTween.Tween = damageTween.CreateTween().SetAutoKill(false);
-                damageTween.Tween.Pause();
-            }
-            
-            if (pendingHealTween != null)
-            {
-                pendingHealTween.Tween = pendingHealTween.CreateTween().SetAutoKill(false);
-                pendingHealTween.Tween.Pause();
-            }
-            
-            if (pendingDamageTween != null)
-            {
-                pendingDamageTween.Tween = pendingDamageTween.CreateTween().SetAutoKill(false);
-                pendingDamageTween.Tween.Pause();
-            }
-            
-            _isInitialized = true;
-        }
 
         public override Tween CreateTween()
         {
@@ -135,75 +103,67 @@ namespace Core._.UI
 
         private void ExecuteHeal()
         {
-            EnsureInitialized();
             ResetDurations();
-            healTween?.Tween.PlayForward();
-            if (pendingHealTween?.Tween.IsPlaying() == true) 
-                pendingHealTween.Tween.Complete();
-            damageTween?.Tween.Pause();
-            pendingDamageTween?.Tween.Rewind();
+            Reset();
+
+            PlayForward(healTween);
         }
 
         private void ExecuteDamage()
         {
-            EnsureInitialized();
             ResetDurations();
-            damageTween?.Tween.PlayForward();
-            pendingDamageTween?.Tween.Pause();
-            healTween?.Tween.Rewind();
-            pendingHealTween?.Tween.Rewind();
+            this.DOPause();
+
+            PlayForward(damageTween);
         }
 
         private void ExecutePendingHeal()
         {
-            EnsureInitialized();
-            if (pendingHealTween != null && _customDuration > 0)
-            {
-                pendingHealTween.SetDuration(_customDuration);
-            }
+            ResetDurations();
+            Reset();
             
-            pendingHealTween?.Tween.PlayForward();
-            damageTween?.Tween.Pause();
-            pendingDamageTween?.Tween.Rewind();
-            healTween?.Tween.Rewind();
+            PlayForward(pendingHealTween);
+            pendingHealTween.SetDuration(_customDuration);
         }
 
         private void ExecutePendingDamage()
         {
-            EnsureInitialized();
-            if (pendingDamageTween != null && _customDuration > 0)
-            {
-                pendingDamageTween.SetDuration(_customDuration);
-            }
+            ResetDurations();
+            Reset();
             
-            pendingDamageTween?.Tween.PlayForward();
-            pendingHealTween?.Tween.Rewind();
-            damageTween?.Tween.Rewind();
-            healTween?.Tween.Rewind();
+            PlayForward(pendingDamageTween);
+            pendingDamageTween.SetDuration(_customDuration);
         }
 
         private void ExecuteCancelPendingHeal()
         {
-            EnsureInitialized();
-            if (pendingHealTween?.Tween.IsPlaying() != true) return;
+            ResetDurations();
+            this.DOPause();
             
+            pendingHealTween.Tween?.PlayBackwards();
             pendingHealTween.SetDuration(defaultCancelDuration);
-            pendingHealTween.Tween.PlayBackwards();
-            damageTween?.Tween.Rewind();
-            pendingDamageTween?.Tween.Rewind();
-            healTween?.Tween.Rewind();
         }
 
         private void ExecuteCancelPendingDamage()
         {
-            EnsureInitialized();
-            if (pendingDamageTween?.Tween.IsPlaying() != true) return;
+            ResetDurations();
             
+            pendingDamageTween.Tween?.PlayBackwards();
             pendingDamageTween.SetDuration(defaultCancelDuration);
-            pendingDamageTween.Tween.PlayBackwards();
-            pendingHealTween?.Tween.Rewind();
-            damageTween?.Tween.Rewind();
-            healTween?.Tween.Rewind();
+        }
+
+        private void PlayForward(TweenableBase tweenBase)
+        {
+            tweenBase.Tween = tweenBase.CreateTween();
+            tweenBase.Tween.SetTarget(this);
+            tweenBase.Tween.PlayForward();
+        }
+
+        private void Reset()
+        {
+            pendingDamageTween.Tween?.Rewind();
+            pendingHealTween.Tween?.Rewind();
+            this.DOKill();
         }
 
         private void ResetDurations()

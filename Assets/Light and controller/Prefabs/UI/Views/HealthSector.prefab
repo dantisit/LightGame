@@ -528,7 +528,7 @@ RectTransform:
   m_GameObject: {fileID: 6531236899749902923}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 0.8, y: 0.8, z: 0.8}
   m_ConstrainProportionsScale: 1
   m_Children:
   - {fileID: 6136793108210942759}
@@ -556,6 +556,7 @@ GameObject:
   - component: {fileID: 2209752199542959366}
   - component: {fileID: 3759201629377937066}
   - component: {fileID: 372499464862248483}
+  - component: {fileID: 4844178995032947134}
   m_Layer: 5
   m_Name: HealthSector
   m_TagString: Untagged
@@ -603,10 +604,26 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b3fabd87657d4286afa91c34fb558362, type: 3}
   m_Name: 
   m_EditorClassIdentifier: LightGame::Light_and_controller.Scripts.UI.HealthSectorView
+  stateTween: {fileID: 4844178995032947134}
+--- !u!114 &4844178995032947134
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6890797524378837356}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5b57e1dd051e04948a186910976dd940, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: LightGame::Core._.UI.HealthSectorStateTween
+  playOnEnable: 0
+  currentState: 0
   healTween: {fileID: 959435720600493961}
   damageTween: {fileID: 931822997935277579}
   pendingHealTween: {fileID: 2276807379731064027}
   pendingDamageTween: {fileID: 1821279643880911153}
+  defaultCancelDuration: 0.5
 --- !u!1 &7940926212734295610
 GameObject:
   m_ObjectHideFlags: 0
@@ -666,6 +683,8 @@ MonoBehaviour:
   returnDelay: 0.2
   returnDuration: 0.25
   returnEase: 7
+  useStartScale: 1
+  startScale: {x: 1, y: 1, z: 1}
   targetScale: {x: 1.15, y: 1.15, z: 1}
   scaleDuration: 10
   scaleEase: 5

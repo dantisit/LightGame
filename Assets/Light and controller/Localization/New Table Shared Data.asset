@@ -14,7 +14,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: Unity.Localization::UnityEngine.Localization.Tables.SharedTableData
   m_TableCollectionName: New Table
   m_TableCollectionNameGuidString: 43d18811a754e4b18a33d5b71fb86678
-  m_Entries: []
+  m_Entries:
+  - m_Id: 1945832256430080
+    m_Key: Test
+    m_Metadata:
+      m_Items: []
   m_Metadata:
     m_Items: []
   m_KeyGenerator:

@@ -20,18 +20,18 @@ namespace Core._.UI
 
         public override Tween CreateTween()
         {
-            var sequence = DOTween.Sequence();
             var rect = (RectTransform)transform.parent;
+            var startScale = _useStartScale ? _startScale : rect.localScale;
             
             if (_useStartScale)
             {
-                // Set start scale with 0-duration tween, then animate to end scale
-                sequence.Append(rect.DOScale(_startScale, 0.001f));
+                rect.localScale = _startScale;
             }
             
-            sequence.Append(rect.DOScale(_endScale, _duration).SetEase(_scaleEase));
-            
-            return sequence;
+            return DOVirtual.Float(0f, 1f, _duration, value =>
+            {
+                rect.localScale = Vector3.Lerp(startScale, _endScale, value);
+            }).SetEase(_scaleEase);
         }
     }
 }

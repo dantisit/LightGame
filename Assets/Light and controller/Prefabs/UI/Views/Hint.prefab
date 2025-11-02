@@ -49,6 +49,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: LightGame::Core._.UI.ScaleTween
   playOnEnable: 0
+  _useStartScale: 0
   _startScale: {x: 1, y: 1, z: 1}
   _endScale: {x: 0, y: 0, z: 0}
   _duration: 0.6
@@ -200,6 +201,7 @@ GameObject:
   - component: {fileID: 321720498026762207}
   - component: {fileID: 5039439170175657339}
   - component: {fileID: 5445351234229233440}
+  - component: {fileID: 2422594498065807365}
   m_Layer: 5
   m_Name: Text (TMP)
   m_TagString: Untagged
@@ -339,6 +341,30 @@ MonoBehaviour:
   m_EditorClassIdentifier: LightGame::Light_and_controller.Scripts.UI.Utils.ParentedContentSizeFitter
   m_HorizontalFit: 2
   m_VerticalFit: 2
+--- !u!114 &2422594498065807365
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5297777032929013736}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9840f87219df84505803024c796e739d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: LightGame::Light_and_controller.Scripts.Effects.TextEffectExtended
+  text: {fileID: 5039439170175657339}
+  usePreset: 0
+  preset: {fileID: 0}
+  tagEffects: []
+  globalEffects:
+  - triggerWhen: 1
+    effect: {fileID: 11400000, guid: 1c48df1dcf7d54cefa1fc0e1d05156e3, type: 2}
+    onEffectCompleted:
+      m_PersistentCalls:
+        m_Calls: []
+    overrideTagEffects: 0
+  updatesPerSecond: 30
 --- !u!1 &6553759811238362859
 GameObject:
   m_ObjectHideFlags: 0
@@ -350,6 +376,7 @@ GameObject:
   - component: {fileID: 3457181392982872302}
   - component: {fileID: 3742291860929120942}
   - component: {fileID: 5559938025301278545}
+  - component: {fileID: 6711404183388730965}
   m_Layer: 5
   m_Name: Hint
   m_TagString: Untagged
@@ -398,8 +425,27 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: LightGame::Light_and_controller.Scripts.UI.HintView
   tmp: {fileID: 5039439170175657339}
+  textEffect: {fileID: 2422594498065807365}
   showTween: {fileID: 6073056522783518350}
   hideTween: {fileID: 2036196048071690892}
+--- !u!114 &6711404183388730965
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6553759811238362859}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d13f78bd53f9f4e5f8c11aead494aadd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: LightGame::Light_and_controller.Scripts.Examples.TypewriterSoundController
+  textEffect: {fileID: 2422594498065807365}
+  typewriterSound: {fileID: 11400000, guid: 7b68eebebf11a4dffa72125e957d294e, type: 2}
+  randomizePitch: 1
+  pitchMin: 0.9
+  pitchMax: 1.1
+  skipSpaces: 1
 --- !u!1 &7345828055759813397
 GameObject:
   m_ObjectHideFlags: 0

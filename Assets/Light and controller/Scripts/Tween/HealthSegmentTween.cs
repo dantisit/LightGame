@@ -25,6 +25,8 @@ namespace Core._.UI
         [SerializeField] private Ease returnEase = Ease.InOutQuad;
         
         [Header("Scale Animation")]
+        [SerializeField] private bool useStartScale;
+        [SerializeField] private Vector3 startScale = Vector3.one;
         [SerializeField] private Vector3 targetScale = new Vector3(1.15f, 1.15f, 1f);
         [SerializeField] private float scaleDuration = 0.3f;
         [SerializeField] private Ease scaleEase = Ease.OutBack;
@@ -65,6 +67,12 @@ namespace Core._.UI
                 _isInitialized = true;
             }
             
+            // Set start scale if enabled
+            if (useStartScale)
+            {
+                rectTransform.localScale = startScale;
+            }
+            
             var sequence = DOTween.Sequence();
             
             // Move anchored position up by Y offset
@@ -72,6 +80,7 @@ namespace Core._.UI
             sequence.Append(rectTransform.DOAnchorPos(targetPosition, moveDuration).SetEase(moveEase));
             
             // Scale animation (plays simultaneously with position)
+            var scaleFrom = useStartScale ? startScale : rectTransform.localScale;
             sequence.Join(rectTransform.DOScale(targetScale, scaleDuration).SetEase(scaleEase));
             
             // Color animations for both images (plays simultaneously)
