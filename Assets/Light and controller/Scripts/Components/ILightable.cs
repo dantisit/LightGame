@@ -8,5 +8,12 @@ namespace Light_and_controller.Scripts.Components
     public class LightChangeEvent
     {
         public bool IsInLight { get; set; }
+        public LightType? LightType { get; set; }
+
+        public LightChangeEvent(bool isInLight, LightType? lightType = null)
+        {
+            IsInLight = isInLight;
+            LightType = lightType;
+        }
     }
 }

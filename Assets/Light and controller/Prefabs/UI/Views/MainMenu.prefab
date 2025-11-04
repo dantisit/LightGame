@@ -312,7 +312,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 0, y: 114}
-  m_SizeDelta: {x: 689.89, y: 89.73001}
+  m_SizeDelta: {x: 1143.0162, y: 89.73}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &4141564034376328406
 CanvasRenderer:
@@ -342,7 +342,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Through the Hollow
+  m_text: Through the Hollow (Demo NAme)
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: c177f0bfab03e4af88a804bdb77f92c0, type: 2}
   m_sharedMaterial: {fileID: 4082110679830654717, guid: c177f0bfab03e4af88a804bdb77f92c0, type: 2}

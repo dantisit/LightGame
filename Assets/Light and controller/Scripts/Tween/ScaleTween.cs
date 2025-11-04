@@ -20,17 +20,17 @@ namespace Core._.UI
 
         public override Tween CreateTween()
         {
-            var rect = (RectTransform)transform.parent;
-            var startScale = _useStartScale ? _startScale : rect.localScale;
+            var parent = transform.parent;
+            var startScale = _useStartScale ? _startScale : parent.localScale;
             
             if (_useStartScale)
             {
-                rect.localScale = _startScale;
+                parent.localScale = _startScale;
             }
             
             return DOVirtual.Float(0f, 1f, _duration, value =>
             {
-                rect.localScale = Vector3.Lerp(startScale, _endScale, value);
+                parent.localScale = Vector3.Lerp(startScale, _endScale, value);
             }).SetEase(_scaleEase);
         }
     }

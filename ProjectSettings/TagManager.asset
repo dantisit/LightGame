@@ -52,6 +52,12 @@ TagManager:
   - name: Turrel
     uniqueID: 3841052337
     locked: 0
+  - name: LightSource
+    uniqueID: 2460176289
+    locked: 0
+  - name: LevelChangeLight
+    uniqueID: 1649512993
+    locked: 0
   m_RenderingLayers:
   - Default
   - Light Layer 1

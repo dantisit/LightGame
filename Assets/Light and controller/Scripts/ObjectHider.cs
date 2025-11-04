@@ -8,7 +8,7 @@ using UnityEngine.Events;
 [RequireComponent(typeof(LightDetector))]
 public class ObjectHider : MonoBehaviour, ILightable
 {
-    [SerializeField] private MeshRenderer m_Renderer;
+    [SerializeField] private List<Renderer> m_Renderer;
 
     private int _originalLayer;
     
@@ -35,16 +35,14 @@ public class ObjectHider : MonoBehaviour, ILightable
     void HideCollider()
     {
         gameObject.layer = LayerMask.NameToLayer("Hidden");
-        if (!m_Renderer) return;
-        m_Renderer.enabled = false;
+        m_Renderer.ForEach(x => x.enabled = false);
     }
 
 
     public void ShowCollider()
     {
         gameObject.layer = _originalLayer;
-        if (!m_Renderer) return;
-        m_Renderer.enabled = true;
+        m_Renderer.ForEach(x => x.enabled = true);
     }
 
     public void OnInLightChange(bool isInLight)

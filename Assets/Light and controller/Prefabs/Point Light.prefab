@@ -51,6 +51,7 @@ MonoBehaviour:
   targetLightPoint: {fileID: 8032318125657472138}
   collider2D: {fileID: 3340997641310451738}
   lightRigidbody: {fileID: 0}
+  lightType: 0
 --- !u!50 &1059473318656560178
 Rigidbody2D:
   serializedVersion: 5
@@ -310,6 +311,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1719819257763676271}
   - component: {fileID: 5683614713753529005}
+  - component: {fileID: 6010748331892553847}
   m_Layer: 0
   m_Name: Spot Light 2D
   m_TagString: Untagged
@@ -352,7 +354,7 @@ MonoBehaviour:
   m_Intensity: 10.61
   m_LightVolumeIntensity: 0
   m_LightVolumeEnabled: 0
-  m_ApplyToSortingLayers: 00000000a556f4a5b1cef1e4
+  m_ApplyToSortingLayers: 00000000a556f4a5b1cef1e4159e3f4e
   m_LightCookieSprite: {fileID: 0}
   m_DeprecatedPointLightCookieSprite: {fileID: 0}
   m_LightOrder: 0
@@ -384,6 +386,22 @@ MonoBehaviour:
   - {x: 1.8241119, y: -7.7004623, z: 3.9790382e-13}
   - {x: 0.3360138, y: 3.4606564, z: 0}
   - {x: 0.14712524, y: 2.5118384, z: 3.9790382e-13}
+--- !u!114 &6010748331892553847
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6159656131576913894}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3bd577f8d053c454ea098394b069a7e9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: LightGame::Light2DGlobalListener
+  lightType: 0
+  duration: 0.5
+  ease: 7
+  autoRegisterOnEnable: 1
 --- !u!1 &7870496512025402796
 GameObject:
   m_ObjectHideFlags: 0
@@ -394,6 +412,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3300877806965890911}
   - component: {fileID: 5351193645353431645}
+  - component: {fileID: 5610817095610874587}
   m_Layer: 0
   m_Name: Spot Light 2D (1)
   m_TagString: Untagged
@@ -436,7 +455,7 @@ MonoBehaviour:
   m_Intensity: 46.3
   m_LightVolumeIntensity: 0
   m_LightVolumeEnabled: 0
-  m_ApplyToSortingLayers: 00000000a556f4a5b1cef1e4
+  m_ApplyToSortingLayers: 00000000a556f4a5b1cef1e4159e3f4e
   m_LightCookieSprite: {fileID: 0}
   m_DeprecatedPointLightCookieSprite: {fileID: 0}
   m_LightOrder: 0
@@ -468,3 +487,19 @@ MonoBehaviour:
   - {x: 1.8241119, y: -7.7004623, z: 3.9790382e-13}
   - {x: 0.3360138, y: 3.4606564, z: 0}
   - {x: 0.14712524, y: 2.5118384, z: 3.9790382e-13}
+--- !u!114 &5610817095610874587
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7870496512025402796}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3bd577f8d053c454ea098394b069a7e9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: LightGame::Light2DGlobalListener
+  lightType: 0
+  duration: 0.5
+  ease: 7
+  autoRegisterOnEnable: 1

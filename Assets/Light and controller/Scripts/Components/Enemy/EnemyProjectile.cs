@@ -12,7 +12,8 @@ namespace Light_and_controller.Scripts.Components.Enemy
         [SerializeField] private Rigidbody2D rb;
         [SerializeField] private float gravityScale = 2f;
         [SerializeField] private float lifetime = 5f;
-        [SerializeField] private float rotationSpeed = 180f;
+        [SerializeField] private float rotationLerpSpeed = 5f;
+        [SerializeField] private float rotationOffset = 0f;
         
         private Vector2 initialVelocity;
         
@@ -33,17 +34,26 @@ namespace Light_and_controller.Scripts.Components.Enemy
             Destroy(gameObject, lifetime);
         }
         
-        public void Initialize(Vector2 direction, float speed, float rotSpeed)
+        public void Initialize(Vector2 direction, float speed, float rotSpeed = 0f)
         {
             initialVelocity = direction.normalized * speed;
             rb.linearVelocity = initialVelocity;
-            rotationSpeed = rotSpeed;
+            
+            // Set initial rotation to match velocity direction with offset
+            float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg + rotationOffset;
+            transform.rotation = Quaternion.Euler(0, 0, angle);
         }
         
         private void FixedUpdate()
         {
-            // Apply rotation
-            rb.MoveRotation(rb.rotation + rotationSpeed * Time.fixedDeltaTime);
+            // Rotate to match velocity direction with offset
+            if (rb.linearVelocity.sqrMagnitude > 0.01f)
+            {
+                float targetAngle = Mathf.Atan2(rb.linearVelocity.y, rb.linearVelocity.x) * Mathf.Rad2Deg + rotationOffset;
+                float currentAngle = rb.rotation;
+                float newAngle = Mathf.LerpAngle(currentAngle, targetAngle, rotationLerpSpeed * Time.fixedDeltaTime);
+                rb.MoveRotation(newAngle);
+            }
         }
         
         private void OnTriggerEnter2D(Collider2D other)

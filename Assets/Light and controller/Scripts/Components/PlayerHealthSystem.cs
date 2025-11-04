@@ -1,4 +1,5 @@
-﻿using System;
+using System;
+using Light_and_controller.Scripts.Events;
 using Light_and_controller.Scripts.Systems;
 using R3;
 using UnityEngine;
@@ -12,8 +13,12 @@ namespace Light_and_controller.Scripts.Components
         {
             rigidbody ??= GetComponent<Rigidbody2D>();
             rigidbody.linearVelocity = Vector2.zero;
-            rigidbody.position = Checkpoint.Active.transform.position;
-            Heal(MaxHealth - Health);
+            
+            // Publish death event for PlayerDeathView to handle
+            EventBus.Publish(new PlayerDiedEvent());
+            
+            // Reset health immediately so it's ready after respawn
+            // Heal(MaxHealth - Health);
         }
 
         public override void TakeDamage(int amount)

@@ -122,5 +122,28 @@ namespace Core._.UI
             
             return sequence;
         }
+        
+        public override void Revert()
+        {
+            if (!_isInitialized || rectTransform == null)
+                return;
+            
+            // Kill any active tweens on this transform
+            rectTransform.DOKill();
+            
+            // Immediately restore to original values
+            rectTransform.anchoredPosition = _originalAnchoredPos;
+            rectTransform.localScale = _originalScale;
+            
+            if (firstImage != null)
+            {
+                firstImage.color = _originalFirstImageColor;
+            }
+            
+            if (secondImage != null)
+            {
+                secondImage.color = _originalSecondImageColor;
+            }
+        }
     }
 }

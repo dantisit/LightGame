@@ -175,7 +175,7 @@ Rigidbody2D:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7759473674814068349}
-  m_BodyType: 1
+  m_BodyType: 0
   m_Simulated: 1
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
@@ -311,6 +311,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: LightGame::Light_and_controller.Scripts.Components.Enemy.EnemyProjectile
   rb: {fileID: 1583098745044085364}
-  gravityScale: 2
+  gravityScale: 1.5
   lifetime: 5
-  rotationSpeed: 180
+  rotationLerpSpeed: 5
+  rotationOffset: 0

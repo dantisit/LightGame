@@ -1,5 +1,54 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!1 &387814651917638381
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 5830378179859332309}
+  - component: {fileID: 6306234852032884288}
+  m_Layer: 0
+  m_Name: LevelChangeView
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &5830378179859332309
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 387814651917638381}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1547631611833056512}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &6306234852032884288
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 387814651917638381}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c390d58dcccad4f129514a81fa39a4d4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: LightGame::Light_and_controller.Scripts.UI.Views.LevelChangeView
+  fadeOutDuration: 1
+  fadeInDuration: 1
+  fadeEase: 7
+  delayBeforeLoad: 0.2
+  delayAfterLoad: 0.2
 --- !u!1 &2753777934028376708
 GameObject:
   m_ObjectHideFlags: 0
@@ -76,8 +125,8 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_GlobalIlluminationMeshLod: 0
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
+  m_SortingLayerID: 1312792085
+  m_SortingLayer: -1
   m_SortingOrder: -1
   m_Sprite: {fileID: 7482667652216324306, guid: 311925a002f4447b3a28927169b83ea6, type: 3}
   m_Color: {r: 0.051397283, g: 0.051397283, b: 0.14150941, a: 1}
@@ -101,6 +150,9 @@ GameObject:
   - component: {fileID: 5475498954990956544}
   - component: {fileID: 438617904200805737}
   - component: {fileID: 6366317538968489257}
+  - component: {fileID: 5055046997566709776}
+  - component: {fileID: 2592987933379138963}
+  - component: {fileID: 2146362196730930453}
   m_Layer: 0
   m_Name: CinemachineCamera
   m_TagString: Untagged
@@ -117,7 +169,7 @@ Transform:
   m_GameObject: {fileID: 3505592775665338945}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -134.3, y: 53.4, z: -11}
+  m_LocalPosition: {x: 0, y: 0, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -197,6 +249,53 @@ MonoBehaviour:
     Time: 0
     Smoothing: 0
     IgnoreY: 0
+--- !u!114 &5055046997566709776
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3505592775665338945}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ff2b949d758644f99264479a180f5d0b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: LightGame::Light_and_controller.Scripts.UI.CameraView
+  cinemachineCamera: {fileID: 438617904200805737}
+  defaultShakeIntensity: 5
+  defaultShakeDuration: 0.3
+--- !u!114 &2592987933379138963
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3505592775665338945}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ff2b949d758644f99264479a180f5d0b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: LightGame::Light_and_controller.Scripts.UI.CameraView
+  cinemachineCamera: {fileID: 438617904200805737}
+  defaultShakeIntensity: 5
+  defaultShakeDuration: 0.3
+--- !u!114 &2146362196730930453
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3505592775665338945}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 68bb026fafb42b14791938953eaace77, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Unity.Cinemachine::Unity.Cinemachine.CinemachineBasicMultiChannelPerlin
+  NoiseProfile: {fileID: 11400000, guid: e9ce97b7a206dc64d90931ea044e0c72, type: 2}
+  PivotOffset: {x: 0, y: 0, z: 0}
+  AmplitudeGain: 1
+  FrequencyGain: 1
+  m_NoiseOffsets: {x: -673.04065, y: 555.95465, z: -232.87692}
 --- !u!1 &7008356457272032129
 GameObject:
   m_ObjectHideFlags: 0
@@ -231,6 +330,7 @@ Transform:
   - {fileID: 3032595485538032762}
   - {fileID: 5475498954990956544}
   - {fileID: 542141363951427694}
+  - {fileID: 5830378179859332309}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &8748558076839906777
@@ -563,21 +663,29 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1547631611833056512}
     m_Modifications:
+    - target: {fileID: 742726834364584989, guid: 8df91cb297f60c04c9706753ea914b78, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 1.684
+      objectReference: {fileID: 0}
+    - target: {fileID: 742726834364584989, guid: 8df91cb297f60c04c9706753ea914b78, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0.842
+      objectReference: {fileID: 0}
     - target: {fileID: 3213259104454701869, guid: 8df91cb297f60c04c9706753ea914b78, type: 3}
       propertyPath: m_Name
       value: Player
       objectReference: {fileID: 0}
     - target: {fileID: 3213259104454701875, guid: 8df91cb297f60c04c9706753ea914b78, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -134.3
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3213259104454701875, guid: 8df91cb297f60c04c9706753ea914b78, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 53.4
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3213259104454701875, guid: 8df91cb297f60c04c9706753ea914b78, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3213259104454701875, guid: 8df91cb297f60c04c9706753ea914b78, type: 3}
       propertyPath: m_LocalRotation.w
@@ -610,6 +718,18 @@ PrefabInstance:
     - target: {fileID: 3687372560954174181, guid: 8df91cb297f60c04c9706753ea914b78, type: 3}
       propertyPath: m_ShadowMesh.m_InitialTrim
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3803380629175493506, guid: 8df91cb297f60c04c9706753ea914b78, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4937008101993315368, guid: 8df91cb297f60c04c9706753ea914b78, type: 3}
+      propertyPath: m_CastingOption
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 8691095846045560413, guid: 8df91cb297f60c04c9706753ea914b78, type: 3}
+      propertyPath: targetScene
+      value: 5
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

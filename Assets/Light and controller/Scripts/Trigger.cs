@@ -11,6 +11,9 @@ public class Trigger : MonoBehaviour
     [SerializeField] private Transform targetLightPoint;
     [SerializeField] private Collider2D collider2D;
     [SerializeField] private Rigidbody2D lightRigidbody;
+    [SerializeField] private LightType lightType = LightType.Default;
+    
+    public LightType LightType => lightType;
 
     private async void Start()
     {
@@ -45,7 +48,7 @@ public class Trigger : MonoBehaviour
         collider2D.GetContacts(contacts);
         if(contacts.Any(x => x.gameObject == other.gameObject)) return;
 
-        component.lightSprings.Remove(gameObject);
+        component.RemoveLightSource(gameObject, lightType);
     }
 
     private void Handle(Collider2D other)
@@ -54,7 +57,7 @@ public class Trigger : MonoBehaviour
         
         var is_lighted = component.LightBlockCheck(targetLightPoint.position, lightRigidbody);
 //        Debug.Log(is_lighted);
-        if (is_lighted) component.lightSprings.Add(gameObject);
-        else component.lightSprings.Remove(gameObject);
+        if (is_lighted) component.AddLightSource(gameObject, lightType);
+        else component.RemoveLightSource(gameObject, lightType);
     }
 }

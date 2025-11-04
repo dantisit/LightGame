@@ -31,7 +31,7 @@ Transform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -104.37, y: 33.92, z: -0.97638}
   m_LocalScale: {x: 0.361716, y: 0.67296, z: 0.67296}
-  m_ConstrainProportionsScale: 0
+  m_ConstrainProportionsScale: 1
   m_Children:
   - {fileID: 8398890077529048688}
   m_Father: {fileID: 0}
@@ -184,8 +184,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: PlayerController::JumpPad
   jumpIndex: 1
-  jumpHeightMultiplier: 1.5
-  horizontalBoostMultiplier: 1.2
+  launchDirection: {x: 0, y: 1}
+  forceMultiplier: 1.5
+  preservePerpendicularVelocity: 1
+  activationAngle: 60
   cooldownTime: 0.5
   targetLayers:
     serializedVersion: 2

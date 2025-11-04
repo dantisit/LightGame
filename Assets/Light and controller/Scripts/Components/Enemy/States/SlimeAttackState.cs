@@ -24,6 +24,9 @@ namespace Light_and_controller.Scripts.Components.Enemy.States
             // Freeze rotation during attack
             enemy.Rigidbody2D.freezeRotation = true;
             Debug.Log($"[AttackState] Enter - Rotation frozen at {enemy.transform.rotation.eulerAngles.z} degrees");
+            
+            // Notify view that charge has started
+            ((SlimeEnemy)enemy).InvokeChargeStart(enemyData.Attack.ChargeTime);
         }
         
         public override void Update()
@@ -36,6 +39,10 @@ namespace Light_and_controller.Scripts.Components.Enemy.States
                 FireProjectiles();
                 hasAttacked = true;
                 enemyData.Attack.IsCharging = false;
+                
+                // Notify view that charge has stopped and attack is fired
+                ((SlimeEnemy)enemy).InvokeChargeStop();
+                ((SlimeEnemy)enemy).InvokeAttack();
             }
         }
         
@@ -148,6 +155,9 @@ namespace Light_and_controller.Scripts.Components.Enemy.States
                 enemy.Rigidbody2D.freezeRotation = false;
             }
             Debug.Log($"[AttackState] Exit - Rotation unfrozen");
+            
+            // Ensure charge is stopped when exiting (in case it was interrupted)
+            ((SlimeEnemy)enemy).InvokeChargeStop();
         }
     }
 }

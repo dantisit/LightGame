@@ -26,8 +26,8 @@ MonoBehaviour:
     facingDirection: -1
     walkSpeedDirection: {x: -1, y: 0}
   Movement:
-    wanderSpeed: 2
-    aggroSpeed: 3
+    wanderSpeed: 1
+    aggroSpeed: 2
     gravityScale: 1
     canWalkOnWalls: 1
     canWalkOnCeiling: 1
@@ -38,16 +38,16 @@ MonoBehaviour:
       serializedVersion: 2
       m_Bits: 512
     wanderDirectionChangeInterval: 3
-    wanderTimer: 0.880002
+    wanderTimer: 3
     targetPlayer: {fileID: 0}
-    isAggro: 0
+    isAggro: 1
   Attack:
     projectilePrefab: {fileID: 7759473674814068349, guid: 80e900d21a4414dd49a7da827a46683a, type: 3}
     projectileCount: 8
-    projectileSpeed: 5
-    projectileSpeedRotation: 180
+    projectileSpeed: 12
+    projectileSpeedRotation: 20
     attackCooldown: 2
     chargeTime: 1
     attackCooldownTimer: 0
-    isCharging: 0
-    chargeTimer: 0
+    isCharging: 1
+    chargeTimer: 0.2799999

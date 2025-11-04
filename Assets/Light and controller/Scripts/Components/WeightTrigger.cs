@@ -9,8 +9,8 @@ namespace Light_and_controller.Scripts.Components
     public class WeightTrigger : MonoBehaviour
     {
         [SerializeField] private float weightThreshold;
-        [SerializeField] private UnityEvent onActivate;
-        [SerializeField] private UnityEvent onDeactivate;
+        public UnityEvent onActivate = new UnityEvent();
+        public UnityEvent onDeactivate = new UnityEvent();
         
         private float _currentWeight;
         private bool _active;

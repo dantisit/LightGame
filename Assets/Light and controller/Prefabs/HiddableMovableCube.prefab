@@ -50,18 +50,35 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2580968662769834753, guid: 324d0da91f0620343b0a9ca8654ed79a, type: 3}
       propertyPath: m_Name
-      value: HiddableMovableCube (2) Variant
+      value: HiddableMovableCube
       objectReference: {fileID: 0}
     - target: {fileID: 2580968662769834753, guid: 324d0da91f0620343b0a9ca8654ed79a, type: 3}
       propertyPath: m_TagString
       value: HideObject
       objectReference: {fileID: 0}
+    - target: {fileID: 3639452369483529197, guid: 324d0da91f0620343b0a9ca8654ed79a, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 6767734010737898879, guid: 324d0da91f0620343b0a9ca8654ed79a, type: 3}
       propertyPath: 'm_Materials.Array.data[0]'
       value: 
       objectReference: {fileID: 2100000, guid: 7f1d87bbbf8b18f47b1cf9765839ae0d, type: 2}
+    - target: {fileID: 8904744301216200591, guid: 324d0da91f0620343b0a9ca8654ed79a, type: 3}
+      propertyPath: m_Color.b
+      value: 0.65882355
+      objectReference: {fileID: 0}
+    - target: {fileID: 8904744301216200591, guid: 324d0da91f0620343b0a9ca8654ed79a, type: 3}
+      propertyPath: m_Color.g
+      value: 0.12941177
+      objectReference: {fileID: 0}
+    - target: {fileID: 8904744301216200591, guid: 324d0da91f0620343b0a9ca8654ed79a, type: 3}
+      propertyPath: m_Color.r
+      value: 0.41960785
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
-    m_RemovedGameObjects: []
+    m_RemovedGameObjects:
+    - {fileID: 7679579792578222558, guid: 324d0da91f0620343b0a9ca8654ed79a, type: 3}
     m_AddedGameObjects: []
     m_AddedComponents:
     - targetCorrespondingSourceObject: {fileID: 2580968662769834753, guid: 324d0da91f0620343b0a9ca8654ed79a, type: 3}
@@ -71,11 +88,6 @@ PrefabInstance:
       insertIndex: -1
       addedObject: {fileID: 2344085493824841135}
   m_SourcePrefab: {fileID: 100100000, guid: 324d0da91f0620343b0a9ca8654ed79a, type: 3}
---- !u!23 &979114682716264819 stripped
-MeshRenderer:
-  m_CorrespondingSourceObject: {fileID: 6767734010737898879, guid: 324d0da91f0620343b0a9ca8654ed79a, type: 3}
-  m_PrefabInstance: {fileID: 5799881660039212044}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &4102431925261058547 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 7535531243481918975, guid: 324d0da91f0620343b0a9ca8654ed79a, type: 3}
@@ -92,6 +104,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bd4f21f031854f4ebc976633700fb34f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!1 &7681972109825613353 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 4244230653411701285, guid: 324d0da91f0620343b0a9ca8654ed79a, type: 3}
+  m_PrefabInstance: {fileID: 5799881660039212044}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &8335073255672985357 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 2580968662769834753, guid: 324d0da91f0620343b0a9ca8654ed79a, type: 3}
@@ -109,7 +126,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f0c477c63ab4d1049a843d1321b17111, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_Renderer: {fileID: 979114682716264819}
+  m_Renderer: []
 --- !u!114 &2344085493824841135
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -143,6 +160,18 @@ MonoBehaviour:
       - m_Target: {fileID: 4674498621688086435}
         m_TargetAssemblyTypeName: UnityEngine.Behaviour, UnityEngine
         m_MethodName: set_enabled
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 7681972109825613353}
+        m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
+        m_MethodName: SetActive
         m_Mode: 0
         m_Arguments:
           m_ObjectArgument: {fileID: 0}

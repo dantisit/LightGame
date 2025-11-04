@@ -19,6 +19,27 @@ namespace Light_and_controller.Scripts.Components.Enemy
         [Header("Components")]
         public EnemyData EnemyData;
         
+        // Events for UI/View
+        public event Action<float> OnChargeStart; // Passes charge duration
+        public event Action OnChargeStop;
+        public event Action OnAttack; // Fired when projectiles are launched
+        
+        /// <summary>
+        /// Invoke charge start event (called by states)
+        /// </summary>
+        /// <param name="chargeDuration">Duration of the charge in seconds</param>
+        public void InvokeChargeStart(float chargeDuration) => OnChargeStart?.Invoke(chargeDuration);
+        
+        /// <summary>
+        /// Invoke charge stop event (called by states)
+        /// </summary>
+        public void InvokeChargeStop() => OnChargeStop?.Invoke();
+        
+        /// <summary>
+        /// Invoke attack event (called by states)
+        /// </summary>
+        public void InvokeAttack() => OnAttack?.Invoke();
+        
         [Header("State Machine")]
         public EnemyStateMachine _stateMachine;
         public EnemyState WanderState;

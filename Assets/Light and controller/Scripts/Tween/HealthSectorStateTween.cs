@@ -138,7 +138,6 @@ namespace Core._.UI
         private void ExecuteCancelPendingHeal()
         {
             ResetDurations();
-            this.DOPause();
             
             pendingHealTween.Tween?.PlayBackwards();
             pendingHealTween.SetDuration(defaultCancelDuration);
@@ -157,6 +156,7 @@ namespace Core._.UI
             tweenBase.Tween = tweenBase.CreateTween();
             tweenBase.Tween.SetTarget(this);
             tweenBase.Tween.PlayForward();
+            tweenBase.Tween.SetAutoKill(false);
         }
 
         private void Reset()

@@ -40,5 +40,10 @@ namespace Core._.UI
                 Tween.timeScale = Tween.Duration() / duration;
             }
         }
+        
+        public virtual void Revert()
+        {
+            // Override in derived classes to implement revert behavior
+        }
     }
 }

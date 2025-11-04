@@ -133,8 +133,6 @@ namespace Core._.UI
         
         void InitializeTween(TweenableBase tweenableTarget)
         {
-            try
-            {
                 if (!dontResetOnPlay){
                     tweenableTarget.Tween?.Kill();
                 }
@@ -159,11 +157,6 @@ namespace Core._.UI
                 tweenableTarget.Tween.SetLoops(1);
                 tweenableTarget.Tween.Pause();
                 playedTweens.Add(tweenableTarget.Tween);
-            }
-            catch (Exception e)
-            {
-                Debug.LogError($"Error initializing tween: {e.Message}");
-            }
         }
         
         void StartPreview()

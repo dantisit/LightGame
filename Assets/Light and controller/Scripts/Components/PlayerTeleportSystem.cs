@@ -31,6 +31,10 @@ public class PlayerTeleportSystem : MonoBehaviourWithData<PlayerTeleportSkill.Te
 
     private void OnLightChangeEvent(LightChangeEvent evt)
     {
+        // Only respond to Default light type (ignore LevelChange lights)
+        if (evt.LightType.HasValue && evt.LightType.Value != LightType.Default)
+            return;
+            
         OnInLightChange(evt.IsInLight);
     }
 

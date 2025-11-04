@@ -7,6 +7,7 @@ namespace Light_and_controller.Scripts
     public static class SceneLoader
     {
         private static string _currentSceneName = string.Empty;
+        private static SceneName? _currentLevelScene = null;
         
         [RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.AfterSceneLoad)]
         private static void Initialize()
@@ -16,6 +17,13 @@ namespace Light_and_controller.Scripts
             //     SceneManager.LoadScene(SceneName.Shared.KeyToString(), LoadSceneMode.Additive);
             // }
             _currentSceneName = SceneManager.GetActiveScene().name;
+            
+            // Try to set current level scene based on active scene when starting from editor
+            if (TryParseSceneName(_currentSceneName, out SceneName parsedScene))
+            {
+                _currentLevelScene = parsedScene;
+            }
+            
             InitializeScene(_currentSceneName);
         }
         
@@ -29,6 +37,44 @@ namespace Light_and_controller.Scripts
             InitializeScene(sceneName.KeyToString());
         }
         
+        /// <summary>
+        /// Load a new level scene, unloading the previous level and ensuring Shared scene is loaded
+        /// </summary>
+        public static void LoadLevel(SceneName newLevel)
+        {
+            // Ensure Shared scene is loaded
+            if (!IsSceneLoaded(SceneName.Shared))
+            {
+                SceneManager.LoadScene(SceneName.Shared.KeyToString(), LoadSceneMode.Additive);
+            }
+            
+            // Unload previous level if exists
+            if (_currentLevelScene.HasValue)
+            {
+                UnloadScene(_currentLevelScene.Value);
+            }
+            
+            // Load new level
+            var asyncOp = SceneManager.LoadSceneAsync(newLevel.KeyToString(), LoadSceneMode.Additive);
+            
+            // Set callback to set active scene when loaded
+            if (asyncOp != null)
+            {
+                asyncOp.completed += (op) =>
+                {
+                    var scene = SceneManager.GetSceneByName(newLevel.KeyToString());
+                    if (scene.IsValid() && scene.isLoaded)
+                    {
+                        SceneManager.SetActiveScene(scene);
+                    }
+                };
+            }
+            
+            // Update current level
+            _currentLevelScene = newLevel;
+            _currentSceneName = newLevel.KeyToString();
+        }
+        
         public static void UnloadScene(SceneName sceneName)
         {
             SceneManager.UnloadSceneAsync(sceneName.KeyToString());
@@ -40,6 +86,22 @@ namespace Light_and_controller.Scripts
             Debug.Log($"Is scene '{sceneName}' loaded? {scene.IsValid() && scene.isLoaded}. Loaded scenes: {SceneManager.loadedSceneCount}");
             return scene.IsValid() && scene.isLoaded;
         }
+        
+        /// <summary>
+        /// Try to parse a scene name string to SceneName enum
+        /// </summary>
+        private static bool TryParseSceneName(string sceneName, out SceneName result)
+        {
+            return System.Enum.TryParse(sceneName, true, out result);
+        }
+        
+        /// <summary>
+        /// Get the current level scene
+        /// </summary>
+        public static SceneName? GetCurrentLevel()
+        {
+            return _currentLevelScene;
+        }
     }
 
     public enum SceneName
@@ -48,6 +110,8 @@ namespace Light_and_controller.Scripts
         Shared,
         MainMenu,
         Level1,
-        LevelTest
+        LevelTest,
+        LevelTestLevelChange,
+        LevelTestSpikes
     }
 }

@@ -13,6 +13,9 @@ namespace Light_and_controller.Scripts.UI
         [SerializeField] private HealthSystem healthSystem;
         [SerializeField] private List<HealthSectorView> healthSectors;
 
+        private List<HealthSectorView> _pendingHealSectors = new List<HealthSectorView>();
+        private List<HealthSectorView> _pendingDamageSectors = new List<HealthSectorView>();
+
         private void OnEnable()
         {
             SetHealth(healthSystem.Health);
@@ -33,29 +36,31 @@ namespace Light_and_controller.Scripts.UI
         private void OnHealPending(PendingHealEvent data)
         {
             data.Cancel += OnHealPendingCancel;
-            healthSectors.Where(x => !x.IsFilled)
+            _pendingHealSectors = healthSectors.Where(x => !x.IsFilled)
                 .Take(data.Amount)
-                .ToList()
-                .ForEach(x => x.OnHealPending(data.Duration));
+                .ToList();
+            _pendingHealSectors.ForEach(x => x.OnHealPending(data.Duration));
         }
 
         private void OnHealPendingCancel()
         {
-            healthSectors.ForEach(x => x.OnHealPendingCancel());
+            _pendingHealSectors.ForEach(x => x.OnHealPendingCancel());
+            _pendingHealSectors.Clear();
         }
 
         private void OnTakeDamagePending(PendingDamageEvent data)
         {
             data.Cancel += OnTakeDamagePendingCancel;
-            healthSectors.Where(x => x.IsFilled)
+            _pendingDamageSectors = healthSectors.Where(x => x.IsFilled)
                 .TakeLast(data.Amount)
-                .ToList()
-                .ForEach(x => x.OnTakeDamagePending(data.Duration));
+                .ToList();
+            _pendingDamageSectors.ForEach(x => x.OnTakeDamagePending(data.Duration));
         }
         
         private void OnTakeDamagePendingCancel()
         {
-            healthSectors.ForEach(x => x.OnTakeDamagePendingCancel());
+            _pendingDamageSectors.ForEach(x => x.OnTakeDamagePendingCancel());
+            _pendingDamageSectors.Clear();
         }
 
         private void AddHealth(int value)
