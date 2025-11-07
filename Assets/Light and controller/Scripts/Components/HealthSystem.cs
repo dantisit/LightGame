@@ -77,8 +77,16 @@ public class HealthSystem : MonoBehaviour, IDamageable, IHealable
 
     public virtual void Heal(int amount)
     {
-        Health += amount;
+        Health = Mathf.Min(Health + amount, MaxHealth);
         OnHeal?.Invoke(amount);
+    }
+    
+    public void ClampHealthToMax()
+    {
+        if (Health > MaxHealth)
+        {
+            Health = MaxHealth;
+        }
     }
 
     public virtual void Die() {}

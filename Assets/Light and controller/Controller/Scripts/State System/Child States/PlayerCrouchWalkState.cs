@@ -69,7 +69,7 @@ public class PlayerCrouchWalkState : MainState, IMove1D
         {
             stateMachine.ChangeState(player.LandState);
         }
-        else if (inputManager.Input_Dash && playerData.Dash.DashCooldownTimer <= 0f)
+        else if (inputManager.Input_Dash && playerData.Dash.DashCooldownTimer <= 0f && playerData.Dash.IsDashEnabled)
         {
             stateMachine.ChangeState(player.DashState);
         }
@@ -119,7 +119,8 @@ public class PlayerCrouchWalkState : MainState, IMove1D
             {
                 XVelocity = playerData.Crouch.SpeedUpCurve.Evaluate(1f);
             }
-            XVelocity *= inputManager.Input_Walk * playerData.Crouch.MaxSpeed;
+            // Apply push slowdown if player is pushing/dragging an object
+            XVelocity *= inputManager.Input_Walk * playerData.Crouch.MaxSpeed * player.PushObjectSlowdown;
         }
         else if (inputManager.Input_Walk != 0 && (localXVelovity != 0 && Mathf.Sign(inputManager.Input_Walk) != Mathf.Sign(localXVelovity) || phase == Phase.TurnBack))
         {
@@ -138,7 +139,7 @@ public class PlayerCrouchWalkState : MainState, IMove1D
             {
                 XVelocity = playerData.Crouch.TurnBackCurve.Evaluate(2f);
             }
-            XVelocity *= playerData.Crouch.MaxSpeed * turnBackStartDirection;
+            XVelocity *= playerData.Crouch.MaxSpeed * turnBackStartDirection * player.PushObjectSlowdown;
         }
         else
         {
@@ -156,7 +157,7 @@ public class PlayerCrouchWalkState : MainState, IMove1D
             {
                 XVelocity = playerData.Crouch.SlowDownCurve.Evaluate(1f);
             }
-            XVelocity *= playerData.Crouch.MaxSpeed * playerData.Physics.FacingDirection;
+            XVelocity *= playerData.Crouch.MaxSpeed * playerData.Physics.FacingDirection * player.PushObjectSlowdown;
         }
 
         if (playerData.Physics.Contacts.Count == 0)

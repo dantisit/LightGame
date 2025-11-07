@@ -73,7 +73,7 @@ public class PlayerLandState : MainState, IMove2D
         {
             stateMachine.ChangeState(player.WallJumpState);
         }
-        else if (inputManager.Input_Dash && playerData.Dash.DashCooldownTimer <= 0f)
+        else if (inputManager.Input_Dash && playerData.Dash.DashCooldownTimer <= 0f && playerData.Dash.IsDashEnabled)
         {
             stateMachine.ChangeState(player.DashState);
         }

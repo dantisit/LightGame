@@ -14,6 +14,10 @@ public class PlayerMain : MonoBehaviour
     [NonSerialized] public CapsuleCollider2D CapsuleCollider2D; // CapsuleCollider2D is used to handle slopes and define the ground check position in the base state class: "State.cs".
 
     public PlayerData PlayerData; // All player movement and action data is stored in the PlayerData object.
+    
+    // Push/drag state - set by PushableObject when player is interacting with it
+    [NonSerialized] public float PushObjectSlowdown = 1f; // Speed multiplier when pushing/dragging objects (1 = no slowdown)
+    [NonSerialized] public bool IsPushingObject = false; // Whether player is currently pushing/dragging an object
 
     private void Awake()
     {

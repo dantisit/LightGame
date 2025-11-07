@@ -61,7 +61,7 @@ public class PlayerWalkState : MainState, IMove1D
         {
             stateMachine.ChangeState(player.LandState);
         }
-        else if (inputManager.Input_Dash && playerData.Dash.DashCooldownTimer <= 0f)
+        else if (inputManager.Input_Dash && playerData.Dash.DashCooldownTimer <= 0f && playerData.Dash.IsDashEnabled)
         {
             stateMachine.ChangeState(player.DashState);
         }
@@ -115,7 +115,8 @@ public class PlayerWalkState : MainState, IMove1D
             {
                 XVelocity = playerData.Walk.SpeedUpCurve.Evaluate(1f);
             }
-            XVelocity *= inputManager.Input_Walk * playerData.Walk.MaxSpeed;
+            // Apply push slowdown if player is pushing an object
+            XVelocity *= inputManager.Input_Walk * playerData.Walk.MaxSpeed * player.PushObjectSlowdown;
         }
         else if (inputManager.Input_Walk != 0 && ((localXVelovity != 0 && Mathf.Sign(inputManager.Input_Walk) != Mathf.Sign(localXVelovity)) || phase == Phase.TurnBack))
         {
@@ -134,7 +135,7 @@ public class PlayerWalkState : MainState, IMove1D
             {
                 XVelocity = playerData.Walk.TurnBackCurve.Evaluate(2f);
             }
-            XVelocity *= playerData.Walk.MaxSpeed * turnBackStartDirection;
+            XVelocity *= playerData.Walk.MaxSpeed * turnBackStartDirection * player.PushObjectSlowdown;
         }
         else
         {
@@ -152,7 +153,7 @@ public class PlayerWalkState : MainState, IMove1D
             {
                 XVelocity = playerData.Walk.SlowDownCurve.Evaluate(1f);
             }
-            XVelocity *= playerData.Physics.FacingDirection * playerData.Walk.MaxSpeed;
+            XVelocity *= playerData.Physics.FacingDirection * playerData.Walk.MaxSpeed * player.PushObjectSlowdown;
         }
 
         if (playerData.Physics.Contacts.Count == 0)

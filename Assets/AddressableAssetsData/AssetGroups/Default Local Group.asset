@@ -15,6 +15,63 @@ MonoBehaviour:
   m_GroupName: Default Local Group
   m_GUID: 1fce2509380dc4b89b78bf7ffcc8b5cb
   m_SerializeEntries:
+  - m_GUID: 0500b3799d45242f298f88c3b8c70512
+    m_Address: ObjectsWeight
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 215e58b072a5d4308955472331d59d77
+    m_Address: Assets/Light and controller/GameData/Abilities/HealInLight.asset
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - default
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 27b31611af74545d1902fe569eea8e2e
+    m_Address: Assets/Light and controller/GameData/Abilities/DoubleJump.asset
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - default
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 64f3e0306616445378a8822a45d8c503
+    m_Address: Assets/Light and controller/GameData/Abilities/Dash.asset
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - default
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 72312e3088fbc43c59e6955ccec04b2c
+    m_Address: Assets/Light and controller/GameData/Abilities/HealthUpgrade.asset
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - default
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 7cb5492bb52ee493589e43607aa65618
+    m_Address: LevelOrder
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: a4587b7b3eb034ecf9d702df0d135146
+    m_Address: LevelAbilities
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: b05545aceef844ef68d04dfba0d54449
+    m_Address: Assets/Light and controller/GameData/Abilities/Teleport.asset
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - default
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: b30bf01b4e8114e50bccbc3c1d136979
+    m_Address: Assets/Light and controller/GameData/Abilities/PushStrength.asset
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - default
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: d5dd102503e1f4d6cbe59d49fdcba7f2
+    m_Address: Assets/Light and controller/GameData/Abilities/DamageInDark.asset
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - default
+    FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: e038ac5e0718c4312bb2a1bfbc2f8fad
     m_Address: Sounds/MainTheme
     m_ReadOnly: 0

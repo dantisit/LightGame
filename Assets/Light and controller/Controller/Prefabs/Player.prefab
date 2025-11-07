@@ -22,6 +22,8 @@ GameObject:
   - component: {fileID: 5736767365432281745}
   - component: {fileID: 4937008101993315368}
   - component: {fileID: 8691095846045560413}
+  - component: {fileID: 4577508022152415354}
+  - component: {fileID: 563658081202739}
   m_Layer: 9
   m_Name: Player
   m_TagString: Player
@@ -92,7 +94,7 @@ SpriteRenderer:
   m_GlobalIlluminationMeshLod: 0
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 1
   m_Sprite: {fileID: -9095717837082945937, guid: 207ee8102dd4143d288186ef0be518ee, type: 3}
   m_Color: {r: 0.58431375, g: 0.58431375, b: 0.58431375, a: 1}
   m_FlipX: 0
@@ -210,7 +212,7 @@ MonoBehaviour:
         m_Bits: 6272
       headBumpLayerMask:
         serializedVersion: 2
-        m_Bits: 1
+        m_Bits: 0
       wallLayerMask:
         serializedVersion: 2
         m_Bits: 256
@@ -864,6 +866,7 @@ MonoBehaviour:
       dashCooldown: 1
       dashCooldownTimer: 0
       physics2DGravityScale: 0
+      isDashEnabled: 0
     Walls:
       WallSlide:
         facingDirectionWhenSliding: -1
@@ -1252,7 +1255,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c9a4d51c326c4af38fb0ac02af80370b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  weight: 10
+  type: 0
+  fallback: 10
 --- !u!114 &7814056437280613642
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1337,7 +1341,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Unity.RenderPipelines.Universal.2D.Runtime::UnityEngine.Rendering.Universal.ShadowCaster2D
   m_ShadowGroup: 0
-  m_Priority: 0
+  m_Priority: 1
   m_ComponentVersion: 5
   m_HasRenderer: 1
   m_UseRendererSilhouette: 1
@@ -1390,6 +1394,32 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: LightGame::LevelChangeTrigger
   targetScene: 0
+--- !u!114 &4577508022152415354
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3213259104454701869}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2a5e2653fbfe14177a06e52d2f46ae17, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: LightGame::Light_and_controller.Scripts.Components.PushStrength
+  maxPushableWeight: 0
+  pushSpeedMultiplier: 1
+--- !u!114 &563658081202739
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3213259104454701869}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 962ea84b3beb4743b59b46bae91f583a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: LightGame::Light_and_controller.Scripts.Systems.AbilityManager
 --- !u!1 &3410020105280573791
 GameObject:
   m_ObjectHideFlags: 0

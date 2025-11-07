@@ -1,11 +1,15 @@
+using System;
 using Light_and_controller.Scripts.Systems;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 namespace Light_and_controller.Scripts.Components
 {
     public class Weight : MonoBehaviour, IWeight
     {
-        [SerializeField] private float weight;
+        [SerializeField] private ObjectsWeight.Type type;
+        [FormerlySerializedAs("weight")] [SerializeField] private float fallback;
+        
 
         private void OnEnable()
         {
@@ -19,12 +23,12 @@ namespace Light_and_controller.Scripts.Components
 
         private void OnWeightRequest(WeightRequestEvent evt)
         {
-            evt.Weight = weight;
+            evt.Weight = GD.ObjectsWeight.GetWeight(type);
         }
         
         public float Get()
         {
-            return weight;
+            return GD.ObjectsWeight.GetWeight(type);
         }
     }
 }

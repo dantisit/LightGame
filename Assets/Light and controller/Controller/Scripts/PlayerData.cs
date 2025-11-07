@@ -235,6 +235,7 @@ public class PlayerData
         [SerializeField] private float dashCooldown;
         [SerializeField, NonEditable] private float dashCooldownTimer;
         [SerializeField, NonEditable] private float physics2DGravityScale;
+        [SerializeField, NonEditable] private bool isDashEnabled = false;
 
         public float MaxHeight => maxHeight;
         public AnimationCurve DashHeightCurve => dashHeightCurve;
@@ -245,6 +246,7 @@ public class PlayerData
         public float DashCooldown => dashCooldown;
         public float DashCooldownTimer { get { return dashCooldownTimer; } set { dashCooldownTimer = value; } }
         public float Physics2DGravityScale => physics2DGravityScale;
+        public bool IsDashEnabled { get { return isDashEnabled; } set { isDashEnabled = value; } }
     }
     [System.Serializable]
     public class WallMovementVariables
