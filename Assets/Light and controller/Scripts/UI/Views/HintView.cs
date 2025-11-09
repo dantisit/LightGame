@@ -2,7 +2,6 @@ using System;
 using System.Text.RegularExpressions;
 using Core._.UI;
 using Cysharp.Threading.Tasks;
-using DG.DemiEditor;
 using DG.Tweening;
 using EasyTextEffects;
 using Light_and_controller.Scripts.Events;
@@ -46,13 +45,17 @@ namespace Light_and_controller.Scripts.UI
             }
             
             tmp.text = localizedText;
-            tmp.color = tmp.color.SetAlpha(0);
+            var color = tmp.color;
+            color.a = 0;
+            tmp.color = color;
             
             _isLocked = true;
             showTween.Play();
             showTween.Tween.OnComplete(() =>
             {
-                tmp.color = tmp.color.SetAlpha(1);
+                var color = tmp.color;
+                color.a = 1;
+                tmp.color = color;
                 textEffect.UpdateStyleInfos();
                 textEffect.StartManualEffects();
                 textEffect.Update();

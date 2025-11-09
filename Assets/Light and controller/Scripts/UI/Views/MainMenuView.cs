@@ -36,7 +36,7 @@ namespace Light_and_controller.Scripts.UI
 
         private void OnNewGameButtonClicked()
         {
-            SceneLoader.LoadScene(SceneName.Level1);
+            SceneLoader.LoadScene(SceneName.LevelTestAll);
             SceneLoader.UnloadScene(SceneName.MainMenu);
         }
 
@@ -47,12 +47,14 @@ namespace Light_and_controller.Scripts.UI
 
         private void OnQuitButtonClicked()
         {
+            #if UNITY_EDITOR
             if (Application.isEditor)
             {
                 // Stop the editor
                 EditorApplication.isPlaying = false;
                 return;
             }
+            #endif
             Application.Quit();
         }
     }

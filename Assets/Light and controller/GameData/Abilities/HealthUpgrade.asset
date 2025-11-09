@@ -13,5 +13,7 @@ MonoBehaviour:
   m_Name: HealthUpgrade
   m_EditorClassIdentifier: LightGame::Light_and_controller.Scripts.AbilitiesSystem.HealthUpgradeAbility
   unlockAtLevel: 0
+  unlockBehavior: 2
+  disableInNearDeath: 0
   healthIncrease: 1
   healOnActivate: 1

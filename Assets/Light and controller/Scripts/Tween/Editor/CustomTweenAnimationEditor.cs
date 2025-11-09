@@ -1,3 +1,4 @@
+#if UNITY_EDITOR
 using UnityEditor;
 using UnityEngine;
 using DG.Tweening;
@@ -334,3 +335,4 @@ namespace Core._.UI
         }
     }
 }
+#endif

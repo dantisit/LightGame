@@ -1,3 +1,5 @@
+using Light_and_controller.Scripts;
+
 namespace Light_and_controller.Scripts.Components
 {
     public interface ILightable
@@ -9,11 +11,13 @@ namespace Light_and_controller.Scripts.Components
     {
         public bool IsInLight { get; set; }
         public LightType? LightType { get; set; }
+        public SceneName? TargetScene { get; set; }
 
-        public LightChangeEvent(bool isInLight, LightType? lightType = null)
+        public LightChangeEvent(bool isInLight, LightType? lightType = null, SceneName? targetScene = null)
         {
             IsInLight = isInLight;
             LightType = lightType;
+            TargetScene = targetScene;
         }
     }
 }

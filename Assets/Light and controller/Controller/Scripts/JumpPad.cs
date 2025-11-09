@@ -29,7 +29,13 @@ public class JumpPad : MonoBehaviour
     
     [SerializeField, Tooltip("Cooldown time before the same player can use this pad again")]
     private float cooldownTime = 0.5f;
-    
+
+    [SerializeField, Tooltip("Time interval to check for stuck objects on the jump pad")]
+    private float stuckCheckInterval = 0.2f;
+
+    [SerializeField, Tooltip("Minimum velocity threshold to consider an object as stuck")]
+    private float stuckVelocityThreshold = 0.5f;
+
     [Header("Layer Settings")]
     [SerializeField, Tooltip("Layer mask for objects that can use the jump pad")]
     private LayerMask targetLayers = -1;
@@ -51,6 +57,9 @@ public class JumpPad : MonoBehaviour
     private float lastBounceTime = -999f;
     private PlayerMain lastPlayer;
     private bool cooldownCompleted = true;
+    private float lastStuckCheckTime = 0f;
+    private PlayerMain currentCollidingPlayer;
+    private Rigidbody2D currentCollidingRigidbody;
     
     /// <summary>
     /// Returns true if the jump pad is ready to be used (not on cooldown)
@@ -76,14 +85,20 @@ public class JumpPad : MonoBehaviour
             cooldownCompleted = true;
             OnCooldownComplete?.Invoke();
         }
+
+        // Periodic check for stuck objects
+        if (currentCollidingPlayer != null && currentCollidingRigidbody != null)
+        {
+            if (Time.time - lastStuckCheckTime >= stuckCheckInterval)
+            {
+                lastStuckCheckTime = Time.time;
+                CheckAndHandleStuckObject();
+            }
+        }
     }
     
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        // Check if enough time has passed since last bounce
-        if (Time.time - lastBounceTime < cooldownTime)
-            return;
-        
         // Check if the colliding object is on the target layer
         if (((1 << collision.gameObject.layer) & targetLayers) == 0)
             return;
@@ -92,7 +107,16 @@ public class JumpPad : MonoBehaviour
         PlayerMain player = collision.gameObject.GetComponent<PlayerMain>();
         if (player == null)
             return;
-        
+
+        // Track the colliding player for stuck detection
+        currentCollidingPlayer = player;
+        currentCollidingRigidbody = collision.rigidbody;
+        lastStuckCheckTime = Time.time;
+
+        // Check if enough time has passed since last bounce
+        if (Time.time - lastBounceTime < cooldownTime)
+            return;
+
         // Check if player is hitting from the correct direction
         if (activationAngle > 0f)
         {
@@ -109,6 +133,49 @@ public class JumpPad : MonoBehaviour
         OnPlayerLand?.Invoke(player);
         
         ApplyJumpForce(player, collision.rigidbody);
+    }
+
+    private void OnCollisionStay2D(Collision2D collision)
+    {
+        // Update the current colliding player reference
+        if (((1 << collision.gameObject.layer) & targetLayers) != 0)
+        {
+            PlayerMain player = collision.gameObject.GetComponent<PlayerMain>();
+            if (player != null)
+            {
+                currentCollidingPlayer = player;
+                currentCollidingRigidbody = collision.rigidbody;
+            }
+        }
+    }
+
+    private void OnCollisionExit2D(Collision2D collision)
+    {
+        // Clear the colliding player reference when they leave
+        PlayerMain player = collision.gameObject.GetComponent<PlayerMain>();
+        if (player != null && player == currentCollidingPlayer)
+        {
+            currentCollidingPlayer = null;
+            currentCollidingRigidbody = null;
+        }
+    }
+
+    private void CheckAndHandleStuckObject()
+    {
+        if (currentCollidingPlayer == null || currentCollidingRigidbody == null)
+            return;
+
+        // Check if the object is moving slowly (potentially stuck)
+        float currentSpeed = currentCollidingRigidbody.linearVelocity.magnitude;
+
+        if (currentSpeed < stuckVelocityThreshold)
+        {
+            // Object appears to be stuck, apply jump force
+            // Invoke land event
+            OnPlayerLand?.Invoke(currentCollidingPlayer);
+
+            ApplyJumpForce(currentCollidingPlayer, currentCollidingRigidbody);
+        }
     }
     
     

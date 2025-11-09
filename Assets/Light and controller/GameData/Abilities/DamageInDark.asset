@@ -12,8 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5449679d7d64d4175a092a85d23bd9c0, type: 3}
   m_Name: DamageInDark
   m_EditorClassIdentifier: LightGame::Light_and_controller.Scripts.AbilitiesSystem.DamageInDarkAbility
-  unlockAtLevel: 0
+  unlockAtLevel: 4
   unlockBehavior: 0
+  disableInNearDeath: 1
   damageData:
     Duration: 0
     Rate: 10

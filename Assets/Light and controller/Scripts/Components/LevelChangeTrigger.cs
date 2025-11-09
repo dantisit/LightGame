@@ -7,8 +7,6 @@ using UnityEngine;
 [RequireComponent(typeof(LightDetector))]
 public class LevelChangeTrigger : MonoBehaviour, ILightable
 {
-    [SerializeField] private SceneName targetScene;
-    
     private LightDetector _lightDetector;
     private bool _wasInLevelChangeLight = false;
 
@@ -33,31 +31,29 @@ public class LevelChangeTrigger : MonoBehaviour, ILightable
         if (!evt.LightType.HasValue || evt.LightType.Value != LightType.LevelChange)
             return;
 
-        OnInLightChange(evt.IsInLight);
+        OnInLightChange(evt.IsInLight, evt.TargetScene);
     }
 
     public void OnInLightChange(bool isInLight)
     {
-        if (isInLight && !_wasInLevelChangeLight)
+        // This method is kept for ILightable interface compatibility
+        // but the actual logic is in the overload below
+    }
+
+    private void OnInLightChange(bool isInLight, SceneName? targetScene)
+    {
+        if (isInLight && !_wasInLevelChangeLight && targetScene.HasValue)
         {
-            // Entered LevelChange light - trigger scene change
-            TriggerLevelChange();
+            // Entered LevelChange light - trigger scene change with the scene from the trigger
+            TriggerLevelChange(targetScene.Value);
         }
         
         _wasInLevelChangeLight = isInLight;
     }
 
-    private void TriggerLevelChange()
+    private void TriggerLevelChange(SceneName targetScene)
     {
         // Publish event that LevelChangeView can listen to
         EventBus.Publish(new RequestLevelChangeEvent(targetScene));
-    }
-
-    /// <summary>
-    /// Set the target scene dynamically
-    /// </summary>
-    public void SetTargetScene(SceneName scene)
-    {
-        targetScene = scene;
     }
 }

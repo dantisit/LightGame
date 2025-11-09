@@ -128,6 +128,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1166189451}
+  - component: {fileID: 1166189452}
   m_Layer: 0
   m_Name: Root
   m_TagString: Untagged
@@ -152,6 +153,18 @@ Transform:
   - {fileID: 6018213040078776922}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1166189452
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1166189450}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ada985f5e2254890ab5760eb5ff2fecc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: LightGame::Light_and_controller.Scripts.Components.SceneRoot
 --- !u!224 &2051079497 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 3109548152435879442, guid: 077f6fb2615b742d5be6ba30441b6f89, type: 3}

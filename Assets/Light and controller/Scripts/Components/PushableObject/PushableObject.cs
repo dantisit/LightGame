@@ -24,13 +24,13 @@ public class PushableObject : PlayerMain
         WalkState = new PlayerWalkState(this, _stateMachine, AnimName.Walk, PlayerData);
         JumpState = new PlayerJumpState(this, _stateMachine, AnimName.Jump, PlayerData);
         LandState = new PlayerLandState(this, _stateMachine, AnimName.Land, PlayerData);
-        DashState = new PlayerDashState(this, _stateMachine, AnimName.Dash, PlayerData);
+        // DashState = new PlayerDashState(this, _stateMachine, AnimName.Dash, PlayerData);
         // CrouchIdleState = new PlayerCrouchIdleState(this, _stateMachine, AnimName.CrouchIdle, PlayerData);
         // CrouchWalkState = new PlayerCrouchWalkState(this, _stateMachine, AnimName.CrouchWalk, PlayerData);
         // WallGrabState = new PlayerWallGrabState(this, _stateMachine, AnimName.WallGrab, PlayerData);
         // WallClimbState = new PlayerWallClimbState(this, _stateMachine, AnimName.WallClimb, PlayerData);
         // WallJumpState = new PlayerWallJumpState(this, _stateMachine, AnimName.WallJump, PlayerData);
-        // WallSlideState = new PlayerWallSlideState(this, _stateMachine, AnimName.WallSlide, PlayerData);
+        WallSlideState = new PlayerWallSlideState(this, _stateMachine, AnimName.WallSlide, PlayerData);
 
         baseMaxSpeed = PlayerData.Walk.MaxSpeed;
         

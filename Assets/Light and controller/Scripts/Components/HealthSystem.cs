@@ -7,11 +7,14 @@ public class HealthSystem : MonoBehaviour, IDamageable, IHealable
 {
     [SerializeField] private int health;
     [SerializeField] private float invincibilityDuration = 1f;
-    
+    [SerializeField] private int nearDeathThreshold = 1;
+
     public Action<int> OnTakeDamage;
     public Action<int> OnHeal;
-    
+    public Action<bool> OnNearDeathStateChanged;
+
     private float invincibilityTimer = 0f;
+    private bool isInNearDeathState = false;
     
     public int Health
     {
@@ -22,6 +25,8 @@ public class HealthSystem : MonoBehaviour, IDamageable, IHealable
     public int MaxHealth { get; set; }
     
     public bool IsInvincible => invincibilityTimer > 0f;
+
+    public bool IsInNearDeathState => isInNearDeathState;
 
     protected virtual void Awake()
     {
@@ -73,12 +78,15 @@ public class HealthSystem : MonoBehaviour, IDamageable, IHealable
         {
             invincibilityTimer = invincibilityDuration;
         }
+
+        CheckNearDeathState();
     }
 
     public virtual void Heal(int amount)
     {
         Health = Mathf.Min(Health + amount, MaxHealth);
         OnHeal?.Invoke(amount);
+        CheckNearDeathState();
     }
     
     public void ClampHealthToMax()
@@ -86,6 +94,17 @@ public class HealthSystem : MonoBehaviour, IDamageable, IHealable
         if (Health > MaxHealth)
         {
             Health = MaxHealth;
+        }
+    }
+
+    private void CheckNearDeathState()
+    {
+        bool shouldBeInNearDeath = Health > 0 && Health <= nearDeathThreshold;
+
+        if (shouldBeInNearDeath != isInNearDeathState)
+        {
+            isInNearDeathState = shouldBeInNearDeath;
+            OnNearDeathStateChanged?.Invoke(isInNearDeathState);
         }
     }
 

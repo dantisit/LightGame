@@ -9,6 +9,7 @@ namespace Light_and_controller.Scripts.Components
     public class WeightTrigger : MonoBehaviour
     {
         [SerializeField] private float weightThreshold;
+        [SerializeField] private List<Togglable> togglables = new List<Togglable>();
         public UnityEvent onActivate = new UnityEvent();
         public UnityEvent onDeactivate = new UnityEvent();
         
@@ -16,7 +17,12 @@ namespace Light_and_controller.Scripts.Components
         private bool _active;
 
         private HashSet<GameObject> AddedWeights { get; } = new();
-        
+
+        private void Start()
+        {
+            DeactivateTogglables(); // Initialize
+        }
+
         private void OnTriggerEnter2D(Collider2D other)
         {
             if(!AddedWeights.Add(other.gameObject)) return;
@@ -46,6 +52,7 @@ namespace Light_and_controller.Scripts.Components
             if (!(_currentWeight >= weightThreshold) || _active) return;
             
             onActivate.Invoke();
+            ActivateTogglables();
             _active = true;
         }
 
@@ -55,7 +62,30 @@ namespace Light_and_controller.Scripts.Components
             if (!(_currentWeight < weightThreshold) || !_active) return;
             
             onDeactivate.Invoke();
+            DeactivateTogglables();
             _active = false;
+        }
+
+        private void ActivateTogglables()
+        {
+            foreach (var togglable in togglables)
+            {
+                if (togglable != null)
+                {
+                    togglable.Enable();
+                }
+            }
+        }
+
+        private void DeactivateTogglables()
+        {
+            foreach (var togglable in togglables)
+            {
+                if (togglable != null)
+                {
+                    togglable.Disable();
+                }
+            }
         }
     }
 }

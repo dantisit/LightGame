@@ -32,7 +32,10 @@ namespace Light_and_controller.Scripts.UI.Views
 
         private void OnRequestLevelChange(RequestLevelChangeEvent evt)
         {
-            ChangeLevel(evt.TargetScene);
+            if (!isTransitioning)
+            {
+                ChangeLevel(evt.TargetScene);
+            }
         }
 
         /// <summary>

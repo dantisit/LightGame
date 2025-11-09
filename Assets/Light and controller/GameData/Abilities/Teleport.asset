@@ -12,4 +12,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 592367956f98e4481ae57499ad17e07a, type: 3}
   m_Name: Teleport
   m_EditorClassIdentifier: LightGame::Light_and_controller.Scripts.AbilitiesSystem.TeleportAbility
-  unlockAtLevel: 0
+  unlockAtLevel: 4
+  unlockBehavior: 0

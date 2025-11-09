@@ -48,7 +48,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4a5eb1f7a87fa1d41a33a42e9b167ee3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  damage: 1
+  damage: 5
   useCollision: 1
 --- !u!212 &60628285608948350
 SpriteRenderer:
@@ -202,6 +202,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8398890077529048688}
   - component: {fileID: 4984847558686406626}
+  - component: {fileID: 8737553343243256070}
   m_Layer: 0
   m_Name: Freeform Light 2D
   m_TagString: Untagged
@@ -276,3 +277,19 @@ MonoBehaviour:
   - {x: 0.7971359, y: -0.54120064, z: 0}
   - {x: 0.03571138, y: 0.8128189, z: 0}
   - {x: -0.043807074, y: 0.6936207, z: 0}
+--- !u!114 &8737553343243256070
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7503818896802625662}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3bd577f8d053c454ea098394b069a7e9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: LightGame::Light2DGlobalListener
+  lightType: 0
+  duration: 0.5
+  ease: 7
+  autoRegisterOnEnable: 1

@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: LightGame::LightGame.Audio.SoundData
   audioClip: {fileID: 8300000, guid: 74715af5b50f34f3195d6634810ae548, type: 3}
   loop: 0
-  volume: 1
+  volume: 0.05
   pitch: 1
   spatialBlend: 0
   maxDistance: 50

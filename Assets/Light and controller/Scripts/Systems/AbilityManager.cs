@@ -8,7 +8,9 @@ namespace Light_and_controller.Scripts.Systems
     {
         private HashSet<LevelAbility> _activeAbilities = new();
         private HashSet<LevelAbility> _permanentAbilities = new();
+        private HashSet<LevelAbility> _disabledAbilities = new();
         private GameObject _player;
+        private bool _abilitiesDisabled = false;
         
         private void Start()
         {
@@ -99,6 +101,44 @@ namespace Light_and_controller.Scripts.Systems
             {
                 ability.Deactivate(_player);
             }
+        }
+
+        public void DisableAllAbilities()
+        {
+            if (_abilitiesDisabled) return;
+
+            _abilitiesDisabled = true;
+            _disabledAbilities.Clear();
+
+            foreach (var ability in _activeAbilities)
+            {
+                // Only disable abilities that have disableInNearDeath set to true
+                if (ability.disableInNearDeath)
+                {
+                    ability.Deactivate(_player);
+                    _disabledAbilities.Add(ability);
+                }
+            }
+
+            Debug.Log($"Disabled {_disabledAbilities.Count} abilities in near death state");
+        }
+
+        public void EnableAllAbilities()
+        {
+            if (!_abilitiesDisabled) return;
+
+            _abilitiesDisabled = false;
+
+            foreach (var ability in _disabledAbilities)
+            {
+                if (_activeAbilities.Contains(ability))
+                {
+                    ability.Activate(_player);
+                }
+            }
+
+            Debug.Log($"Re-enabled {_disabledAbilities.Count} abilities");
+            _disabledAbilities.Clear();
         }
     }
 }

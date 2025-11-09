@@ -24,6 +24,9 @@ namespace Light_and_controller.Scripts.Components
            { LightType.LevelChange, new HashSet<GameObject>() }
        };
 
+       // Track the active trigger for LevelChange light type
+       private GameObject _activeLevelChangeTrigger;
+
        // Public accessors for events
        public UnityEvent<bool> OnChangeState => onChangeState;
        public UnityEvent<bool> OnChangeStateInverse => onChangeStateInverse;
@@ -47,7 +50,28 @@ namespace Light_and_controller.Scripts.Components
                
                if (isInLightOfType != _lastStateByType[lightType])
                {
-                   EventBus.Publish(gameObject, new LightChangeEvent(isInLightOfType, lightType));
+                   Light_and_controller.Scripts.SceneName? targetScene = null;
+
+                   // If this is a LevelChange light type, get the target scene from the trigger
+                   if (lightType == LightType.LevelChange && _activeLevelChangeTrigger != null)
+                   {
+                       var trigger = _activeLevelChangeTrigger.GetComponent<Trigger>();
+                       if (trigger != null)
+                       {
+                           if (trigger.UseNextScene)
+                           {
+                               // Get next scene from LevelOrder
+                               targetScene = Light_and_controller.Scripts.GD.LevelOrder?.GetNextScene();
+                           }
+                           else
+                           {
+                               // Use the specified target scene
+                               targetScene = trigger.TargetScene;
+                           }
+                       }
+                   }
+
+                   EventBus.Publish(gameObject, new LightChangeEvent(isInLightOfType, lightType, targetScene));
                    _lastStateByType[lightType] = isInLightOfType;
                }
            }
@@ -67,6 +91,12 @@ namespace Light_and_controller.Scripts.Components
        {
            lightSprings.Add(lightSource);
            _lightSourcesByType[lightType].Add(lightSource);
+
+           // Track the active LevelChange trigger
+           if (lightType == LightType.LevelChange)
+           {
+               _activeLevelChangeTrigger = lightSource;
+           }
        }
        
        /// <summary>
@@ -76,6 +106,12 @@ namespace Light_and_controller.Scripts.Components
        {
            lightSprings.Remove(lightSource);
            _lightSourcesByType[lightType].Remove(lightSource);
+
+           // Clear the active LevelChange trigger if it's being removed
+           if (lightType == LightType.LevelChange && _activeLevelChangeTrigger == lightSource)
+           {
+               _activeLevelChangeTrigger = null;
+           }
        }
        
        /// <summary>

@@ -9,24 +9,6 @@ namespace Light_and_controller.Scripts
         private static string _currentSceneName = string.Empty;
         private static SceneName? _currentLevelScene = null;
         
-        [RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.AfterSceneLoad)]
-        private static void Initialize()
-        {
-            // if (!IsSceneLoaded(SceneName.Shared))
-            // {
-            //     SceneManager.LoadScene(SceneName.Shared.KeyToString(), LoadSceneMode.Additive);
-            // }
-            _currentSceneName = SceneManager.GetActiveScene().name;
-            
-            // Try to set current level scene based on active scene when starting from editor
-            if (TryParseSceneName(_currentSceneName, out SceneName parsedScene))
-            {
-                _currentLevelScene = parsedScene;
-            }
-            
-            InitializeScene(_currentSceneName);
-        }
-        
         private static void InitializeScene(string sceneName)
         {
         }
@@ -102,16 +84,14 @@ namespace Light_and_controller.Scripts
         {
             return _currentLevelScene;
         }
-    }
-
-    public enum SceneName
-    {
-        Initialization,
-        Shared,
-        MainMenu,
-        Level1,
-        LevelTest,
-        LevelTestLevelChange,
-        LevelTestSpikes
+        
+        public static void SetCurrentScene(string sceneName)
+        {
+            _currentSceneName = sceneName;
+            if (TryParseSceneName(_currentSceneName, out SceneName parsedScene))
+            {
+                _currentLevelScene = parsedScene;
+            }
+        }
     }
 }

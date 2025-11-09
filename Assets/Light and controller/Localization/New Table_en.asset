@@ -19,7 +19,7 @@ MonoBehaviour:
     m_Items: []
   m_TableData:
   - m_Id: 1945832256430080
-    m_Localized: Test super long text {Jump}
+    m_Localized: To pull cube press {Crouch}
     m_Metadata:
       m_Items: []
   references:

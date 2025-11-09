@@ -15,6 +15,18 @@
             </GhostTextMetaData>
           </value>
         </entry>
+        <entry key="@&lt;file_name&gt; can we make, so when player in near death state @&lt;file_name&gt;">
+          <value>
+            <GhostTextMetaData>
+              <option name="count" value="1.0" />
+              <option name="timestamps">
+                <list>
+                  <option value="1762615149521" />
+                </list>
+              </option>
+            </GhostTextMetaData>
+          </value>
+        </entry>
         <entry key="About dissolve effects, what ways do i have? How to sync dissolving of sprite with physics blocks?">
           <value>
             <GhostTextMetaData>
@@ -88,6 +100,42 @@
             </GhostTextMetaData>
           </value>
         </entry>
+        <entry key="Can we add to ability base should it be disabled or not in near death state?">
+          <value>
+            <GhostTextMetaData>
+              <option name="count" value="1.0" />
+              <option name="timestamps">
+                <list>
+                  <option value="1762615527723" />
+                </list>
+              </option>
+            </GhostTextMetaData>
+          </value>
+        </entry>
+        <entry key="Can we instead of level reload move player to checkpoint? @&lt;file_name&gt;">
+          <value>
+            <GhostTextMetaData>
+              <option name="count" value="1.0" />
+              <option name="timestamps">
+                <list>
+                  <option value="1762532669323" />
+                </list>
+              </option>
+            </GhostTextMetaData>
+          </value>
+        </entry>
+        <entry key="Can we keep horizontal forces?">
+          <value>
+            <GhostTextMetaData>
+              <option name="count" value="1.0" />
+              <option name="timestamps">
+                <list>
+                  <option value="1762601997220" />
+                </list>
+              </option>
+            </GhostTextMetaData>
+          </value>
+        </entry>
         <entry key="Can we make SoundManager as static class\singleton so we dont need to create gameobject with it">
           <value>
             <GhostTextMetaData>
@@ -112,6 +160,18 @@
             </GhostTextMetaData>
           </value>
         </entry>
+        <entry key="Can you add some delay before ability is removed?">
+          <value>
+            <GhostTextMetaData>
+              <option name="count" value="1.0" />
+              <option name="timestamps">
+                <list>
+                  <option value="1762608774730" />
+                </list>
+              </option>
+            </GhostTextMetaData>
+          </value>
+        </entry>
         <entry key="Can you also add optional edge glow?">
           <value>
             <GhostTextMetaData>
@@ -119,6 +179,18 @@
               <option name="timestamps">
                 <list>
                   <option value="1761514581411" />
+                </list>
+              </option>
+            </GhostTextMetaData>
+          </value>
+        </entry>
+        <entry key="Can you also add variant to just load next scene? @&lt;file_name&gt;">
+          <value>
+            <GhostTextMetaData>
+              <option name="count" value="1.0" />
+              <option name="timestamps">
+                <list>
+                  <option value="1762600803154" />
                 </list>
               </option>
             </GhostTextMetaData>
@@ -268,6 +340,18 @@
             </GhostTextMetaData>
           </value>
         </entry>
+        <entry key="For some reason only gizmos disables, sprite renderer remains.">
+          <value>
+            <GhostTextMetaData>
+              <option name="count" value="1.0" />
+              <option name="timestamps">
+                <list>
+                  <option value="1762597944942" />
+                </list>
+              </option>
+            </GhostTextMetaData>
+          </value>
+        </entry>
         <entry key="GetAverageDissolveAmount_ReturnsCorrectValue (0.028s)&#10;---&#10;  Expected: 0.40000000596046448d +/- 0.0010000000474974513d&#10;  But was:  0.0d&#10;&#10;---&#10;at SimpleBlockToSpriteSyncPlayModeTests+&lt;GetAverageDissolveAmount_ReturnsCorrectValue&gt;d__7.MoveNext () [0x0019f] in Assets/Tests/SimpleBlockToSpriteSyncPlayModeTests.cs:120&#10;at UnityEngine.TestTools.TestEnumerator+&lt;Execute&gt;d__7.MoveNext () [0x0004e] in Library/PackageCache/com.unity.test-framework@&lt;file_name&gt;">
           <value>
             <GhostTextMetaData>
@@ -371,6 +455,18 @@
               <option name="timestamps">
                 <list>
                   <option value="1761476126831" />
+                </list>
+              </option>
+            </GhostTextMetaData>
+          </value>
+        </entry>
+        <entry key="It kinda big now tho. Can we refactor code to be more clean and shorter?">
+          <value>
+            <GhostTextMetaData>
+              <option name="count" value="1.0" />
+              <option name="timestamps">
+                <list>
+                  <option value="1762703295792" />
                 </list>
               </option>
             </GhostTextMetaData>
@@ -491,6 +587,18 @@
               <option name="timestamps">
                 <list>
                   <option value="1761476020499" />
+                </list>
+              </option>
+            </GhostTextMetaData>
+          </value>
+        </entry>
+        <entry key="Myabe better than make it abstarct monobeh?">
+          <value>
+            <GhostTextMetaData>
+              <option name="count" value="1.0" />
+              <option name="timestamps">
+                <list>
+                  <option value="1762599578337" />
                 </list>
               </option>
             </GhostTextMetaData>
@@ -652,6 +760,18 @@
             </GhostTextMetaData>
           </value>
         </entry>
+        <entry key="Universal Renderer Pipeline/2D/Sprite-Unlit-Default on">
+          <value>
+            <GhostTextMetaData>
+              <option name="count" value="1.0" />
+              <option name="timestamps">
+                <list>
+                  <option value="1762533935447" />
+                </list>
+              </option>
+            </GhostTextMetaData>
+          </value>
+        </entry>
         <entry key="What about fact that i build &quot;walls&quot; from small physics blocks that appear and dissappear? What are alternatives when we need hide only part of object that light is fall on? Also can you examine else files in project(it is pretty small) cause objecthider actually small part of this.">
           <value>
             <GhostTextMetaData>
@@ -724,6 +844,18 @@
             </GhostTextMetaData>
           </value>
         </entry>
+        <entry key="Why unity throw SerializedObjectNotCreatableException: Object at index 0 is null&#10;UnityEditor.Editor.CreateSerializedObject () (at /Users/bokken/build/output/unity/unity/Editor/Mono/Inspector/Editor.cs:717)&#10;UnityEditor.Editor.GetSerializedObjectInternal () (at /Users/bokken/build/output/unity/unity/Editor/Mono/Inspector/Editor.cs:689)&#10;UnityEditor.Editor.get_serializedObject () (at /Users/bokken/build/output/unity/unity/Editor/Mono/Inspector/Editor.cs:583)&#10;UnityEditor.GridEditor.OnEnable () (at /Users/bokken/build/output/unity/unity/Modules/GridEditor/Managed/GridEditor.cs:16)&#10;? i think for @&lt;file_name&gt;">
+          <value>
+            <GhostTextMetaData>
+              <option name="count" value="1.0" />
+              <option name="timestamps">
+                <list>
+                  <option value="1762534369544" />
+                </list>
+              </option>
+            </GhostTextMetaData>
+          </value>
+        </entry>
         <entry key="Yes, i agree with you. Is it possible to create mock shader, to actually test passing of data? And completely remove reflection.">
           <value>
             <GhostTextMetaData>
@@ -748,6 +880,18 @@
             </GhostTextMetaData>
           </value>
         </entry>
+        <entry key="also can you add revert &quot;Remove level&quot; process? To select which - choose SceneName enum value">
+          <value>
+            <GhostTextMetaData>
+              <option name="count" value="1.0" />
+              <option name="timestamps">
+                <list>
+                  <option value="1762616706863" />
+                </list>
+              </option>
+            </GhostTextMetaData>
+          </value>
+        </entry>
         <entry key="better?">
           <value>
             <GhostTextMetaData>
@@ -760,6 +904,30 @@
             </GhostTextMetaData>
           </value>
         </entry>
+        <entry key="but, not only damageinlight shouldnt kill, all others sources dp">
+          <value>
+            <GhostTextMetaData>
+              <option name="count" value="1.0" />
+              <option name="timestamps">
+                <list>
+                  <option value="1762612953467" />
+                </list>
+              </option>
+            </GhostTextMetaData>
+          </value>
+        </entry>
+        <entry key="can i add global editor shortcut to enable\disable rendering of it?">
+          <value>
+            <GhostTextMetaData>
+              <option name="count" value="1.0" />
+              <option name="timestamps">
+                <list>
+                  <option value="1762597716631" />
+                </list>
+              </option>
+            </GhostTextMetaData>
+          </value>
+        </entry>
         <entry key="can you add camera shaking">
           <value>
             <GhostTextMetaData>
@@ -767,6 +935,18 @@
               <option name="timestamps">
                 <list>
                   <option value="1761572081406" />
+                </list>
+              </option>
+            </GhostTextMetaData>
+          </value>
+        </entry>
+        <entry key="can you also add ability to rename already defained levels?">
+          <value>
+            <GhostTextMetaData>
+              <option name="count" value="1.0" />
+              <option name="timestamps">
+                <list>
+                  <option value="1762703184306" />
                 </list>
               </option>
             </GhostTextMetaData>
@@ -815,6 +995,42 @@
               <option name="timestamps">
                 <list>
                   <option value="1761474422470" />
+                </list>
+              </option>
+            </GhostTextMetaData>
+          </value>
+        </entry>
+        <entry key="can you make periodic change, so there isnt objects that &quot;stucked&quot; on jumpad?">
+          <value>
+            <GhostTextMetaData>
+              <option name="count" value="1.0" />
+              <option name="timestamps">
+                <list>
+                  <option value="1762705431784" />
+                </list>
+              </option>
+            </GhostTextMetaData>
+          </value>
+        </entry>
+        <entry key="can you make periodic check, so there isnt objects that &quot;stucked&quot; on jumpad?">
+          <value>
+            <GhostTextMetaData>
+              <option name="count" value="1.0" />
+              <option name="timestamps">
+                <list>
+                  <option value="1762705439311" />
+                </list>
+              </option>
+            </GhostTextMetaData>
+          </value>
+        </entry>
+        <entry key="can you prevent requestest when already changing?">
+          <value>
+            <GhostTextMetaData>
+              <option name="count" value="1.0" />
+              <option name="timestamps">
+                <list>
+                  <option value="1762617464418" />
                 </list>
               </option>
             </GhostTextMetaData>
@@ -887,6 +1103,18 @@
               <option name="timestamps">
                 <list>
                   <option value="1761515395374" />
+                </list>
+              </option>
+            </GhostTextMetaData>
+          </value>
+        </entry>
+        <entry key="i think it may not work with custom controller. look carefully at it">
+          <value>
+            <GhostTextMetaData>
+              <option name="count" value="1.0" />
+              <option name="timestamps">
+                <list>
+                  <option value="1762602115669" />
                 </list>
               </option>
             </GhostTextMetaData>
@@ -976,6 +1204,18 @@
             </GhostTextMetaData>
           </value>
         </entry>
+        <entry key="not active but which scene root is belongs to">
+          <value>
+            <GhostTextMetaData>
+              <option name="count" value="1.0" />
+              <option name="timestamps">
+                <list>
+                  <option value="1762614959133" />
+                </list>
+              </option>
+            </GhostTextMetaData>
+          </value>
+        </entry>
         <entry key="now i dont see it at all">
           <value>
             <GhostTextMetaData>
@@ -983,6 +1223,30 @@
               <option name="timestamps">
                 <list>
                   <option value="1761508294862" />
+                </list>
+              </option>
+            </GhostTextMetaData>
+          </value>
+        </entry>
+        <entry key="oh, issue was that it double loads scene here">
+          <value>
+            <GhostTextMetaData>
+              <option name="count" value="1.0" />
+              <option name="timestamps">
+                <list>
+                  <option value="1762617514227" />
+                </list>
+              </option>
+            </GhostTextMetaData>
+          </value>
+        </entry>
+        <entry key="only can you use unlit material? in project lit one set as default">
+          <value>
+            <GhostTextMetaData>
+              <option name="count" value="1.0" />
+              <option name="timestamps">
+                <list>
+                  <option value="1762533568888" />
                 </list>
               </option>
             </GhostTextMetaData>
@@ -1067,6 +1331,18 @@
               <option name="timestamps">
                 <list>
                   <option value="1761505277486" />
+                </list>
+              </option>
+            </GhostTextMetaData>
+          </value>
+        </entry>
+        <entry key="we can pass player at PlayerDiedEvent">
+          <value>
+            <GhostTextMetaData>
+              <option name="count" value="1.0" />
+              <option name="timestamps">
+                <list>
+                  <option value="1762532787366" />
                 </list>
               </option>
             </GhostTextMetaData>

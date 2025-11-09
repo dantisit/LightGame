@@ -1,3 +1,4 @@
+#if UNITY_EDITOR
 using UnityEngine;
 using UnityEditor;
 using System.Text;
@@ -438,3 +439,4 @@ public class AnimationToTweenConverter : EditorWindow
         public string ObjectVarName;
     }
 }
+#endif

@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Linq;
 using Cysharp.Threading.Tasks;
 using Light_and_controller.Scripts.Components;
+using Light_and_controller.Scripts;
 
 public class Trigger : MonoBehaviour
 {
@@ -12,8 +13,14 @@ public class Trigger : MonoBehaviour
     [SerializeField] private Collider2D collider2D;
     [SerializeField] private Rigidbody2D lightRigidbody;
     [SerializeField] private LightType lightType = LightType.Default;
-    
+
+    [Header("Level Change Settings (only for LevelChange light type)")]
+    [SerializeField] private bool useNextScene = true;
+    [SerializeField] private SceneName targetScene;
+
     public LightType LightType => lightType;
+    public bool UseNextScene => useNextScene;
+    public SceneName TargetScene => targetScene;
 
     private async void Start()
     {

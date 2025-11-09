@@ -82,9 +82,9 @@ PolygonCollider2D:
   m_AutoTiling: 0
   m_Points:
     m_Paths:
-    - - {x: 1.8470173, y: -4.685848}
+    - - {x: 1.2972091, y: -3.6606405}
       - {x: 0.048878614, y: 8.327909}
-      - {x: -1.6537097, y: -4.779788}
+      - {x: -0.94825864, y: -3.6925552}
   m_UseDelaunayMesh: 0
 --- !u!114 &5705270409059074438
 MonoBehaviour:
@@ -102,6 +102,8 @@ MonoBehaviour:
   collider2D: {fileID: 8308682882465474172}
   lightRigidbody: {fileID: 0}
   lightType: 0
+  useNextScene: 1
+  targetScene: 0
 --- !u!50 &1059473318656560178
 Rigidbody2D:
   serializedVersion: 5

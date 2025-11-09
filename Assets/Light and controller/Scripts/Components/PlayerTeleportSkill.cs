@@ -147,8 +147,23 @@ public class PlayerTeleportSkill : MonoBehaviourWithData<PlayerTeleportSkill.Tel
     {
         if (TargetPosition == null) return;
         rigidbody2D ??= GetComponent<Rigidbody2D>();
- 
-        rigidbody2D.position =  TargetPosition.Value;
+
+        // Get the PlayerMain component to access the state machine
+        PlayerMain playerMain = GetComponent<PlayerMain>();
+
+        // Reset velocity and position
+        rigidbody2D.linearVelocity = new Vector2(rigidbody2D.linearVelocity.x, 0f);
+        rigidbody2D.angularVelocity = 0f;
+        rigidbody2D.position = TargetPosition.Value;
+
+        // Force state transition to reset internal movement tracking
+        // This ensures the custom controller's internal state variables are reset
+        if (playerMain != null && playerMain._stateMachine != null)
+        {
+            // Transition to IdleState to reset all movement tracking variables
+            playerMain._stateMachine.ChangeState(playerMain.IdleState);
+        }
+
         Data.TeleportPoint.SetActive(false);
         TargetPosition = null;
     }

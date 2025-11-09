@@ -10,12 +10,13 @@ namespace Light_and_controller.Scripts.AbilitiesSystem
         TemporaryUnlock     // Unlocks at level but can be locked again
     }
     
-    public abstract class LevelAbility : ScriptableObject
+    public class LevelAbility : ScriptableObject
     {
         public SceneName unlockAtLevel;
         public UnlockBehavior unlockBehavior = UnlockBehavior.UnlockAtLevel;
-        
-        public abstract void Activate(GameObject target);
-        public abstract void Deactivate(GameObject target);
+        public bool disableInNearDeath = true;
+
+        public virtual void Activate(GameObject target) {}
+        public virtual void Deactivate(GameObject target) {}
     }
 }

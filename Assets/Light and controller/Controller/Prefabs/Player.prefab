@@ -17,7 +17,6 @@ GameObject:
   - component: {fileID: 1868357830118979999}
   - component: {fileID: 7553217259832705559}
   - component: {fileID: 7814056437280613642}
-  - component: {fileID: 6344414702692281381}
   - component: {fileID: 2287397683517608150}
   - component: {fileID: 5736767365432281745}
   - component: {fileID: 4937008101993315368}
@@ -209,10 +208,10 @@ MonoBehaviour:
     Physics:
       groundLayerMask:
         serializedVersion: 2
-        m_Bits: 6272
+        m_Bits: 88192
       headBumpLayerMask:
         serializedVersion: 2
-        m_Bits: 0
+        m_Bits: 161920
       wallLayerMask:
         serializedVersion: 2
         m_Bits: 256
@@ -454,7 +453,7 @@ MonoBehaviour:
       nextJumpInt: 0
       Jumps:
       - Animation: 2
-        maxHeight: 4.7
+        maxHeight: 4
         jumpHeightCurve:
           serializedVersion: 2
           m_Curve:
@@ -480,76 +479,6 @@ MonoBehaviour:
           m_PostInfinity: 2
           m_RotationOrder: 0
         jumpTime: 0.5
-        jumpVelocityCurve:
-          serializedVersion: 2
-          m_Curve: []
-          m_PreInfinity: 0
-          m_PostInfinity: 0
-          m_RotationOrder: 0
-        jumpCutPower: 0.4
-        timeScaleOnCut: 0.6
-      - Animation: 3
-        maxHeight: 2
-        jumpHeightCurve:
-          serializedVersion: 2
-          m_Curve:
-          - serializedVersion: 3
-            time: 0
-            value: 0
-            inSlope: 2
-            outSlope: 2
-            tangentMode: 0
-            weightedMode: 0
-            inWeight: 0
-            outWeight: 0
-          - serializedVersion: 3
-            time: 1
-            value: 1
-            inSlope: 0
-            outSlope: 0
-            tangentMode: 0
-            weightedMode: 0
-            inWeight: 0
-            outWeight: 0
-          m_PreInfinity: 2
-          m_PostInfinity: 2
-          m_RotationOrder: 0
-        jumpTime: 0.4
-        jumpVelocityCurve:
-          serializedVersion: 2
-          m_Curve: []
-          m_PreInfinity: 0
-          m_PostInfinity: 0
-          m_RotationOrder: 0
-        jumpCutPower: 0.4
-        timeScaleOnCut: 0.6
-      - Animation: 4
-        maxHeight: 1.5
-        jumpHeightCurve:
-          serializedVersion: 2
-          m_Curve:
-          - serializedVersion: 3
-            time: 0
-            value: 0
-            inSlope: 2
-            outSlope: 2
-            tangentMode: 0
-            weightedMode: 0
-            inWeight: 0
-            outWeight: 0
-          - serializedVersion: 3
-            time: 1
-            value: 1
-            inSlope: 0
-            outSlope: 0
-            tangentMode: 0
-            weightedMode: 0
-            inWeight: 0
-            outWeight: 0
-          m_PreInfinity: 2
-          m_PostInfinity: 2
-          m_RotationOrder: 0
-        jumpTime: 0.3
         jumpVelocityCurve:
           serializedVersion: 2
           m_Curve: []
@@ -1275,30 +1204,6 @@ MonoBehaviour:
   onChangeStateInverse:
     m_PersistentCalls:
       m_Calls: []
---- !u!114 &6344414702692281381
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3213259104454701869}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0fbc9630734247eab3b5aee9e0d33fe0, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  damageOverTimeData:
-    Duration: 0
-    Rate: 5
-    IsInfinity: 1
-    Amount: 1
-    ResetTickOnHealthChange: 1
-  healOverTimeData:
-    Duration: 0
-    Rate: 1
-    IsInfinity: 1
-    Amount: 1
-    ResetTickOnHealthChange: 1
 --- !u!114 &2287397683517608150
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1313,6 +1218,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   health: 4
   invincibilityDuration: 1
+  nearDeathThreshold: 1
 --- !u!114 &5736767365432281745
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1320,7 +1226,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3213259104454701869}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: f5d9414519091594899df78d903aba69, type: 3}
   m_Name: 
@@ -1328,6 +1234,7 @@ MonoBehaviour:
   data:
     Radius: 15
     TeleportPoint: {fileID: 3803380629175493506}
+  disableDelay: 0.5
 --- !u!114 &4937008101993315368
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1393,7 +1300,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0cd14ba696aaf4b33acc43dec8464201, type: 3}
   m_Name: 
   m_EditorClassIdentifier: LightGame::LevelChangeTrigger
-  targetScene: 0
 --- !u!114 &4577508022152415354
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1401,7 +1307,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3213259104454701869}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 2a5e2653fbfe14177a06e52d2f46ae17, type: 3}
   m_Name: 
@@ -1575,6 +1481,7 @@ GameObject:
   - component: {fileID: 742726834364584989}
   - component: {fileID: 3643202876859235113}
   - component: {fileID: 8794492961701964305}
+  - component: {fileID: 1070531880735298670}
   m_Layer: 9
   m_Name: PointTP
   m_TagString: Untagged
@@ -1685,3 +1592,19 @@ MonoBehaviour:
   - {x: 0.5, y: -0.5, z: 0}
   - {x: 0.5, y: 0.5, z: 0}
   - {x: -0.5, y: 0.5, z: 0}
+--- !u!114 &1070531880735298670
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3803380629175493506}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3bd577f8d053c454ea098394b069a7e9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: LightGame::Light2DGlobalListener
+  lightType: 0
+  duration: 0.5
+  ease: 7
+  autoRegisterOnEnable: 1

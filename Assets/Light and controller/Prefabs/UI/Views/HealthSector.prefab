@@ -113,7 +113,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0.43137255, g: 0.90588236, b: 0.7176471, a: 1}
+  m_Color: {r: 1, g: 0.8352941, b: 0.5019608, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -472,7 +472,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0.0627451, g: 0.7254902, b: 0.5058824, a: 1}
+  m_Color: {r: 0.754717, g: 0.5204307, b: 0.046279836, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -528,7 +528,7 @@ RectTransform:
   m_GameObject: {fileID: 6531236899749902923}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.8, y: 0.8, z: 0.8}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 1
   m_Children:
   - {fileID: 6136793108210942759}
@@ -688,8 +688,8 @@ MonoBehaviour:
   targetScale: {x: 1.15, y: 1.15, z: 1}
   scaleDuration: 10
   scaleEase: 5
-  firstImageTargetColor: {r: 0.7075472, g: 0.21693665, b: 0.21693665, a: 1}
-  secondImageTargetColor: {r: 0.5, g: 0.0495283, b: 0.09918142, a: 1}
+  firstImageTargetColor: {r: 0.65882355, g: 0.33333334, b: 0.96862745, a: 1}
+  secondImageTargetColor: {r: 0.41960785, g: 0.12941177, b: 0.65882355, a: 1}
   colorDuration: 10
   colorEase: 5
 --- !u!1 &8066726834266610353

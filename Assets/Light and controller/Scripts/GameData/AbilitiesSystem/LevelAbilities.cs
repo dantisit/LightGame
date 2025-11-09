@@ -31,8 +31,7 @@ namespace Light_and_controller.Scripts.AbilitiesSystem
                 return;
             }
             
-            var handle = Addressables.LoadAssetsAsync<LevelAbility>(addressableLabel, null);
-            var loadedAbilities = handle.WaitForCompletion();
+            var loadedAbilities = Addressables.LoadAssetsAsync<LevelAbility>(addressableLabel).WaitForCompletion();
             
             abilities.Clear();
             abilities.AddRange(loadedAbilities);

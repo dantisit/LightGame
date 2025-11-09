@@ -12,10 +12,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 066d6f81a5b754cbc9c451a14f296988, type: 3}
   m_Name: HealInLight
   m_EditorClassIdentifier: LightGame::Light_and_controller.Scripts.AbilitiesSystem.HealInLightAbility
-  unlockAtLevel: 0
+  unlockAtLevel: 4
+  unlockBehavior: 0
+  disableInNearDeath: 0
   healData:
     Duration: 0
-    Rate: 1
+    Rate: 2
     IsInfinity: 1
-    Amount: 1
+    Amount: 3
     ResetTickOnHealthChange: 1

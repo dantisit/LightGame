@@ -324,7 +324,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: PlayerController::JumpPad
   jumpIndex: 1
   launchDirection: {x: 0, y: 1}
-  forceMultiplier: 1.5
+  forceMultiplier: 2.5
   preservePerpendicularVelocity: 1
   activationAngle: 60
   cooldownTime: 0.5

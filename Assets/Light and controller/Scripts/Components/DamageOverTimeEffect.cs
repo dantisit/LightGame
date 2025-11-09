@@ -56,9 +56,30 @@ namespace Light_and_controller.Scripts.Components
         protected override void Tick()
         {
             _pendingEvent = null;
-            // Apply the damage
-            EventBus.Publish(gameObject, new DamageEvent { Amount = Data.Amount });
-            
+
+            // Check if applying damage would kill the player
+            var healthSystem = GetComponent<HealthSystem>();
+            if (healthSystem != null)
+            {
+                // Only apply damage if it won't reduce health below 1
+                int damageToApply = Data.Amount;
+                if (healthSystem.Health - damageToApply < 1)
+                {
+                    damageToApply = healthSystem.Health - 1;
+                }
+
+                // Only apply damage if there's damage to apply
+                if (damageToApply > 0)
+                {
+                    EventBus.Publish(gameObject, new DamageEvent { Amount = damageToApply });
+                }
+            }
+            else
+            {
+                // If no health system, apply damage normally
+                EventBus.Publish(gameObject, new DamageEvent { Amount = Data.Amount });
+            }
+
             // Publish next pending event if not finished
             if (Data.IsInfinity || _currentTime + Data.Rate < Data.Duration)
             {

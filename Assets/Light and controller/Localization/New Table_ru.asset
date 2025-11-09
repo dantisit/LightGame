@@ -19,7 +19,9 @@ MonoBehaviour:
     m_Items: []
   m_TableData:
   - m_Id: 1945832256430080
-    m_Localized: Test super long text {Jump}
+    m_Localized: "\u0427\u0442\u043E\u0431\u044B \u0442\u043E\u043B\u043A\u0430\u0442\u044C
+      \u043A\u0443\u0431 \u043D\u0430 \u0441\u0435\u0431\u044F \u043D\u0430\u0436\u043C\u0438\u0442\u0435
+      {Crouch}"
     m_Metadata:
       m_Items: []
   references:

@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7022399337152057564}
   - component: {fileID: 6982325220932829453}
-  m_Layer: 7
+  m_Layer: 16
   m_Name: Freeform Light 2D
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -97,7 +97,7 @@ GameObject:
   - component: {fileID: 681350671305896329}
   - component: {fileID: 4154811511507473934}
   - component: {fileID: 5793097390824169950}
-  m_Layer: 7
+  m_Layer: 16
   m_Name: OneWayPlatform
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -259,8 +259,8 @@ MonoBehaviour:
   m_ShadowMesh:
     m_Mesh: {fileID: 0}
     m_LocalBounds:
-      m_Center: {x: -0.0000076293945, y: 0.0000076293945, z: 0}
-      m_Extent: {x: 0.49098969, y: 0.49098969, z: 0}
+      m_Center: {x: 0.0000076293945, y: 0, z: 0}
+      m_Extent: {x: 0.49098969, y: 0.49098206, z: 0}
     m_EdgeProcessing: 1
     m_TrimEdge: 0.009
     m_FlipX: 0

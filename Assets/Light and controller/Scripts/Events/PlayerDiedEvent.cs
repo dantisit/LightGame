@@ -1,3 +1,5 @@
+using UnityEngine;
+
 namespace Light_and_controller.Scripts.Events
 {
     /// <summary>
@@ -5,8 +7,11 @@ namespace Light_and_controller.Scripts.Events
     /// </summary>
     public class PlayerDiedEvent
     {
-        public PlayerDiedEvent()
+        public GameObject Player { get; }
+
+        public PlayerDiedEvent(GameObject player)
         {
+            Player = player;
         }
     }
 }

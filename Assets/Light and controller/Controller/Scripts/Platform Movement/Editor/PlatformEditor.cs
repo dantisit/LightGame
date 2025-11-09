@@ -1,3 +1,4 @@
+#if UNITY_EDITOR
 using UnityEngine;
 using UnityEditor;
 
@@ -139,3 +140,4 @@ public class PlatformEditor : Editor
         }
     }
 }
+#endif

@@ -164,4 +164,34 @@ public class Light2DGlobalListener : MonoBehaviour
     {
         _storedIntensity = -1f;
     }
+
+    /// <summary>
+    /// Fade the light to black (intensity 0) with optional callback
+    /// </summary>
+    /// <param name="fadeDuration">Duration of the fade animation</param>
+    /// <param name="onComplete">Optional callback when fade completes</param>
+    public void FadeOut(float fadeDuration = 0.5f, System.Action onComplete = null)
+    {
+        currentTween?.Kill();
+
+        currentTween = DOVirtual.Float(light2D.intensity, 0f, fadeDuration,
+            value => light2D.intensity = value)
+            .SetEase(ease)
+            .OnComplete(() => onComplete?.Invoke());
+    }
+
+    /// <summary>
+    /// Fade the light to its original intensity with optional callback
+    /// </summary>
+    /// <param name="fadeDuration">Duration of the fade animation</param>
+    /// <param name="onComplete">Optional callback when fade completes</param>
+    public void FadeIn(float fadeDuration = 0.5f, System.Action onComplete = null)
+    {
+        currentTween?.Kill();
+
+        currentTween = DOVirtual.Float(light2D.intensity, originalIntensity, fadeDuration,
+            value => light2D.intensity = value)
+            .SetEase(ease)
+            .OnComplete(() => onComplete?.Invoke());
+    }
 }
