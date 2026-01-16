@@ -8,7 +8,17 @@ namespace Light_and_controller.Scripts.Components
 {
     public class WeightTrigger : MonoBehaviour
     {
+        [Header("Mode")]
+        [SerializeField] private bool toggleMode = false;
+        
+        [Header("Weight Mode Settings")]
         [SerializeField] private float weightThreshold;
+        [SerializeField] private bool canDeactivate = true;
+        
+        [Header("Initial State")]
+        [SerializeField] private bool startActivated = false;
+        
+        [Header("References")]
         [SerializeField] private List<Togglable> togglables = new List<Togglable>();
         public UnityEvent onActivate = new UnityEvent();
         public UnityEvent onDeactivate = new UnityEvent();
@@ -17,32 +27,63 @@ namespace Light_and_controller.Scripts.Components
         private bool _active;
 
         private HashSet<GameObject> AddedWeights { get; } = new();
+        
+        public bool IsActive => _active;
 
         private void Start()
         {
-            DeactivateTogglables(); // Initialize
+            // Initialize based on startActivated setting
+            if (startActivated)
+            {
+                _active = true;
+                ActivateTogglables();
+                onActivate.Invoke();
+            }
+            else
+            {
+                _active = false;
+                DeactivateTogglables();
+                onDeactivate.Invoke();
+            }
         }
 
         private void OnTriggerEnter2D(Collider2D other)
         {
-            if(!AddedWeights.Add(other.gameObject)) return;
-            var weightRequest = new WeightRequestEvent();
-            EventBus.Publish(other.gameObject, weightRequest);
-            if (weightRequest.Weight > 0)
+            if (toggleMode)
             {
-                AddWeight(weightRequest.Weight);
+                // Toggle mode: each enter toggles the state
+                ToggleState();
+            }
+            else
+            {
+                // Weight mode: accumulate weight
+                if(!AddedWeights.Add(other.gameObject)) return;
+                var weightRequest = new WeightRequestEvent();
+                EventBus.Publish(other.gameObject, weightRequest);
+                if (weightRequest.Weight > 0)
+                {
+                    AddWeight(weightRequest.Weight);
+                }
             }
         }
 
         private void OnTriggerExit2D(Collider2D other)
         {
-            
-            if(!AddedWeights.Remove(other.gameObject)) return;
-            var weightRequest = new WeightRequestEvent();
-            EventBus.Publish(other.gameObject, weightRequest);
-            if (weightRequest.Weight > 0)
+            if (toggleMode)
             {
-                RemoveWeight(weightRequest.Weight);
+                // Toggle mode: exit does nothing (or could toggle again if desired)
+                return;
+            }
+            else
+            {
+                // Weight mode: remove weight
+                if(!AddedWeights.Remove(other.gameObject)) return;
+                var weightRequest = new WeightRequestEvent();
+                EventBus.Publish(other.gameObject, weightRequest);
+                if (weightRequest.Weight > 0)
+                {
+                    RemoveWeight(weightRequest.Weight);
+                }
             }
         }
 
@@ -59,7 +100,7 @@ namespace Light_and_controller.Scripts.Components
         private void RemoveWeight(float value)
         {
             _currentWeight -= value;
-            if (!(_currentWeight < weightThreshold) || !_active) return;
+            if (!(_currentWeight < weightThreshold) || !_active || !canDeactivate) return;
             
             onDeactivate.Invoke();
             DeactivateTogglables();
@@ -85,6 +126,22 @@ namespace Light_and_controller.Scripts.Components
                 {
                     togglable.Disable();
                 }
+            }
+        }
+
+        private void ToggleState()
+        {
+            if (_active)
+            {
+                onDeactivate.Invoke();
+                DeactivateTogglables();
+                _active = false;
+            }
+            else
+            {
+                onActivate.Invoke();
+                ActivateTogglables();
+                _active = true;
             }
         }
     }

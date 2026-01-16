@@ -20,6 +20,7 @@ namespace Light_and_controller.Scripts
         LevelTeachPullCubeNarrowCoridor,
         LevelCubeTriggerLightPlayerOnTrigger,
         LevelCubeTriggerLightSequencingAdvance,
-        LevelTestAll
+        LevelTestAll,
+        FirstDesignedLevel
     }
 }

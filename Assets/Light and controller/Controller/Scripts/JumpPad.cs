@@ -5,7 +5,6 @@ using UnityEngine;
 /// Jump pad component that triggers a jump when the player lands on it.
 /// Works with the state-based player controller system by initiating jump state transitions.
 /// </summary>
-[RequireComponent(typeof(Collider2D))]
 public class JumpPad : MonoBehaviour
 {
     [Header("Jump Pad Settings")]
@@ -13,7 +12,10 @@ public class JumpPad : MonoBehaviour
     [Range(1, 3)]
     private int jumpIndex = 1;
     
-    [SerializeField, Tooltip("Direction to launch the player (will be normalized)")]
+    [SerializeField, Tooltip("Use collision normal as launch direction instead of fixed direction")]
+    private bool useCollisionNormal = false;
+    
+    [SerializeField, Tooltip("Direction to launch the player (will be normalized). Ignored if useCollisionNormal is true")]
     private Vector2 launchDirection = Vector2.up;
     
     [SerializeField, Tooltip("Force multiplier for the launch (1.0 = normal jump height)")]
@@ -60,6 +62,7 @@ public class JumpPad : MonoBehaviour
     private float lastStuckCheckTime = 0f;
     private PlayerMain currentCollidingPlayer;
     private Rigidbody2D currentCollidingRigidbody;
+    private Vector2 lastCollisionNormal;
     
     /// <summary>
     /// Returns true if the jump pad is ready to be used (not on cooldown)
@@ -112,6 +115,12 @@ public class JumpPad : MonoBehaviour
         currentCollidingPlayer = player;
         currentCollidingRigidbody = collision.rigidbody;
         lastStuckCheckTime = Time.time;
+        
+        // Store collision normal for potential use in launch direction
+        if (collision.contactCount > 0)
+        {
+            lastCollisionNormal = collision.contacts[0].normal;
+        }
 
         // Check if enough time has passed since last bounce
         if (Time.time - lastBounceTime < cooldownTime)
@@ -132,7 +141,7 @@ public class JumpPad : MonoBehaviour
         // Invoke land event
         OnPlayerLand?.Invoke(player);
         
-        ApplyJumpForce(player, collision.rigidbody);
+        ApplyJumpForce(player, collision.rigidbody, collision);
     }
 
     private void OnCollisionStay2D(Collision2D collision)
@@ -174,12 +183,12 @@ public class JumpPad : MonoBehaviour
             // Invoke land event
             OnPlayerLand?.Invoke(currentCollidingPlayer);
 
-            ApplyJumpForce(currentCollidingPlayer, currentCollidingRigidbody);
+            ApplyJumpForce(currentCollidingPlayer, currentCollidingRigidbody, null);
         }
     }
     
     
-    private void ApplyJumpForce(PlayerMain player, Rigidbody2D rb)
+    private void ApplyJumpForce(PlayerMain player, Rigidbody2D rb, Collision2D collision)
     {
         if (player == null || rb == null)
             return;
@@ -191,43 +200,62 @@ public class JumpPad : MonoBehaviour
             Debug.LogWarning($"JumpPad on {gameObject.name}: Invalid jump index {jumpIndex}. Using index {clampedJumpIndex}.");
         }
         
-        // Set up jump parameters for the state machine
-        player.PlayerData.Jump.NextJumpInt = clampedJumpIndex;
-        player.PlayerData.Jump.NewJump = true;
-        
-        // Reset coyote time to ensure jump triggers
-        player.PlayerData.Jump.CoyoteTimeTimer = player.PlayerData.Jump.CoyoteTimeMaxTime;
-        
-        // Transition to jump state
-        player._stateMachine.ChangeState(player.JumpState);
-        
-        // Set the velocity multiplier AFTER transition
-        var jumpState = player.JumpState as PlayerJumpState;
-        if (jumpState != null)
-        {
-            jumpState.VelocityMultiplier = forceMultiplier;
-        }
-        
         // Get jump info and calculate launch velocity
         var jumpInfo = player.PlayerData.Jump.Jumps[clampedJumpIndex - 1];
         float baseForce = jumpInfo.MaxHeight * forceMultiplier;
         
-        // Normalize launch direction
-        Vector2 normalizedDirection = launchDirection.normalized;
-        
-        // Calculate new velocity based on launch direction
-        Vector2 launchVelocity = normalizedDirection * baseForce;
-        
-        // Optionally preserve velocity perpendicular to launch direction
-        if (preservePerpendicularVelocity)
+        // Determine launch direction based on settings
+        Vector2 normalizedDirection;
+        if (useCollisionNormal && collision != null && collision.contactCount > 0)
         {
-            Vector2 perpendicular = new Vector2(-normalizedDirection.y, normalizedDirection.x);
-            float perpendicularSpeed = Vector2.Dot(rb.linearVelocity, perpendicular);
-            launchVelocity += perpendicular * perpendicularSpeed;
+            // Use the collision normal as launch direction (inverted because normal points into surface)
+            normalizedDirection = -collision.contacts[0].normal;
+            Debug.Log($"[JumpPad] Using collision normal (inverted): {normalizedDirection}");
+        }
+        else if (useCollisionNormal && lastCollisionNormal != Vector2.zero)
+        {
+            // Fallback to last stored collision normal (for stuck object handling)
+            normalizedDirection = -lastCollisionNormal;
+            Debug.Log($"[JumpPad] Using last collision normal (inverted): {normalizedDirection}");
+        }
+        else
+        {
+            // Use fixed launch direction
+            normalizedDirection = launchDirection.normalized;
+            Debug.Log($"[JumpPad] Using fixed launch direction: {normalizedDirection}");
         }
         
-        // Apply the calculated velocity
-        rb.linearVelocity = launchVelocity;
+        // Use DirectionalJumpState for angled jumps, normal JumpState for upward jumps
+        if (useCollisionNormal || launchDirection.normalized != Vector2.up)
+        {
+            // Use directional jump state for custom directions
+            Debug.Log($"[JumpPad] Using DirectionalJumpState - Direction: {normalizedDirection}, Force: {baseForce}");
+            var directionalJumpState = player.DirectionalJumpState as PlayerDirectionalJumpState;
+            if (directionalJumpState != null)
+            {
+                directionalJumpState.SetLaunchParameters(normalizedDirection, baseForce, jumpInfo.JumpTime, preservePerpendicularVelocity, clampedJumpIndex);
+                player._stateMachine.ChangeState(player.DirectionalJumpState);
+            }
+            else
+            {
+                Debug.LogError($"[JumpPad] DirectionalJumpState is null!");
+            }
+        }
+        else
+        {
+            // Use normal jump state for standard upward jumps
+            Debug.Log($"[JumpPad] Using normal JumpState - Force multiplier: {forceMultiplier}");
+            player.PlayerData.Jump.NextJumpInt = clampedJumpIndex;
+            player.PlayerData.Jump.NewJump = true;
+            player.PlayerData.Jump.CoyoteTimeTimer = player.PlayerData.Jump.CoyoteTimeMaxTime;
+            player._stateMachine.ChangeState(player.JumpState);
+            
+            var jumpState = player.JumpState as PlayerJumpState;
+            if (jumpState != null)
+            {
+                jumpState.VelocityMultiplier = forceMultiplier;
+            }
+        }
         
         // Update cooldown
         lastBounceTime = Time.time;
@@ -246,7 +274,7 @@ public class JumpPad : MonoBehaviour
         Vector3 position = transform.position;
         
         // Draw arrow showing launch direction
-        Vector3 direction = launchDirection.normalized;
+        Vector3 direction = useCollisionNormal ? Vector3.up : launchDirection.normalized;
         float visualLength = forceMultiplier * 2f;
         Vector3 endPoint = position + (Vector3)(direction * visualLength);
         
@@ -265,7 +293,7 @@ public class JumpPad : MonoBehaviour
         Vector3 position = transform.position;
         
         // Draw force visualization
-        Vector3 direction = launchDirection.normalized;
+        Vector3 direction = useCollisionNormal ? Vector3.up : launchDirection.normalized;
         float visualLength = forceMultiplier * 2f;
         Vector3 endPoint = position + (Vector3)(direction * visualLength);
         Gizmos.DrawWireSphere(endPoint, 0.3f);

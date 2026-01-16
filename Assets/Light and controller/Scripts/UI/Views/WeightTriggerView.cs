@@ -38,9 +38,19 @@ namespace Light_and_controller.Scripts.UI
             {
                 Debug.LogWarning("WeightTriggerView: No WeightTrigger component found on this GameObject!", this);
             }
-            
-            // Initialize with inactive state
-            if (spriteRenderer != null)
+        }
+        
+        private void Start()
+        {
+            // Initialize color based on WeightTrigger's initial state
+            // The WeightTrigger.Start() will invoke onActivate/onDeactivate events
+            // which will set the correct color through the event listeners
+            if (_weightTrigger != null && spriteRenderer != null)
+            {
+                // Set initial color based on current active state
+                spriteRenderer.color = _weightTrigger.IsActive ? activeColor : inactiveColor;
+            }
+            else if (spriteRenderer != null)
             {
                 spriteRenderer.color = inactiveColor;
             }

@@ -67,8 +67,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: "\u041D\u043E\u0432\u0430\u044F \u0438\u0433\u0440\u0430"
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: c177f0bfab03e4af88a804bdb77f92c0, type: 2}
-  m_sharedMaterial: {fileID: 4082110679830654717, guid: c177f0bfab03e4af88a804bdb77f92c0, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 92436fdbc8f384e38ab29c617e934f83, type: 2}
+  m_sharedMaterial: {fileID: 6600315928709293364, guid: 92436fdbc8f384e38ab29c617e934f83, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -277,10 +277,10 @@ MonoBehaviour:
         _Object: {fileID: 0}
   selectionStateToSprite:
     values:
-      Normal: {r: 1, g: 1, b: 1, a: 1}
-      Highlighted: {r: 1, g: 0.8784314, b: 0.627451, a: 1}
+      Normal: {r: 0.5372549, g: 0.5176471, b: 0.52156866, a: 1}
+      Highlighted: {r: 1, g: 0.6627451, b: 0.039215688, a: 1}
       Pressed: {r: 1, g: 0.627451, b: 0.2509804, a: 1}
-      Selected: {r: 1, g: 0.8784314, b: 0.627451, a: 1}
+      Selected: {r: 1, g: 0.6627451, b: 0.039215688, a: 1}
       Disabled: {r: 0.2901961, g: 0.2901961, b: 0.22745098, a: 1}
 --- !u!114 &1796541551047785828
 MonoBehaviour:

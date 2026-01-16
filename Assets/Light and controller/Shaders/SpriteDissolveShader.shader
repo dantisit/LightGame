@@ -115,17 +115,8 @@ Shader "Custom/URP/SpriteDissolve"
                 half4 spriteColor = SAMPLE_TEXTURE2D(_MainTex, sampler_MainTex, IN.uv);
                 spriteColor *= _Color * IN.color;
 
-                // Calculate lighting for sprites
-                Light mainLight = GetMainLight(TransformWorldToShadowCoord(IN.positionWS));
-
-                // Use ambient lighting from scene
-                half3 ambient = half3(unity_SHAr.w, unity_SHAg.w, unity_SHAb.w);
-
-                // Calculate main light contribution
-                half3 lighting = ambient + mainLight.color * mainLight.distanceAttenuation * mainLight.shadowAttenuation;
-
+                // Use unlit sprite color (sprites don't need lighting)
                 half4 litColor = spriteColor;
-                litColor.rgb *= lighting;
 
                 // Generate noise - try texture first, fallback to procedural
                 half noise = SAMPLE_TEXTURE2D(_NoiseTexture, sampler_NoiseTexture, IN.uv * _NoiseScale).r;
@@ -183,22 +174,26 @@ Shader "Custom/URP/SpriteDissolve"
                     clip(-1); // Discard this pixel
                 }
                 
-                // Create two edge thresholds for inner bright glow
-                half outerEdge = finalDissolve + _EdgeWidth;
-                half innerEdge = finalDissolve + _InnerEdgeOffset;
+                // Only show edge glow when we're close to the dissolve threshold
+                // This ensures glow only appears at actual dissolve boundaries
+                half distanceToDissolve = noise - finalDissolve;
+                half outerEdge = _EdgeWidth;
+                half innerEdge = _InnerEdgeOffset;
                 
-                if (noise < outerEdge)
+                // Only apply edge glow if we're within edge width of the dissolve boundary
+                // AND the dissolve value is significant enough to create a boundary
+                if (finalDissolve > 0.01 && distanceToDissolve > 0 && distanceToDissolve < outerEdge)
                 {
                     // We're in the edge region
-                    half edgeFactor = (noise - finalDissolve) / _EdgeWidth;
+                    half edgeFactor = distanceToDissolve / _EdgeWidth;
                     edgeFactor = smoothstep(0.0, 1.0, edgeFactor);
                     
                     // Calculate bright inner glow (unlit/emissive)
                     half glowMask = 0.0;
-                    if (noise < innerEdge)
+                    if (distanceToDissolve < innerEdge)
                     {
                         // Inner bright edge - this will be unlit
-                        glowMask = 1.0 - ((noise - finalDissolve) / _InnerEdgeOffset);
+                        glowMask = 1.0 - (distanceToDissolve / _InnerEdgeOffset);
                         glowMask = smoothstep(0.0, 1.0, glowMask);
                     }
                     

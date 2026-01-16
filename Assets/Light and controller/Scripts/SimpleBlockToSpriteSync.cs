@@ -3,8 +3,8 @@ using Light_and_controller.Scripts.Components;
 using UnityEngine;
 
 /// <summary>
-/// SIMPLER APPROACH: Uses multiple dissolve amounts for different regions.
-/// Each physics block controls one float value in the shader.
+/// SIMPLIFIED GRID APPROACH: Divides sprite into equal grid regions.
+/// Each physics block controls one region in the grid.
 /// </summary>
 public class SimpleBlockToSpriteSync : MonoBehaviour
 {
@@ -12,13 +12,17 @@ public class SimpleBlockToSpriteSync : MonoBehaviour
     public class BlockRegion
     {
         public ObjectHider objectHider;
-        public Rect uvRegion; // Which part of sprite (0-1 coordinates)
+        [HideInInspector] public int regionIndex;
         [HideInInspector] public float currentDissolve = 0f;
     }
 
     [Header("References")]
     [SerializeField] private SpriteRenderer wallSprite;
     [SerializeField] private List<BlockRegion> blockRegions = new List<BlockRegion>();
+
+    [Header("Grid Settings")]
+    [SerializeField] private int gridColumns = 2;
+    [SerializeField] private int gridRows = 2;
 
     [Header("Dissolve Settings")]
     [SerializeField] private float dissolveSpeed = 2f;
@@ -42,19 +46,16 @@ public class SimpleBlockToSpriteSync : MonoBehaviour
             return;
         }
 
-        // Setup arrays
-        _regionData = new Vector4[blockRegions.Count];
+        // Calculate grid-based UV regions
+        int totalRegions = gridColumns * gridRows;
+        _regionData = new Vector4[totalRegions];
+        
+        CalculateGridRegions();
 
         // Initialize regions
         for (int i = 0; i < blockRegions.Count; i++)
         {
             var region = blockRegions[i];
-            _regionData[i] = new Vector4(
-                region.uvRegion.x,
-                region.uvRegion.y,
-                region.uvRegion.width,
-                region.uvRegion.height
-            );
             region.currentDissolve = 0f;
 
             // Subscribe to block events
@@ -74,6 +75,25 @@ public class SimpleBlockToSpriteSync : MonoBehaviour
 
         // Send to shader
         UpdateShader();
+    }
+
+    private void CalculateGridRegions()
+    {
+        float cellWidth = 1f / gridColumns;
+        float cellHeight = 1f / gridRows;
+
+        int index = 0;
+        for (int row = 0; row < gridRows; row++)
+        {
+            for (int col = 0; col < gridColumns; col++)
+            {
+                float x = col * cellWidth;
+                float y = row * cellHeight;
+                
+                _regionData[index] = new Vector4(x, y, cellWidth, cellHeight);
+                index++;
+            }
+        }
     }
 
     private void OnBlockChanged(int blockIndex, bool isVisible)
@@ -107,19 +127,31 @@ public class SimpleBlockToSpriteSync : MonoBehaviour
 
     private void UpdateShader()
     {
-        if (_spriteMaterial == null || blockRegions.Count == 0) return;
+        if (_spriteMaterial == null || _regionData == null) return;
 
-        // Build dissolve amounts array from current block states
-        float[] dissolveAmounts = new float[blockRegions.Count];
+        int totalRegions = gridColumns * gridRows;
+        float[] dissolveAmounts = new float[totalRegions];
+        
+        // Initialize all regions to 0 (visible)
+        for (int i = 0; i < totalRegions; i++)
+        {
+            dissolveAmounts[i] = 0f;
+        }
+        
+        // Set dissolve for assigned blocks
         for (int i = 0; i < blockRegions.Count; i++)
         {
-            dissolveAmounts[i] = blockRegions[i].currentDissolve;
+            int regionIdx = blockRegions[i].regionIndex;
+            if (regionIdx >= 0 && regionIdx < totalRegions)
+            {
+                dissolveAmounts[regionIdx] = blockRegions[i].currentDissolve;
+            }
         }
 
         // Send region data to shader
         _spriteMaterial.SetVectorArray("_RegionData", _regionData);
         _spriteMaterial.SetFloatArray("_RegionDissolve", dissolveAmounts);
-        _spriteMaterial.SetInt("_RegionCount", blockRegions.Count);
+        _spriteMaterial.SetInt("_RegionCount", totalRegions);
     }
 
     private void OnDestroy()
@@ -163,8 +195,7 @@ public class SimpleBlockToSpriteSync : MonoBehaviour
     }
 
 #if UNITY_EDITOR
-    // Helper to auto-find all ObjectHider children and calculate UV regions
-    [ContextMenu("Auto Setup - Find All Blocks and Calculate UV Regions")]
+    [ContextMenu("Auto Setup - Find All Blocks and Assign Grid Regions")]
     private void AutoSetupBlockRegions()
     {
         if (wallSprite == null)
@@ -185,131 +216,25 @@ public class SimpleBlockToSpriteSync : MonoBehaviour
         // Clear existing regions
         blockRegions.Clear();
 
-        Bounds spriteBounds = wallSprite.bounds;
-
-        // Create new regions for each found block
-        foreach (var block in foundBlocks)
+        // Create new regions and assign sequential grid indices
+        for (int i = 0; i < foundBlocks.Length; i++)
         {
-            Collider2D blockCollider = block.GetComponent<Collider2D>();
-            if (blockCollider == null)
-            {
-                Debug.LogWarning($"ObjectHider on {block.gameObject.name} has no Collider2D!");
-                continue;
-            }
-
-            Bounds blockBounds = blockCollider.bounds;
-            Rect uvRegion = CalculateUVRegionFromBounds(spriteBounds, blockBounds);
-
-            // Create new region
             BlockRegion newRegion = new BlockRegion
             {
-                objectHider = block,
-                uvRegion = uvRegion,
+                objectHider = foundBlocks[i],
+                regionIndex = i,
                 currentDissolve = 0f
             };
 
             blockRegions.Add(newRegion);
         }
 
-        Debug.Log($"Auto-setup complete! Found and configured {blockRegions.Count} ObjectHider blocks.");
-    }
+        // Auto-adjust grid size to fit all blocks
+        int totalBlocks = blockRegions.Count;
+        gridColumns = Mathf.CeilToInt(Mathf.Sqrt(totalBlocks));
+        gridRows = Mathf.CeilToInt((float)totalBlocks / gridColumns);
 
-    // Helper to only recalculate UV regions (if blocks are already assigned)
-    [ContextMenu("Recalculate UV Regions Only")]
-    private void RecalculateUVRegions()
-    {
-        if (wallSprite == null)
-        {
-            Debug.LogError("Wall sprite not assigned!");
-            return;
-        }
-
-        Bounds spriteBounds = wallSprite.bounds;
-        int calculatedCount = 0;
-
-        foreach (var region in blockRegions)
-        {
-            if (region.objectHider == null) continue;
-
-            Collider2D blockCollider = region.objectHider.GetComponent<Collider2D>();
-            if (blockCollider == null) continue;
-
-            Bounds blockBounds = blockCollider.bounds;
-            region.uvRegion = CalculateUVRegionFromBounds(spriteBounds, blockBounds);
-            calculatedCount++;
-        }
-
-        Debug.Log($"UV regions recalculated for {calculatedCount} blocks!");
+        Debug.Log($"Auto-setup complete! Found {blockRegions.Count} blocks. Grid set to {gridColumns}x{gridRows}.");
     }
 #endif
-
-    /// <summary>
-    /// Public helper method for testing: Calculate UV region from world bounds
-    /// </summary>
-    public Rect CalculateUVRegionFromBounds(Bounds spriteBounds, Bounds blockBounds)
-    {
-        // Get sprite reference
-        Sprite sprite = wallSprite.sprite;
-        if (sprite == null)
-        {
-            Debug.LogError("WallSprite has no sprite assigned!");
-            return new Rect(0, 0, 1, 1);
-        }
-
-        // Get the sprite's transform
-        Transform spriteTransform = wallSprite.transform;
-
-        // Convert all 8 corners of the block bounds to local space to handle rotation properly
-        Vector3[] worldCorners = new Vector3[8];
-        worldCorners[0] = new Vector3(blockBounds.min.x, blockBounds.min.y, blockBounds.min.z);
-        worldCorners[1] = new Vector3(blockBounds.min.x, blockBounds.min.y, blockBounds.max.z);
-        worldCorners[2] = new Vector3(blockBounds.min.x, blockBounds.max.y, blockBounds.min.z);
-        worldCorners[3] = new Vector3(blockBounds.min.x, blockBounds.max.y, blockBounds.max.z);
-        worldCorners[4] = new Vector3(blockBounds.max.x, blockBounds.min.y, blockBounds.min.z);
-        worldCorners[5] = new Vector3(blockBounds.max.x, blockBounds.min.y, blockBounds.max.z);
-        worldCorners[6] = new Vector3(blockBounds.max.x, blockBounds.max.y, blockBounds.min.z);
-        worldCorners[7] = new Vector3(blockBounds.max.x, blockBounds.max.y, blockBounds.max.z);
-
-        // Transform all corners to local space and find actual min/max
-        Vector3 blockMinLocal = spriteTransform.InverseTransformPoint(worldCorners[0]);
-        Vector3 blockMaxLocal = blockMinLocal;
-
-        for (int i = 1; i < 8; i++)
-        {
-            Vector3 localCorner = spriteTransform.InverseTransformPoint(worldCorners[i]);
-            blockMinLocal = Vector3.Min(blockMinLocal, localCorner);
-            blockMaxLocal = Vector3.Max(blockMaxLocal, localCorner);
-        }
-
-        // Get sprite dimensions in unscaled local space
-        Rect spriteRect = sprite.textureRect;
-        float pixelsPerUnit = sprite.pixelsPerUnit;
-        Vector2 spritePivot = sprite.pivot;
-
-        // Calculate sprite size in unscaled local units
-        float spriteWidthUnits = spriteRect.width / pixelsPerUnit;
-        float spriteHeightUnits = spriteRect.height / pixelsPerUnit;
-
-        // Calculate sprite bounds in unscaled local space (accounting for pivot)
-        float spriteMinX = -spritePivot.x / pixelsPerUnit;
-        float spriteMinY = -spritePivot.y / pixelsPerUnit;
-        float spriteMaxX = spriteMinX + spriteWidthUnits;
-        float spriteMaxY = spriteMinY + spriteHeightUnits;
-
-        // Convert block local bounds to UV coordinates (0-1 range within sprite)
-        // The block bounds are already in the sprite's local space, accounting for scale
-        float uvX = (blockMinLocal.x - spriteMinX) / spriteWidthUnits;
-        float uvY = (blockMinLocal.y - spriteMinY) / spriteHeightUnits;
-        float uvWidth = (blockMaxLocal.x - blockMinLocal.x) / spriteWidthUnits;
-        float uvHeight = (blockMaxLocal.y - blockMinLocal.y) / spriteHeightUnits;
-
-        // Don't clamp - allow blocks to extend slightly outside sprite bounds
-        // This handles cases where colliders are positioned with small offsets
-        // The shader will handle UV coordinates outside 0-1 range properly
-
-        Debug.Log($"Block UV Region: x={uvX:F3}, y={uvY:F3}, w={uvWidth:F3}, h={uvHeight:F3} " +
-                  $"(BlockLocal: {blockMinLocal} to {blockMaxLocal}, SpriteLocal: ({spriteMinX:F3},{spriteMinY:F3}) to ({spriteMaxX:F3},{spriteMaxY:F3}))");
-
-        return new Rect(uvX, uvY, uvWidth, uvHeight);
-    }
 }

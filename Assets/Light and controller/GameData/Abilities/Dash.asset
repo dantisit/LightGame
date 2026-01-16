@@ -13,4 +13,5 @@ MonoBehaviour:
   m_Name: Dash
   m_EditorClassIdentifier: LightGame::Light_and_controller.Scripts.AbilitiesSystem.DashAbility
   unlockAtLevel: 0
-  unlockBehavior: 2
+  unlockBehavior: 1
+  disableInNearDeath: 1

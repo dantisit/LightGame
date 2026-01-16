@@ -137,4 +137,17 @@ public class PlayerInputManager : MonoBehaviour
         input_WallClimb = context.ReadValue<float>();
     }
     #endregion
+
+    public void ClearInput()
+    {
+        input_Walk = 0f;
+        input_Jump = false;
+        input_Dash = false;
+        input_Crouch = false;
+        input_WallGrab = false;
+        input_WallClimb = 0f;
+        
+        playerData.Jump.JumpBufferTimer = 0f;
+        playerData.Walls.WallJump.JumpBufferTimer = 0f;
+    }
 }

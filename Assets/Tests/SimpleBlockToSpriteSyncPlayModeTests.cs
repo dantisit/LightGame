@@ -32,6 +32,8 @@ public class SimpleBlockToSpriteSyncPlayModeTests
 
         _sync = wallObject.AddComponent<SimpleBlockToSpriteSync>();
         SetPrivateField(_sync, "wallSprite", spriteRenderer);
+        SetPrivateField(_sync, "gridColumns", 2);
+        SetPrivateField(_sync, "gridRows", 2);
 
         // Create block with LightDetector
         var blockObject = new GameObject("Block");
@@ -43,7 +45,7 @@ public class SimpleBlockToSpriteSyncPlayModeTests
         var region = new SimpleBlockToSpriteSync.BlockRegion
         {
             objectHider = objectHider,
-            uvRegion = new Rect(0.4f, 0.4f, 0.2f, 0.2f),
+            regionIndex = 0,
             currentDissolve = 0f
         };
         SetPrivateField(_sync, "blockRegions", new List<SimpleBlockToSpriteSync.BlockRegion> { region });

@@ -10,11 +10,18 @@ namespace Light_and_controller.Scripts.UI.Views
         [SerializeField] private List<GameObject> lights;
         [SerializeField] private float fadeOutDuration = 0.4f;
         [SerializeField] private float fadeInDuration = 0.4f;
+        
+        [Header("Sprite Swap")]
+        [SerializeField] private SpriteRenderer targetSpriteRenderer;
+        [SerializeField] private Sprite enabledSprite;
+        [SerializeField] private Sprite disabledSprite;
 
         private int pendingFadeOuts = 0;
 
         public override void Enable()
         {
+            SwapSprite(enabledSprite);
+            
             foreach (var lightObj in lights)
             {
                 lightObj.SetActive(true);
@@ -72,9 +79,19 @@ namespace Light_and_controller.Scripts.UI.Views
 
         private void DisableAllLights()
         {
+            SwapSprite(disabledSprite);
+            
             foreach (var lightObj in lights)
             {
                 lightObj.SetActive(false);
+            }
+        }
+        
+        private void SwapSprite(Sprite sprite)
+        {
+            if (targetSpriteRenderer != null && sprite != null)
+            {
+                targetSpriteRenderer.sprite = sprite;
             }
         }
     }

@@ -36,8 +36,18 @@ namespace Light_and_controller.Scripts.UI
 
         private void OnNewGameButtonClicked()
         {
-            SceneLoader.LoadScene(SceneName.LevelTestAll);
-            SceneLoader.UnloadScene(SceneName.MainMenu);
+            GD.Init();
+            
+            if (GD.LevelOrder != null && GD.LevelOrder.Value.Count > 0)
+            {
+                var firstLevel = GD.LevelOrder.Value[0];
+                SceneLoader.LoadLevel(firstLevel);
+                SceneLoader.UnloadScene(SceneName.MainMenu);
+            }
+            else
+            {
+                Debug.LogError("LevelOrder is not configured or empty!");
+            }
         }
 
         private void OnSettingsButtonClicked()

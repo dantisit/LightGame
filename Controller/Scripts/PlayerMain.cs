@@ -5,11 +5,11 @@ public class PlayerMain : MonoBehaviour
 {
     private PlayerStateMachine _stateMachine; // State Machine declaration where we change current state
     [NonEditable, Space(5)] public AnimName CurrentState; // Variable to display the current state in the Unity inspector for debugging purposes.
-    public MainState IdleState, WalkState, JumpState, LandState, DashState, CrouchIdleState, CrouchWalkState, WallGrabState, WallClimbState, WallJumpState, WallSlideState ; // State declarations
-    public enum AnimName { Idle, Walk, Jump, ExtraJump1, ExtraJump2, Land, Dash, CrouchIdle, CrouchWalk, WallGrab, WallClimb, WallJump, WallSlide } // Enum declaration of state names as animator parameters
+    public MainState IdleState, WalkState, JumpState, LandState, DashState, CrouchIdleState, CrouchWalkState, WallGrabState, WallClimbState, WallJumpState, WallSlideState, DirectionalJumpState ; // State declarations
+    public enum AnimName { Idle, Walk, Jump, ExtraJump1, ExtraJump2, Land, Dash, CrouchIdle, CrouchWalk, WallGrab, WallClimb, WallJump, WallSlide, DirectionalJump } // Enum declaration of state names as animator parameters
 
     [NonSerialized] public Animator Animator; // The Animator is used to control the player's animations based on their current state.
-    [NonSerialized] public Rigidbody Rigidbody; // The Rigidbody2D is used to control movement based on velocity vector.
+    [NonSerialized] public Rigidbody2D Rigidbody2D; // The Rigidbody2D is used to control movement based on velocity vector.
     [NonSerialized] public PlayerInputManager InputManager; // The PlayerInputManager handles all user input and sends it to the state machine.
     [NonSerialized] public CapsuleCollider2D CapsuleCollider2D; // CapsuleCollider2D is used to handle slopes and define the ground check position in the base state class: "State.cs".
 
@@ -23,7 +23,7 @@ public class PlayerMain : MonoBehaviour
         // InputManager for handling player input,
         // CapsuleCollider2D for slope detection and ground checking.
         Animator = GetComponent<Animator>();
-        Rigidbody = GetComponent<Rigidbody>();
+        Rigidbody2D = GetComponent<Rigidbody2D>();
         InputManager = GetComponent<PlayerInputManager>();
         CapsuleCollider2D = GetComponent<CapsuleCollider2D>();
 
@@ -40,6 +40,7 @@ public class PlayerMain : MonoBehaviour
         WallClimbState = new PlayerWallClimbState(this, _stateMachine, AnimName.WallClimb, PlayerData);
         WallJumpState = new PlayerWallJumpState(this, _stateMachine, AnimName.WallJump, PlayerData);
         WallSlideState = new PlayerWallSlideState(this, _stateMachine, AnimName.WallSlide, PlayerData);
+        DirectionalJumpState = new PlayerDirectionalJumpState(this, _stateMachine, AnimName.DirectionalJump, PlayerData);
     }
 
     private void Start()

@@ -13,10 +13,11 @@ MonoBehaviour:
   m_Name: DoubleJump
   m_EditorClassIdentifier: LightGame::Light_and_controller.Scripts.AbilitiesSystem.DoubleJumpAbility
   unlockAtLevel: 0
-  unlockBehavior: 0
+  unlockBehavior: 1
+  disableInNearDeath: 1
   jumpInfo:
     Animation: 3
-    maxHeight: 2
+    maxHeight: 3
     jumpHeightCurve:
       serializedVersion: 2
       m_Curve:
@@ -44,9 +45,45 @@ MonoBehaviour:
     jumpTime: 0.4
     jumpVelocityCurve:
       serializedVersion: 2
-      m_Curve: []
-      m_PreInfinity: 0
-      m_PostInfinity: 0
-      m_RotationOrder: 0
+      m_Curve:
+      - serializedVersion: 3
+        time: 0
+        value: 1.999999
+        inSlope: -1.9230758
+        outSlope: -1.9230758
+        tangentMode: 0
+        weightedMode: 0
+        inWeight: 0
+        outWeight: 0.33333334
+      - serializedVersion: 3
+        time: 0.78
+        value: 0.5
+        inSlope: -2.5658157
+        outSlope: -2.5658157
+        tangentMode: 0
+        weightedMode: 0
+        inWeight: 0.33333334
+        outWeight: 0.33333334
+      - serializedVersion: 3
+        time: 0.89
+        value: 0.14705883
+        inSlope: -1.8983953
+        outSlope: -1.8983953
+        tangentMode: 0
+        weightedMode: 0
+        inWeight: 0.33333334
+        outWeight: 0.33333334
+      - serializedVersion: 3
+        time: 0.99
+        value: 0.0882353
+        inSlope: -0.5882352
+        outSlope: -0.5882352
+        tangentMode: 0
+        weightedMode: 0
+        inWeight: 0.33333334
+        outWeight: 0
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 4
     jumpCutPower: 0.4
     timeScaleOnCut: 0.6
