@@ -842,7 +842,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fd2bae706c44d4a2b974fb38a307c6e8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: LightGame::Light_and_controller.Scripts.UI.Views.PlayerDeathView
-  deathFadeDuration: 0.5
+  deathFadeDuration: 0.2
   deathFadeEase: 8
   delayAfterFade: 0.1
 --- !u!1 &1824256010
@@ -1290,7 +1290,7 @@ Camera:
   m_OcclusionCulling: 0
   m_StereoConvergence: 10
   m_StereoSeparation: 0.022
---- !u!21 &2039311944
+--- !u!21 &2108112330
 Material:
   serializedVersion: 8
   m_ObjectHideFlags: 0

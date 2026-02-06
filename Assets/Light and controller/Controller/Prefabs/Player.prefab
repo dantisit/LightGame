@@ -22,6 +22,7 @@ GameObject:
   - component: {fileID: 8691095846045560413}
   - component: {fileID: 4577508022152415354}
   - component: {fileID: 563658081202739}
+  - component: {fileID: 8911092722811945818}
   m_Layer: 9
   m_Name: Player
   m_TagString: Player
@@ -44,6 +45,7 @@ Transform:
   m_Children:
   - {fileID: 6408531512386088114}
   - {fileID: 742726834364584989}
+  - {fileID: 4784293917535534717}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &3213259104454701874
@@ -1272,6 +1274,26 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 962ea84b3beb4743b59b46bae91f583a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: LightGame::Light_and_controller.Scripts.Systems.AbilityManager
+--- !u!114 &8911092722811945818
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3213259104454701869}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1e23faa76b555416eb2a41294c76588b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: PlayerController::PlayerView
+  playerMain: {fileID: 3213259104454701870}
+  landingEffectPrefab: {fileID: 7018498864273421396, guid: 34c043344c1954b51b5c1d51440aecf3, type: 3}
+  landingSpawnPoint: {fileID: 4784293917535534717}
+  scaleEffectByFallTime: 1
+  minFallTimeForEffect: 0.1
+  minScale: 0.75
+  maxScale: 1.5
+  fallTimeScaleMultiplier: 1
 --- !u!1 &3410020105280573791
 GameObject:
   m_ObjectHideFlags: 0
@@ -1378,7 +1400,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &742726834364584989
 Transform:
   m_ObjectHideFlags: 0
@@ -1388,7 +1410,7 @@ Transform:
   m_GameObject: {fileID: 3803380629175493506}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 1.684, y: 0.842, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -1430,3 +1452,34 @@ CircleCollider2D:
   m_CompositeOrder: 0
   m_Offset: {x: 0, y: 0}
   m_Radius: 0.5
+--- !u!1 &5649844776797507002
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 4784293917535534717}
+  m_Layer: 9
+  m_Name: LandingEffectPoint
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &4784293917535534717
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5649844776797507002}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: -1.50338, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 3213259104454701875}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}

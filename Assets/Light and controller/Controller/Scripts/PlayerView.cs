@@ -9,12 +9,12 @@ public class PlayerView : MonoBehaviour
     [SerializeField] private GameObject landingEffectPrefab;
     [SerializeField] private Transform landingSpawnPoint;
     
-    [Header("Velocity Scaling")]
-    [SerializeField] private bool scaleEffectByVelocity = true;
-    [SerializeField] private float minVelocityForEffect = 2f;
+    [Header("Fall Time Scaling")]
+    [SerializeField] private bool scaleEffectByFallTime = true;
+    [SerializeField] private float minFallTimeForEffect = 0.1f;
     [SerializeField] private float minScale = 0.5f;
     [SerializeField] private float maxScale = 2f;
-    [SerializeField] private float velocityScaleMultiplier = 0.1f;
+    [SerializeField] private float fallTimeScaleMultiplier = 1f;
 
     private PlayerLandState LandState => playerMain?.LandState as PlayerLandState;
     
@@ -24,7 +24,7 @@ public class PlayerView : MonoBehaviour
             playerMain = GetComponent<PlayerMain>();
     }
 
-    private void OnEnable()
+    private void Start()
     {
         if (playerMain != null && LandState != null)
         {
@@ -40,20 +40,20 @@ public class PlayerView : MonoBehaviour
         }
     }
 
-    private void OnPlayerLanded(float velocity)
+    private void OnPlayerLanded(float fallTime)
     {
         if (landingEffectPrefab == null)
             return;
 
-        if (velocity < minVelocityForEffect)
+        if (fallTime < minFallTimeForEffect)
             return;
 
         Vector3 spawnPosition = GetLandingSpawnPosition();
         GameObject effect = Instantiate(landingEffectPrefab, spawnPosition, Quaternion.identity);
 
-        if (scaleEffectByVelocity)
+        if (scaleEffectByFallTime)
         {
-            float scale = CalculateScaleFromVelocity(velocity);
+            float scale = CalculateScaleFromFallTime(fallTime);
             effect.transform.localScale = Vector3.one * scale;
         }
     }
@@ -68,10 +68,10 @@ public class PlayerView : MonoBehaviour
         return transform.position;
     }
 
-    private float CalculateScaleFromVelocity(float velocity)
+    private float CalculateScaleFromFallTime(float fallTime)
     {
-        float normalizedVelocity = velocity * velocityScaleMultiplier;
-        return Mathf.Clamp(normalizedVelocity, minScale, maxScale);
+        float scaledTime = fallTime * fallTimeScaleMultiplier;
+        return Mathf.Clamp(scaledTime, minScale, maxScale);
     }
 
 #if UNITY_EDITOR

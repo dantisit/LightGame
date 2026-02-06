@@ -20,9 +20,6 @@ public class PlayerLandState : MainState, IMove2D
     {
         base.Enter();
         
-        landingVelocity = rigidbody2D.linearVelocity.magnitude;
-        OnLanded?.Invoke(landingVelocity);
-        
         rigidbody2D.gravityScale = playerData.Land.Physics2DGravityScale;
         if (rigidbody2D.linearVelocity.x != 0)
         {
@@ -55,6 +52,10 @@ public class PlayerLandState : MainState, IMove2D
 
     public override void Exit()
     {
+        if (playerData.Physics.IsGrounded)
+        {
+            OnLanded?.Invoke(localTime);
+        }
         base.Exit();
     }
 
