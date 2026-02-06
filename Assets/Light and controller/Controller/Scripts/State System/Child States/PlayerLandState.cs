@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 
 public class PlayerLandState : MainState, IMove2D
@@ -7,6 +8,10 @@ public class PlayerLandState : MainState, IMove2D
     float xCurveTime;
     private float localXVelovity;
     private int turnBackStartDirection;
+    private float landingVelocity;
+    
+    public event Action<float> OnLanded;
+    
     public PlayerLandState(PlayerMain player, PlayerStateMachine stateMachine, PlayerMain.AnimName animEnum, PlayerData playerData) : base(player, stateMachine, animEnum, playerData)
     {
     }
@@ -14,6 +19,10 @@ public class PlayerLandState : MainState, IMove2D
     public override void Enter()
     {
         base.Enter();
+        
+        landingVelocity = rigidbody2D.linearVelocity.magnitude;
+        OnLanded?.Invoke(landingVelocity);
+        
         rigidbody2D.gravityScale = playerData.Land.Physics2DGravityScale;
         if (rigidbody2D.linearVelocity.x != 0)
         {

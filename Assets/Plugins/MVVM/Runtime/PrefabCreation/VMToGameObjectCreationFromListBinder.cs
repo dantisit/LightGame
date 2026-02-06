@@ -6,14 +6,14 @@ namespace MVVM.Binders
     {
         [SerializeField] private ViewModelToViewMapper _mapper;
 
-        private View _createdView;
+        private BinderView _createdBinderView;
 
         public override void OnPropertyChanged(ViewModel newValue)
         {
             var prefabView = _mapper.GetPrefab(newValue.GetType().FullName);
-            _createdView = Instantiate(prefabView, transform);
+            _createdBinderView = Instantiate(prefabView, transform);
 
-            _createdView.Bind(newValue);
+            _createdBinderView.BindViewModel(newValue);
         }
     }
 }

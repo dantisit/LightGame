@@ -10,7 +10,7 @@ namespace MVVM.Editor
     public abstract class BinderEditor : UnityEditor.Editor
     {
         private Binder _binder;
-        private View _parentView;
+        private BinderView _parentBinderView;
         private SerializedProperty _viewModelTypeFullName;
 
         protected SerializedProperty ViewModelTypeFullName => _viewModelTypeFullName;
@@ -19,7 +19,7 @@ namespace MVVM.Editor
         protected virtual void OnEnable()
         {
             _binder = target as Binder;
-            _parentView = _binder?.GetComponentInParent<View>(true);
+            _parentBinderView = _binder?.GetComponentInParent<BinderView>(true);
 
             _viewModelTypeFullName = serializedObject.FindProperty(nameof(_viewModelTypeFullName));
         }
@@ -38,8 +38,8 @@ namespace MVVM.Editor
 
             serializedObject.Update();
 
-            if (_parentView == null) return;
-            _viewModelTypeFullName.stringValue = _parentView.ViewModelTypeFullName;
+            if (_parentBinderView == null) return;
+            _viewModelTypeFullName.stringValue = _parentBinderView.ViewModelTypeFullName;
             serializedObject.ApplyModifiedProperties();
 
             if (string.IsNullOrWhiteSpace(_viewModelTypeFullName.stringValue))
@@ -56,8 +56,8 @@ namespace MVVM.Editor
         {
             if(!_binder) return;
             
-            _parentView.RemoveBinder(_binder);
-            EditorUtility.SetDirty(_parentView);
+            _parentBinderView.RemoveBinder(_binder);
+            EditorUtility.SetDirty(_parentBinderView);
             _binder = null;
         }
 

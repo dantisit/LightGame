@@ -6,6 +6,6 @@ namespace Core.Client.Events
 {
     public class LockInputEvent : IEvent
     {
-        public List<(Guid guid, ElementTagType tag)> Interactable;
+        public List<(Guid guid, string tag)> Interactable;
     }
 }

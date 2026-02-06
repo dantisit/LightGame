@@ -7,7 +7,7 @@ namespace MVVM.Binders
     {
         [SerializeField] private ViewModelToViewMapper _mapper;
 
-        private readonly Dictionary<ViewModel, View> _createdViews = new();
+        private readonly Dictionary<ViewModel, BinderView> _createdViews = new();
 
         public override void OnItemAdded(ViewModel viewModel)
         {
@@ -20,7 +20,7 @@ namespace MVVM.Binders
             var createdView = Instantiate(prefab, transform);
 
             _createdViews.Add(viewModel, createdView);
-            createdView.Bind(viewModel);
+            createdView.BindViewModel(viewModel);
 
             return;
         }

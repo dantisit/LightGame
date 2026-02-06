@@ -1,9 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using MVVM;
 using MVVM.Binders;
 using Plugins.MVVM.Runtime.Binders;
+using Plugins.MVVM.Runtime.Utils;
 using UltEvents;
 using UnityEngine;
 using UnityEngine.Events;
@@ -16,8 +16,8 @@ namespace Plugins.MVVM.Runtime.UIComponents.Picker
     public abstract class ObservablePickerBinder<T> : ObservableCollectionBinder<T>
     {
         [SerializeField] private bool isCyclic;
-        [SerializeField] private Button previous;
-        [SerializeField] private Button next;
+        [SerializeField] private UnityEngine.UI.Button previous;
+        [SerializeField] private UnityEngine.UI.Button next;
         [SerializeField] private IntUnityEventBinder currentIndexBinder;
         [SerializeField] private UltEvent<bool> onPreviousIsAvailable;
         [SerializeField] private UltEvent<bool> onNextIsAvailable;

@@ -1,24 +1,25 @@
 ﻿using UnityEngine;
+using UnityEngine.Serialization;
 
 namespace MVVM.Binders
 {
     public class VMToGameObjectCreationBinder : ObservableBinder<ViewModel>
     {
-        [SerializeField] protected View _prefabView;
-        protected View _createdView;
+        [FormerlySerializedAs("prefabView")] [FormerlySerializedAs("_prefabView")] [SerializeField] protected BinderView prefabBinderView;
+        protected BinderView CreatedBinderView;
         
         public override void OnPropertyChanged(ViewModel newValue)
         {
             DestroyCreatedView();
             if(newValue == null) return;
-            _createdView = Instantiate(_prefabView, transform);
+            CreatedBinderView = Instantiate(prefabBinderView, transform);
 
-            _createdView.Bind(newValue);
+            CreatedBinderView.BindViewModel(newValue);
         }
 
         public void DestroyCreatedView()
         {
-            if(_createdView) Destroy(_createdView.gameObject);
+            if(CreatedBinderView) Destroy(CreatedBinderView.gameObject);
             _valueWhileDeactivated = null; // TODO: Hack
         }
     }

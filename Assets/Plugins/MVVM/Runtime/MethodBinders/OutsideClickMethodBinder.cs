@@ -11,7 +11,7 @@ namespace MVVM.Binders
 {
     public class OutsideClickMethodBinder : EmptyMethodBinder
     {
-        [SerializeField] private List<View> viewsToExclude;
+        [SerializeField] private List<BinderView> viewsToExclude;
         [SerializeField] private bool debugMode = false;
 
         private ViewModel _viewModel;

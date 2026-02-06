@@ -9,32 +9,32 @@ using UnityEngine.Serialization;
 
 namespace Plugins.MVVM.Runtime
 {
-    [RequireComponent(typeof(View))]
+    [RequireComponent(typeof(BinderView))]
     public class ObserveWindowEvents : MonoBehaviour
     {
         [SerializeField] private bool setLastSiblingIndexOnOpen = true;
-        private View _view;
+        private BinderView _binderView;
         public void Initialize()
         {
-            _view ??= GetComponent<View>();
+            _binderView ??= GetComponent<BinderView>();
             
             EventBus.On<OpenWindowEvent>()
-                .Where(x => x.ViewModel.IsInstanceOf(_view.ViewModelTypeFullName))
+                .Where(x => x.ViewModel.IsInstanceOf(_binderView.ViewModelTypeFullName))
                 .Subscribe(x =>
                 {
-                    _view.Bind(x.ViewModel);
+                    _binderView.BindViewModel(x.ViewModel);
                     if(setLastSiblingIndexOnOpen) transform.SetSiblingIndex(transform.parent.childCount - 1);
                     gameObject.SetActive(true);
                 })
                 .AddTo(this);
             
             EventBus.On<CloseWindowEvent>()
-                .Where(_ => _view.ViewModel != null)
-                .Where(x => x.ViewModel == _view.ViewModel || x.GetWindowType() == _view.ViewModel.GetType())
+                .Where(_ => _binderView.ViewModel != null)
+                .Where(x => x.ViewModel == _binderView.ViewModel || x.GetWindowType() == _binderView.ViewModel.GetType())
                 .Subscribe(_ =>
                 {
                     gameObject.SetActive(false);
-                    _view.ViewModel?.Dispose();
+                    _binderView.ViewModel?.Dispose();
                 })
                 .AddTo(this);
         }

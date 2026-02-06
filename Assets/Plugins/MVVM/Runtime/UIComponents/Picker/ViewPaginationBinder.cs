@@ -3,13 +3,14 @@ using MVVM;
 using R3;
 using UnityEngine;
 using UnityEngine.Events;
+using UnityEngine.Serialization;
 
 namespace Plugins.MVVM.Runtime.UIComponents.Picker
 {
     public class ViewPaginationBinder : PaginationBinder<ViewModel>
     {
-        [SerializeField] private View _prefabView;
-        protected readonly Dictionary<ViewModel, View> _viewModelToView = new();
+        [FormerlySerializedAs("prefabView")] [FormerlySerializedAs("_prefabView")] [SerializeField] private BinderView prefabBinderView;
+        protected readonly Dictionary<ViewModel, BinderView> _viewModelToView = new();
 
         public override void OnItemAdded(ViewModel value)
         {
@@ -21,12 +22,12 @@ namespace Plugins.MVVM.Runtime.UIComponents.Picker
         {
             if (_viewModelToView.TryGetValue(item, out _)) return;
             
-            var createdView = Instantiate(_prefabView, transform);
+            var createdView = Instantiate(prefabBinderView, transform);
             createdView.transform.SetSiblingIndex(WindowSize + offset);
 
             _viewModelToView.Add(item, createdView);
             createdView.DisposeOnDestroy = false;
-            createdView.Bind(item);
+            createdView.BindViewModel(item);
         }
         
         public override void RemovePaginationItem(ViewModel item, int offset)

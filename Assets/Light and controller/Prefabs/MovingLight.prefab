@@ -95,6 +95,9 @@ MonoBehaviour:
   - {fileID: 5167782084821752879}
   fadeOutDuration: 0.6
   fadeInDuration: 0.6
+  targetSpriteRenderer: {fileID: 0}
+  enabledSprite: {fileID: 0}
+  disabledSprite: {fileID: 0}
 --- !u!1001 &5085458719567890214
 PrefabInstance:
   m_ObjectHideFlags: 0

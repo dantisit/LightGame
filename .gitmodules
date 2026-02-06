@@ -1,0 +1,3 @@
+[submodule "Assets/Plugins/MVVM"]
+	path = Assets/Plugins/MVVM
+	url = https://github.com/Sod3n/unity-mvvm.git

@@ -1,4 +1,5 @@
 ﻿using System;
+using UnityEngine.Serialization;
 
 namespace MVVM
 {
@@ -6,6 +7,6 @@ namespace MVVM
     public class ViewModelToViewMapping
     {
         public string ViewModelTypeFullName;
-        public View PrefabView;
+        [FormerlySerializedAs("prefabView")] [FormerlySerializedAs("PrefabView")] public BinderView prefabBinderView;
     }
 }

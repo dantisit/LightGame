@@ -27,7 +27,7 @@ namespace MVVM.Binders
         {
             if (Application.isPlaying) return;
             
-            var parentView = GetComponentInParent<View>(true);
+            var parentView = GetComponentInParent<BinderView>(true);
             if(parentView == null) return;
             parentView.RegisterBinder(this);
         }

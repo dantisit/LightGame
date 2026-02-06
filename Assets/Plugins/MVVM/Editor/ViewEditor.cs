@@ -13,7 +13,7 @@ using Binder = MVVM.Binders.Binder;
 
 namespace MVVM.Editor
 {
-    [CustomEditor(typeof(View))]
+    [CustomEditor(typeof(BinderView), true)]
     public class ViewEditor : UnityEditor.Editor
     {
         #region Fields
@@ -25,7 +25,7 @@ namespace MVVM.Editor
         private SerializedProperty _disableWithoutViewModel;
         private SerializedProperty _childBinders;
         private SerializedProperty _subViews;
-        private View _view;
+        private BinderView _binderView;
         private TypeCache.TypeCollection _cachedViewModelTypes;
         private readonly Dictionary<string, string> _viewModelNames = new();
         private readonly List<string> _viewModelPropertyNames = new();
@@ -38,7 +38,7 @@ namespace MVVM.Editor
 
         private void OnEnable()
         {
-            _view = (View)target;
+            _binderView = (BinderView)target;
             _viewModelTypeFullName = serializedObject.FindProperty(nameof(_viewModelTypeFullName));
             _viewModelPropertyName = serializedObject.FindProperty(nameof(_viewModelPropertyName));
             _viewModelIndex = serializedObject.FindProperty(nameof(_viewModelIndex));
@@ -50,14 +50,18 @@ namespace MVVM.Editor
 
         public override void OnInspectorGUI()
         {
+            DrawDefaultInspector(); 
+
+            EditorGUILayout.Space(10);
+            EditorGUILayout.LabelField("", GUI.skin.horizontalSlider); // Optional: horizontal line separator
+            EditorGUILayout.Space(5);
+            
             _cachedViewModelTypes = TypeCache.GetTypesDerivedFrom<ViewModel>();
-
-            DrawScriptTitle();
-
-            var parentView = _view.GetComponentsInParent<View>(true).FirstOrDefault(c => !ReferenceEquals(c, _view));
+            
+            var parentView = _binderView.GetComponentsInParent<BinderView>(true).FirstOrDefault(c => !ReferenceEquals(c, _binderView));
             var provider = CreateInstance<StringListSearchProvider>();
             var isParentViewExist = parentView != null;
-            var parentViewGo = isParentViewExist ? parentView.gameObject : _view.gameObject;
+            var parentViewGo = isParentViewExist ? parentView.gameObject : _binderView.gameObject;
 
 
 
@@ -70,7 +74,7 @@ namespace MVVM.Editor
                 HandleParentView(provider);
             }
 
-            if (!_view.IsValidSetup())
+            if (!_binderView.IsValidSetup())
             {
                 DrawFixButton();
             }
@@ -85,14 +89,14 @@ namespace MVVM.Editor
             return _cachedViewModelTypes.FirstOrDefault(t => t.FullName == viewModelTypeFullName);
         }
 
-        private void HandleSubView(StringListSearchProvider provider, View parentView, GameObject parentViewGo)
+        private void HandleSubView(StringListSearchProvider provider, BinderView parentBinderView, GameObject parentViewGo)
         {
             SetParentViewBoolean(false);
-            DefineAllViewModelPropertyNames(parentView.ViewModelTypeFullName);
-            DrawEditorForSubView(provider, parentView.ViewModelTypeFullName);
+            DefineAllViewModelPropertyNames(parentBinderView.ViewModelTypeFullName);
+            DrawEditorForSubView(provider, parentBinderView.ViewModelTypeFullName);
             DrawDebug();
 
-            var childViewModelType = GetChildViewModelType(parentView.ViewModelTypeFullName, _view.ViewModelPropertyName);
+            var childViewModelType = GetChildViewModelType(parentBinderView.ViewModelTypeFullName, _binderView.ViewModelPropertyName);
             DrawSubViewModelDebugButtons(parentViewGo, childViewModelType?.FullName);
         }
 
@@ -105,7 +109,7 @@ namespace MVVM.Editor
             DrawIndexField();
             DrawDisableWithoutViewModelField();
             DrawDebug();
-            DrawOpenViewModelButton(_view.ViewModelTypeFullName);
+            DrawOpenViewModelButton(_binderView.ViewModelTypeFullName);
         }
 
         #endregion
@@ -118,6 +122,9 @@ namespace MVVM.Editor
 
             provider.Init(options, result =>
             {
+                var previousPropertyName = _viewModelPropertyName.stringValue;
+                var previousTypeName = _viewModelTypeFullName.stringValue;
+
                 _viewModelPropertyName.stringValue = result == MVVMConstants.NONE ? null : result;
 
                 if (result != MVVMConstants.NONE)
@@ -126,6 +133,19 @@ namespace MVVM.Editor
                 }
 
                 serializedObject.ApplyModifiedProperties();
+
+                // Call OnValidate if property name or type changed
+                if (previousPropertyName != _viewModelPropertyName.stringValue ||
+                    previousTypeName != _viewModelTypeFullName.stringValue)
+                {
+                    EditorApplication.delayCall += () =>
+                    {
+                        if (_binderView != null)
+                        {
+                            _binderView.OnValidate();
+                        }
+                    };
+                }
             });
 
             DrawPropertyNameField(parentViewModelTypeFullName, provider);
@@ -171,8 +191,22 @@ namespace MVVM.Editor
 
             provider.Init(options, result =>
             {
+                var previousTypeName = _viewModelTypeFullName.stringValue;
+
                 _viewModelTypeFullName.stringValue = _viewModelNames[result];
                 serializedObject.ApplyModifiedProperties();
+
+                // Call OnValidate if type changed
+                if (previousTypeName != _viewModelTypeFullName.stringValue)
+                {
+                    EditorApplication.delayCall += () =>
+                    {
+                        if (_binderView != null)
+                        {
+                            _binderView.OnValidate();
+                        }
+                    };
+                }
             });
 
             DrawViewModelField(provider);
@@ -254,7 +288,7 @@ namespace MVVM.Editor
             var property = parentViewModelType.GetProperty(propertyName);
             if (property == null)
             {
-                Debug.LogError($"Property {propertyName} is not found on {parentViewModelTypeFullName} for {_view.gameObject.name}");
+                Debug.LogError($"Property {propertyName} is not found on {parentViewModelTypeFullName} for {_binderView.gameObject.name}");
                 return null;
             }
 
@@ -279,7 +313,7 @@ namespace MVVM.Editor
         private void DrawScriptTitle()
         {
             GUI.enabled = false;
-            EditorGUILayout.ObjectField(MVVMConstants.SCRIPT, MonoScript.FromMonoBehaviour((View)target), typeof(View), false);
+            EditorGUILayout.ObjectField(MVVMConstants.SCRIPT, MonoScript.FromMonoBehaviour((BinderView)target), typeof(BinderView), false);
             GUI.enabled = true;
         }
 
@@ -327,7 +361,7 @@ namespace MVVM.Editor
 
             if (GUILayout.Button("Fix"))
             {
-                _view.Fix();
+                _binderView.Fix();
             }
         }
 
@@ -353,7 +387,7 @@ namespace MVVM.Editor
                 }
 
                 // Get the editor for this binder
-                var viewType = GetViewModelType(_view.ViewModelTypeFullName);
+                var viewType = GetViewModelType(_binderView.ViewModelTypeFullName);
                 var isValid = BinderEditor.IsValidPropertyName(binder.PropertyName, viewType) ||
                               BinderEditor.IsValidMethodName(binder.PropertyName, viewType);
 
@@ -391,18 +425,18 @@ namespace MVVM.Editor
             for (int i = 0; i < _subViews.arraySize; i++)
             {
                 var element = _subViews.GetArrayElementAtIndex(i);
-                var view = element.objectReferenceValue as View;
+                var view = element.objectReferenceValue as BinderView;
 
                 if (view == null)
                 {
-                    EditorGUILayout.ObjectField($"[{i}]", null, typeof(View), true);
+                    EditorGUILayout.ObjectField($"[{i}]", null, typeof(BinderView), true);
                     continue;
                 }
 
                 string propertyName = view.ViewModelPropertyName;
 
                 EditorGUILayout.BeginHorizontal();
-                EditorGUILayout.ObjectField($"[{i}] {view.GetType().Name}", view, typeof(View), true);
+                EditorGUILayout.ObjectField($"[{i}] {view.GetType().Name}", view, typeof(BinderView), true);
                 EditorGUILayout.LabelField(string.IsNullOrEmpty(propertyName) ? "[no property]" : propertyName);
                 EditorGUILayout.EndHorizontal();
             }

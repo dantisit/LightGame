@@ -6,7 +6,7 @@ namespace MVVM.Binders
 {
     public class BaseVMCollectionToGameObjectCreationBinder : ObservableCollectionBinder<ViewModel>
     {
-        protected readonly Dictionary<ViewModel, View> _createdViews = new();
+        protected readonly Dictionary<ViewModel, BinderView> _createdViews = new();
 
         public override void OnItemAdded(ViewModel value)
         {
