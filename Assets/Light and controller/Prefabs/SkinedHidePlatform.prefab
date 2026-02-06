@@ -2279,46 +2279,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: LightGame::SimpleBlockToSpriteSync
   wallSprite: {fileID: 942415090941342433}
-  blockRegions:
-  - objectHider: {fileID: 2851153043657395712}
-    regionIndex: 0
-    currentDissolve: 0
-  - objectHider: {fileID: 9054565728872924405}
-    regionIndex: 1
-    currentDissolve: 0
-  - objectHider: {fileID: 4331190064808183842}
-    regionIndex: 2
-    currentDissolve: 0
-  - objectHider: {fileID: 3222281115608090718}
-    regionIndex: 3
-    currentDissolve: 0
-  - objectHider: {fileID: 4201231668389042631}
-    regionIndex: 4
-    currentDissolve: 0
-  - objectHider: {fileID: 8898216555491201910}
-    regionIndex: 5
-    currentDissolve: 0
-  - objectHider: {fileID: 7205630159491639014}
-    regionIndex: 6
-    currentDissolve: 0
-  - objectHider: {fileID: 320491696919902244}
-    regionIndex: 7
-    currentDissolve: 0
-  - objectHider: {fileID: 5504174247787728188}
-    regionIndex: 8
-    currentDissolve: 0
-  - objectHider: {fileID: 8983782413747302362}
-    regionIndex: 9
-    currentDissolve: 0
-  - objectHider: {fileID: 123349747889368379}
-    regionIndex: 10
-    currentDissolve: 0
-  - objectHider: {fileID: 4362762953713977063}
-    regionIndex: 11
-    currentDissolve: 0
-  gridColumns: 12
-  gridRows: 1
-  dissolveSpeed: 3.5
+  invert: 1
+  noise: 1
+  defaultRadius: 2
+  animationDuration: 0.5
+  animationEase: 6
 --- !u!1 &8600802317334131136
 GameObject:
   m_ObjectHideFlags: 0

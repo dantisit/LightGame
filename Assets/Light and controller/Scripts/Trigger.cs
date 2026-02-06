@@ -21,6 +21,8 @@ public class Trigger : MonoBehaviour
     public LightType LightType => lightType;
     public bool UseNextScene => useNextScene;
     public SceneName TargetScene => targetScene;
+    public Transform TargetLightPoint => targetLightPoint;
+    public Collider2D LightCollider => collider2D;
 
     private async void Start()
     {

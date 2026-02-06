@@ -1,7 +1,7 @@
 // Advanced Dissolve <https://u3d.as/16cX>
 // Copyright (c) Amazing Assets <https://amazingassets.world>
  
-Shader "Amazing Assets/Advanced Dissolve/Unlit"
+Shader "Amazing Assets/Advanced Dissolve/Sprite Unlit"
 {
     Properties
     {
@@ -12,7 +12,7 @@ Shader "Amazing Assets/Advanced Dissolve/Unlit"
         _Cutoff("AlphaCutout", Range(0.0, 1.0)) = 0.5
 
         // BlendMode
-        _Surface("__surface", Float) = 0.0
+        _Surface("__surface", Float) = 1.0
         _Blend("__mode", Float) = 0.0
         _Cull("__cull", Float) = 2.0
         [ToggleUI] _AlphaClip("__clip", Float) = 0.0

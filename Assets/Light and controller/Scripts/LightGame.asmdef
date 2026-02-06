@@ -16,7 +16,8 @@
         "Unity.Cinemachine",
         "Unity.ResourceManager",
         "Unity.Addressables",
-        "EasyTextEffects"
+        "EasyTextEffects",
+        "AmazingAssets.AdvancedDissolve"
     ],
     "includePlatforms": [],
     "excludePlatforms": [],
