@@ -10,6 +10,11 @@ namespace Light_and_controller.Scripts.Components
     {
         [Header("Mode")]
         [SerializeField] private bool toggleMode = false;
+        [SerializeField] private bool interactMode = false;
+        
+        [Header("Interact Mode Settings")]
+        [SerializeField] private KeyCode interactKey = KeyCode.F;
+        [SerializeField] private string playerTag = "Player";
         
         [Header("Weight Mode Settings")]
         [SerializeField] private float weightThreshold;
@@ -25,6 +30,7 @@ namespace Light_and_controller.Scripts.Components
         
         private float _currentWeight;
         private bool _active;
+        private bool _playerInZone;
 
         private HashSet<GameObject> AddedWeights { get; } = new();
         
@@ -47,9 +53,25 @@ namespace Light_and_controller.Scripts.Components
             }
         }
 
+        private void Update()
+        {
+            if (interactMode && _playerInZone && Input.GetKeyDown(interactKey))
+            {
+                ToggleState();
+            }
+        }
+
         private void OnTriggerEnter2D(Collider2D other)
         {
-            if (toggleMode)
+            if (interactMode)
+            {
+                // Interact mode: track player presence
+                if (other.CompareTag(playerTag))
+                {
+                    _playerInZone = true;
+                }
+            }
+            else if (toggleMode)
             {
                 // Toggle mode: each enter toggles the state
                 ToggleState();
@@ -69,7 +91,15 @@ namespace Light_and_controller.Scripts.Components
 
         private void OnTriggerExit2D(Collider2D other)
         {
-            if (toggleMode)
+            if (interactMode)
+            {
+                // Interact mode: track player leaving
+                if (other.CompareTag(playerTag))
+                {
+                    _playerInZone = false;
+                }
+            }
+            else if (toggleMode)
             {
                 // Toggle mode: exit does nothing (or could toggle again if desired)
                 return;
